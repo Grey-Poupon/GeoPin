@@ -7,6 +7,7 @@
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
+    <string name="action_facebook">Log in with Facebook</string>
     <string name="action_without_login">Continue without login</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>

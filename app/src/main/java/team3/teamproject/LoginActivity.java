@@ -29,6 +29,14 @@ public class LoginActivity extends AppCompatActivity{
         startActivity(mapScreen);
     }
 
+    /** facebook login click button listener
+     *  @Petr Makarov
+     */
+    public void onLoginFacebookClick(View view){
+        Intent mapScreen = new Intent(this, MapsActivity.class);
+        startActivity(mapScreen);
+    }
+
     /** without login click button listener
      *  @Petr Makarov
      */
