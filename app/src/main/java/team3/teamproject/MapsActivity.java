@@ -3,7 +3,9 @@ package team3.teamproject;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -20,9 +22,14 @@ import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -57,6 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
 
@@ -102,7 +111,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(overlayState == OverlayState.Air){return;}
 
         overlayState = OverlayState.Air;
-        addHeatMap(getAirPoints());
+        //addHeatMap(getAirPoints());
+        /*debug to test getting the right data from the server
+            * Stephen N*/
+        for(JsonMessage msg : getAllSensorData()){
+            Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
+        }
     }
 
     public void onMapTrafficClick(View view) {
@@ -140,12 +154,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mOverlay != null) {
             mOverlay.remove();
         }
-
-
-
         mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-
     }
 
     private List<WeightedLatLng> getEnvironmentPoints() {
@@ -169,7 +179,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * Just test poitn for debugging
+     * Just test points for debugging
      * @Stephen Northrop
      */
     private List<WeightedLatLng> getTestPoints() {
@@ -182,6 +192,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 list.add(new WeightedLatLng(new LatLng(lat+x, lon+y), 10));
             }
         return  list;
+    }
+    public List<JsonMessage> getAllSensorData(){
+        List<JsonMessage> empty = new ArrayList<JsonMessage>();
+        String message = "";
+        URL url = null;
+        try {
+            url = new URL("https://duffin.co/uo/retreiveSensors.php");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return empty;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return empty;
+        }
+        if(urlConnection!=null) {
+            try {
+                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return empty;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return empty;
     }
 
 }
