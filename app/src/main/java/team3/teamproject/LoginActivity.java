@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -14,7 +16,6 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /** sign in click button listener
-     *  @Petr Makarov
      */
     public void onLoginSignClick(View view){
         Intent mapScreen = new Intent(this, MapsActivity.class);
@@ -22,7 +23,6 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /** register click button listener
-     *  @Petr Makarov
      */
     public void onLoginRegisterClick(View view){
         Intent mapScreen = new Intent(this, MapsActivity.class);
@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /** facebook login click button listener
-     *  @Petr Makarov
      */
     public void onLoginFacebookClick(View view){
         Intent mapScreen = new Intent(this, MapsActivity.class);
@@ -38,7 +37,6 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /** without login click button listener
-     *  @Petr Makarov
      */
     public void onWithoutLoginClick(View view){
         Intent mapScreen = new Intent(this, MapsActivity.class);

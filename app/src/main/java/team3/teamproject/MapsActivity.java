@@ -93,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * move the camera when screen launched
-     * @Petr Makarov
+     * Created by Petr Makarov
      */
     private void startLocation(LatLng lat, int zoom) {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(lat, zoom);
@@ -136,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /**
      * back button listener, returns to home screen
      *
-     * @Petr Makarov
+     * Created by Petr Makarov
      */
     @Override
     public void onBackPressed() {
