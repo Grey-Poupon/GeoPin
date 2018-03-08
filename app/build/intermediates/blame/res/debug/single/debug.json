@@ -68,6 +68,10 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-ldrtl-hdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_login_button_background.9.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\login_button_background.9.png"
+    },
+    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_snackbar_out.xml.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\04b335c32e4810085961e4066775604d\\res\\anim\\design_snackbar_out.xml"
     },
@@ -120,12 +124,12 @@
         "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_notification_bg_normal_pressed.9.png.flat",
@@ -146,6 +150,10 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_forum.xml.flat",
         "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\layout\\content_forum.xml"
+    },
+    {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_traffic.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\button_traffic.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_icon_light_normal.xml.flat",
@@ -174,6 +182,10 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_primary_text_disable_only_material_light.xml.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_air_quality.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\button_air_quality.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_fade_in.xml.flat",
@@ -298,10 +310,6 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\04b335c32e4810085961e4066775604d\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_test_marker_weather.png.flat",
-        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\test_marker_weather.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -514,6 +522,10 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21_design_bottom_sheet_slide_in.xml.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\04b335c32e4810085961e4066775604d\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_environmental.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\button_environmental.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
@@ -1072,6 +1084,10 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\04b335c32e4810085961e4066775604d\\res\\drawable\\design_fab_background.xml"
     },
     {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_logo.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\logo.png"
+    },
+    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\7908850395e2baa80eae3e264f09ef34\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
     },
@@ -1096,6 +1112,10 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_facebook_background.9.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\facebook_background.9.png"
+    },
+    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
@@ -1106,6 +1126,10 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_normal_pressed.9.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e6f0300ad6ba8b4c52159d27ac954b11\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_button_weather.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\button_weather.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_tint_btn_checkable.xml.flat",
@@ -1656,10 +1680,6 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\color-v23\\abc_btn_colored_text_material.xml"
     },
     {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_test_marker_env.png.flat",
-        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\test_marker_env.png"
-    },
-    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-xxxhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
@@ -1728,6 +1748,10 @@
         "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_facebook_logo.png.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\facebook_logo.png"
+    },
+    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_alert_dialog_material.xml.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\layout\\abc_alert_dialog_material.xml"
     },
@@ -1762,10 +1786,6 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_seekbar_track_material.xml.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable\\abc_seekbar_track_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_test_marker_traffic.png.flat",
-        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\test_marker_traffic.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
@@ -1988,10 +2008,6 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\04b335c32e4810085961e4066775604d\\res\\drawable-v21\\avd_show_password.xml"
     },
     {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_test_marker_aq.png.flat",
-        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\test_marker_aq.png"
-    },
-    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
@@ -2058,10 +2074,6 @@
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
-        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_facebook.png.flat",
-        "source": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\src\\main\\res\\drawable\\facebook.png"
     },
     {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\new1\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",

@@ -100,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(update);
     }
 
-    public void onMapEnviromentClick(View view) {
+    public void onMapEnvironmentClick(View view) {
         if(overlayState == OverlayState.Environmental){return;}
 
         overlayState = OverlayState.Environmental;

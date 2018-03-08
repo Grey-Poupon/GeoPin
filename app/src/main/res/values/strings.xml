@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Enviroscope</string>
     <string name="app_logo">Enviroscope logo</string>
+    <string name="button_environmental">Environment button</string>
+    <string name="button_air_quality">Air Quality Button</string>
+    <string name="button_traffic">Traffic button</string>
+    <string name="button_weather">Weather button</string>
     <string name="title_activity_maps">Map</string>
 
     <!-- Strings related to login -->
