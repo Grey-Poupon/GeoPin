@@ -5,36 +5,50 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
+    ir-eligibility="COMPATIBLE"
     plugin-version="3.0.1"
-    timestamp="1520021717544"
+    timestamp="1520679130450"
     token="-3375530145638410657"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="383" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="37" />
     <task
         name="verifier"
-        duration="0" />
+        duration="4" />
+
+    <artifact
+        location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
 
     <build
         build-mode="FULL"
-        timestamp="1520011950415"
+        timestamp="1520678644411"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
         <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
@@ -43,22 +57,13 @@
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
             type="SPLIT" />
         <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\outputs\apk\debug\app-debug.apk"
@@ -66,24 +71,12 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="CLASS_ADDED"
-        timestamp="1520021492549"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1520679130450"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
     </build>
-    <build
-        build-mode="COLD"
-        timestamp="1520021667622"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\outputs\apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1520021717544"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

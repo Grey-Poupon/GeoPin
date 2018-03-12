@@ -54,7 +54,6 @@ public class JsonStreamReader {
         double lon = 0;
         double baseHeight = 0;
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String type = "";
         reader.beginObject();
         while(reader.hasNext()){
@@ -74,7 +73,7 @@ public class JsonStreamReader {
             else if(name.equals("latest")){
                 // try to parse string into Date Time
                 try {
-                    date = format.parse(reader.nextString());
+                    date = ForumMessage.format.parse(reader.nextString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

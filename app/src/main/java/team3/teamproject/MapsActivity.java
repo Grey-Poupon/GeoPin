@@ -16,6 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.Gradient;
@@ -26,7 +28,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -53,6 +54,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private float[] startPoints = {0.1f,0.4f,0.7f,1f};
 
+    /**
+     * List to manage the forum markers, add location and title to add a new Marker
+     * */
+    private List<Marker>  forumMarkers = new ArrayList<Marker>();
+    private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
+    private final String[] forumMarkerTitle = {"ForumListActivity"};
+
     public MapsActivity() {
     }
 
@@ -67,8 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -88,8 +94,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMaxZoomPreference(maxZoom);
         mMap.setMinZoomPreference(minZoom);
         mMap.setLatLngBoundsForCameraTarget(mapBounds);
-
+        setupForumMarkers(mMap);
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent forum = new Intent(MapsActivity.this,ForumListActivity.class);
+                startActivity(forum);
+                return true;
+            }
+        });
     }
+
+    private void setupForumMarkers(GoogleMap map){
+        for(int i = 0;i<forumMarkerLocation.length;i++) {
+            forumMarkers.add(map.addMarker(new MarkerOptions()
+                    .position(forumMarkerLocation[i])
+                    .title(forumMarkerTitle[i])));
+        }
+    }
+
+
 
     /**
      * move the camera when screen launched
@@ -193,6 +217,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         return  list;
     }
+    /**
+     * gets all sensor data from server
+     * Stephen N
+     * */
     public List<JsonMessage> getAllSensorData(){
         List<JsonMessage> empty = new ArrayList<JsonMessage>();
         String message = "";
