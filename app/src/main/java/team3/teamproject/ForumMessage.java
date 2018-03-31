@@ -24,6 +24,7 @@ public class ForumMessage implements Comparable, Parcelable {
     private String parentID;
     private Date date;
     private List<ForumMessage> replies = new ArrayList<>();
+    private Date lastBump;
 
     public ForumMessage(String text, String uID, String parentID,String ID,Date date){
         this.text = text;
@@ -31,6 +32,7 @@ public class ForumMessage implements Comparable, Parcelable {
         this.parentID = parentID;
         this.ID = ID;
         this.date = date;
+        this.lastBump = date;
     }
 
 
@@ -118,4 +120,11 @@ public class ForumMessage implements Comparable, Parcelable {
             return new ForumMessage[size];
         }
     };
+
+    public void setLastBump(Date date) {
+        this.lastBump = date;
+    }
+    public Date getLastBump(){
+        return  lastBump;
+    }
 }

@@ -1,3 +1,5 @@
+<!--Login activity GUI
+    Created by Petr Makarov -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +11,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="team3.teamproject.LoginActivity">
 
     <!-- Login progress -->
@@ -35,7 +39,8 @@
                 android:id="@+id/imageView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/logo2" />
+                android:contentDescription="@string/app_logo"
+                app:srcCompat="@drawable/logo" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -74,8 +79,9 @@
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/activity_login_height"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/login_button_background"
                 android:onClick="onLoginSignClick"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
@@ -84,8 +90,9 @@
                 android:id="@+id/register_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/activity_login_height"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/login_button_background"
                 android:onClick="onLoginRegisterClick"
                 android:text="@string/action_register"
                 android:textStyle="bold" />
@@ -94,20 +101,22 @@
                 android:id="@+id/facebookLogIn_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/facebook_log_in"
+                android:layout_height="@dimen/activity_login_height"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/facebook_background"
+                android:drawableStart="@drawable/facebook_logo"
                 android:onClick="onLoginFacebookClick"
                 android:text="@string/action_facebook"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/without_login_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/activity_login_height"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/login_button_background"
                 android:onClick="onWithoutLoginClick"
                 android:text="@string/action_without_login"
                 android:textStyle="bold" />

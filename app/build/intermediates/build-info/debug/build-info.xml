@@ -7,22 +7,22 @@
     format="10"
     ir-eligibility="COMPATIBLE"
     plugin-version="3.0.1"
-    timestamp="1520679130450"
+    timestamp="1522342598148"
     token="-3375530145638410657"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="383" />
+        duration="1795" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="37" />
+        duration="108" />
     <task
         name="verifier"
-        duration="4" />
+        duration="142" />
 
     <artifact
         location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
@@ -30,11 +30,8 @@
 
     <build
         build-mode="FULL"
-        timestamp="1520678644411"
+        timestamp="1522341870875"
         verifier="FULL_BUILD_REQUESTED" >
-        <artifact
-            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
-            type="SPLIT" />
         <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
@@ -57,6 +54,9 @@
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
+            location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            type="SPLIT" />
+        <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
@@ -72,7 +72,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1520679130450"
+        timestamp="1522342598148"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"

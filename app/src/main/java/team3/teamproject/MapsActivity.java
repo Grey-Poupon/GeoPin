@@ -117,14 +117,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * move the camera when screen launched
-     * @Petr Makarov
+     * Created by Petr Makarov
      */
     private void startLocation(LatLng lat, int zoom) {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(lat, zoom);
         mMap.moveCamera(update);
     }
 
-    public void onMapEnviromentClick(View view) {
+    public void onMapEnvironmentClick(View view) {
         if(overlayState == OverlayState.Environmental){return;}
 
         overlayState = OverlayState.Environmental;
@@ -160,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /**
      * back button listener, returns to home screen
      *
-     * @Petr Makarov
+     * Created by Petr Makarov
      */
     @Override
     public void onBackPressed() {

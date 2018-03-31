@@ -1,4 +1,4 @@
-#Tue Mar 06 19:33:13 GMT 2018
-base.0=D\:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
+#Tue Mar 27 13:19:43 BST 2018
+base.0=D\:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
 path.0=classes.dex
 renamed.0=classes.dex

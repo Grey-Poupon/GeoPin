@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Maps activity GUI
+    Created by Petr Makarov -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,47 +17,51 @@
         tools:context="team3.teamproject.MapsActivity" />
 
     <ImageButton
-        android:id="@+id/enviromentButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/environmentButton"
+        android:layout_width="@dimen/activity_toggle_buttons"
+        android:layout_height="@dimen/activity_toggle_buttons"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginStart="@dimen/activity_toggle_buttons_end"
         android:layout_marginTop="11dp"
-        android:background="@drawable/test_marker_env"
-        android:onClick="onMapEnviromentClick" />
+        android:background="@drawable/button_environmental"
+        android:contentDescription="@string/button_environmental"
+        android:onClick="onMapEnvironmentClick" />
 
     <ImageButton
         android:id="@+id/airButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/activity_toggle_buttons"
+        android:layout_height="@dimen/activity_toggle_buttons"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginStart="@dimen/activity_toggle_buttons_end"
         android:layout_marginTop="81dp"
-        android:background="@drawable/test_marker_aq"
+        android:background="@drawable/button_air_quality"
+        android:contentDescription="@string/button_air_quality"
         android:onClick="onMapAirClick" />
 
     <ImageButton
         android:id="@+id/trafficButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/activity_toggle_buttons"
+        android:layout_height="@dimen/activity_toggle_buttons"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginStart="@dimen/activity_toggle_buttons_end"
         android:layout_marginTop="151dp"
-        android:background="@drawable/test_marker_traffic"
+        android:background="@drawable/button_traffic"
+        android:contentDescription="@string/button_traffic"
         android:onClick="onMapTrafficClick" />
 
     <ImageButton
         android:id="@+id/weatherButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/activity_toggle_buttons"
+        android:layout_height="@dimen/activity_toggle_buttons"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginStart="@dimen/activity_toggle_buttons_end"
         android:layout_marginTop="221dp"
-        android:background="@drawable/test_marker_weather"
+        android:background="@drawable/button_weather"
+        android:contentDescription="@string/button_weather"
         android:onClick="onMapWeatherClick" />
 
 </RelativeLayout>
