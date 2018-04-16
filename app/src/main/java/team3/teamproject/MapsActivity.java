@@ -103,6 +103,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             }
         });
+
+        SensorPlacement();
     }
 
     private void setupForumMarkers(GoogleMap map){
@@ -250,6 +252,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         return empty;
+    }
+
+    // Rheyn Scholtz, place sensors on the map (viewing temp)
+    List<JsonMessage> sensorsToBePlaced;
+
+    private void SensorPlacement() {
+        sensorsToBePlaced = getAllSensorData();
+
+        if (sensorsToBePlaced != null) {
+            PlaceSensorsOnMap();
+        }
+        else {
+            Log.e("STATE", "else");
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(54.973701,-1.626498))
+                    .title("test"));
+            Log.e("STATE", "marker created");
+        }
+    }
+
+    private void PlaceSensorsOnMap () {
+        for (JsonMessage sensor : sensorsToBePlaced) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(sensor.getLatLng())
+                    .title(sensor.getSensorName()));
+        }
     }
 
 }
