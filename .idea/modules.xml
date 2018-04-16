@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://D:\Users\rheyn\AndroidStudioProjects\PinIt\GeoPin.iml" filepath="D:\Users\rheyn\AndroidStudioProjects\PinIt\GeoPin.iml" />
       <module fileurl="file://$PROJECT_DIR$/PinIt.iml" filepath="$PROJECT_DIR$/PinIt.iml" />
+      <module fileurl="file://D:\Users\rheyn\AndroidStudioProjects\PinIt\PinIt.iml" filepath="D:\Users\rheyn\AndroidStudioProjects\PinIt\PinIt.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

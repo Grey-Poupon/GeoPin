@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -104,7 +108,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        SensorPlacement();
+        // Uncomment to view all sensors
+        //SensorPlacement();
     }
 
     private void setupForumMarkers(GoogleMap map){
@@ -119,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * move the camera when screen launched
-     * Created by Petr Makarov
+     * Created by Petr Makarov modified by Rheyn Scholtz
      */
     private void startLocation(LatLng lat, int zoom) {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(lat, zoom);
@@ -130,33 +135,100 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(overlayState == OverlayState.Environmental){return;}
 
         overlayState = OverlayState.Environmental;
-        addHeatMap(getEnvironmentPoints());
+        UpdateHeatMap();
     }
 
     public void onMapAirClick(View view) {
         if(overlayState == OverlayState.Air){return;}
 
         overlayState = OverlayState.Air;
+        UpdateHeatMap();
+
         //addHeatMap(getAirPoints());
         /*debug to test getting the right data from the server
             * Stephen N*/
-        for(JsonMessage msg : getAllSensorData()){
-            Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
-        }
+        //for(JsonMessage msg : getAllSensorData()){
+        //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
+        //}
     }
 
     public void onMapTrafficClick(View view) {
         if(overlayState == OverlayState.Traffic){return;}
 
         overlayState = OverlayState.Traffic;
-        addHeatMap(getTrafficPoints());
+        UpdateHeatMap();
     }
 
     public void onMapWeatherClick(View view) {
         if(overlayState == OverlayState.Weather){return;}
 
         overlayState = OverlayState.Weather;
-        addHeatMap(getWeatherPoints());
+        UpdateHeatMap();
+    }
+
+
+
+    // Rheyn Scholtz
+    private void UpdateHeatMap () {
+        // Get all sensors to place on the heatmap
+        List<JsonMessage> sensors = getSensorsFromType(overlayState);
+
+        List<WeightedLatLng> sensorData = new ArrayList<>();
+
+        for (JsonMessage sensor : sensors) {
+            sensorData.add(new WeightedLatLng(sensor.getLatLng(), 10.0));
+        }
+
+        mProvider = new HeatmapTileProvider.Builder().weightedData(sensorData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+
+        if (mOverlay != null) {
+            mOverlay.remove();
+        }
+        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+    }
+
+    public List<JsonMessage> getSensorsFromType(OverlayState type){
+        String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
+        if (type == OverlayState.Air) {
+            urlPath += "Air%20Quality";
+        }
+        else if (type == OverlayState.Weather) {
+            urlPath += "Weather";
+        }
+        else if (type == OverlayState.Environmental) {
+            urlPath += "Environmental";
+        }
+        else {
+            urlPath += "Traffic";
+        }
+
+        List<JsonMessage> listOfSensors = new ArrayList<JsonMessage>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return listOfSensors;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return listOfSensors;
+        }
+        if(urlConnection!=null) {
+            try {
+                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return listOfSensors;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return listOfSensors;
     }
 
     /**
@@ -182,26 +254,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-    }
-
-    private List<WeightedLatLng> getEnvironmentPoints() {
-        // ToDo pull from database
-        return getTestPoints();
-    }
-
-    private List<WeightedLatLng> getAirPoints() {
-        // ToDo pull from database
-        return getTestPoints();
-    }
-
-    private List<WeightedLatLng> getTrafficPoints() {
-        // ToDo pull from database
-        return getTestPoints();
-    }
-
-    private List<WeightedLatLng> getWeatherPoints() {
-        // ToDo pull from database
-        return getTestPoints();
     }
 
     /**
@@ -254,7 +306,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
-    // Rheyn Scholtz, place sensors on the map (viewing temp) oioi
+    // Rheyn Scholtz, place sensors on the map (viewing temp)
     List<JsonMessage> sensorsToBePlaced;
 
     private void SensorPlacement() {
