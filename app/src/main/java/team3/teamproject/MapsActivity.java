@@ -254,7 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
-    // Rheyn Scholtz, place sensors on the map (viewing temp)
+    // Rheyn Scholtz, place sensors on the map (viewing temp) oioi
     List<JsonMessage> sensorsToBePlaced;
 
     private void SensorPlacement() {
