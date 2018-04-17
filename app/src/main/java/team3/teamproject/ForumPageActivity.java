@@ -23,20 +23,20 @@ import java.util.List;
 
 public class ForumPageActivity extends AppCompatActivity {
 
-    private ForumPost post;
+    private ForumPage post;
     private List<ForumMessage> messages;
     private HashMap<String, ForumMessage> msgMap = new HashMap<>();
     private ForumMessageAdapter adapter;
-
+    private String boardID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forum_post);
+        setContentView(R.layout.activity_forum_page);
 
-        //get the main post
-        post = getIntent().getParcelableExtra("ForumPost");
+        //get the data from intent
+        post = getIntent().getParcelableExtra("ForumPage");
 
         // set variables
         this.messages = getChildren(post);

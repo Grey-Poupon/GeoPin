@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team3.teamproject.ForumListActivity">
+    tools:context="team3.teamproject.PageListActivity">
 
     <TextView
         android:id="@+id/forumTitle"
@@ -32,7 +32,8 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="22dp"
-        app:srcCompat="?android:attr/actionModeCloseDrawable" />
+        app:backgroundTint="@android:color/black"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
 

@@ -8,23 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Steve on 06/03/2018.
  */
 
-public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
+public class ForumPageAdapter extends ArrayAdapter<ForumPage> {
 
-    public ForumPostAdapter(@NonNull Context context, List<ForumPost> resources) {
+    public ForumPageAdapter(@NonNull Context context, List<ForumPage> resources) {
         super(context,0, resources);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ForumPost post = getItem(position);
+        ForumPage post = getItem(position);
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.forum_post_layout, parent, false);

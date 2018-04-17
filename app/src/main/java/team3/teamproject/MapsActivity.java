@@ -59,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * */
     private List<Marker>  forumMarkers = new ArrayList<Marker>();
     private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
-    private final String[] forumMarkerTitle = {"ForumListActivity"};
+    private final String[] forumMarkerTitle = {"PageListActivity"};
 
     public MapsActivity() {
     }
@@ -98,7 +98,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent forum = new Intent(MapsActivity.this,ForumListActivity.class);
+                Intent forum = new Intent(MapsActivity.this,PageListActivity.class);
+                forum.putExtra("PinID",marker.getTitle());
                 startActivity(forum);
                 return true;
             }

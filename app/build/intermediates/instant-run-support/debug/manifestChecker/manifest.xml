@@ -39,7 +39,7 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
 
-<!--              The API key for Google Maps-based APIs is defined as a string resource. -->
+        <!-- The API key for Google Maps-based APIs is defined as a string resource. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -58,7 +58,7 @@
             android:label="@string/title_activity_maps"
             android:parentActivityName="team3.teamproject.LoginActivity" />
         <activity
-            android:name="team3.teamproject.ForumListActivity"
+            android:name="team3.teamproject.PageListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName="team3.teamproject.MapsActivity" >
             <intent-filter>
@@ -70,13 +70,17 @@
         <activity
             android:name="team3.teamproject.ForumPageActivity"
             android:label="@string/title_activity_forum_page"
-            android:parentActivityName="team3.teamproject.ForumListActivity" >
+            android:parentActivityName="team3.teamproject.PageListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="team3.teamproject.SubmitPageActivity"
+            android:label="@string/title_activity_submit_page"
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -14,30 +14,32 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class ForumListActivity extends AppCompatActivity {
+public class PageListActivity extends AppCompatActivity {
 
-    private List<ForumPost> posts = new ArrayList<>();
-
-    public ForumListActivity(){}
+    private List<ForumPage> posts = new ArrayList<>();
+    private String ID;
+    private ForumPageAdapter adapter;
+    public PageListActivity(){}
 
     private void getPosts() {
         //TODO get messsages from server
-        posts.add(new ForumPost("Title 1","Test 1",        "STE","-1","2",  new Date()));
-        posts.add(new ForumPost("Title 2","Test 2",        "STE","-1","3",  new Date()));
-
-
+        posts.add(new ForumPage("Title 1","Test 1","STE",ID,"2",new Date()));
+        posts.add(new ForumPage("Title 2","Test 2","STE",ID,"3",new Date()));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forum_screen);
+        setContentView(R.layout.activity_page_list);
+        ID = getIntent().getStringExtra("PinID");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void onClick(View view){
+                Intent intent = new Intent(getBaseContext(), SubmitPageActivity.class);
+                intent.putExtra("BoardID",ID);
+                startActivityForResult(intent,1);
             }
         });
         ListView lv = findViewById(R.id.messageList);
@@ -47,14 +49,29 @@ public class ForumListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
                 Intent intent = new Intent(getBaseContext(), ForumPageActivity.class);
-                intent.putExtra("ForumPost", posts.get(position));
+                intent.putExtra("ForumPage", posts.get(position));
                 startActivity(intent);
-
             }
         });
         getPosts();
         Collections.sort(posts);
         createForum();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // if creation was successful
+        if(resultCode == RESULT_OK){
+            ForumPage newPage = data.getParcelableExtra("Page");
+            addNewPage(newPage);
+        }
+    }
+
+    private void addNewPage(ForumPage newPage) {
+        // ToDO add new page to server
+        adapter.add(newPage);
+        ListView lv = (ListView) findViewById(R.id.messageList);
+        lv.setSelection(lv.getAdapter().getCount()-1);
     }
 
     // setups all the dynamic elements of the activity
@@ -64,7 +81,7 @@ public class ForumListActivity extends AppCompatActivity {
     }
 
     private void setupMessageText() {
-        ForumPostAdapter adapter = new ForumPostAdapter(this, posts);
+        adapter = new ForumPageAdapter(this, posts);
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.messageList);
         listView.setAdapter(adapter);

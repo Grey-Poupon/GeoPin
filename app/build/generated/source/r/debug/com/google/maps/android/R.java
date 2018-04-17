@@ -73,25 +73,25 @@ public final class R {
         public static final int amu_text = 0x7f080021;
         public static final int auto = 0x7f080023;
         public static final int dark = 0x7f08003d;
-        public static final int hybrid = 0x7f08005e;
-        public static final int icon_only = 0x7f080061;
-        public static final int light = 0x7f08006a;
-        public static final int none = 0x7f08007d;
-        public static final int normal = 0x7f08007e;
-        public static final int satellite = 0x7f080093;
-        public static final int standard = 0x7f0800b7;
-        public static final int terrain = 0x7f0800bd;
-        public static final int webview = 0x7f0800da;
-        public static final int wide = 0x7f0800db;
-        public static final int window = 0x7f0800dc;
+        public static final int hybrid = 0x7f08005f;
+        public static final int icon_only = 0x7f080062;
+        public static final int light = 0x7f08006b;
+        public static final int none = 0x7f08007e;
+        public static final int normal = 0x7f08007f;
+        public static final int satellite = 0x7f080094;
+        public static final int standard = 0x7f0800b8;
+        public static final int terrain = 0x7f0800c0;
+        public static final int webview = 0x7f0800de;
+        public static final int wide = 0x7f0800df;
+        public static final int window = 0x7f0800e0;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f090007;
     }
     public static final class layout {
-        public static final int amu_info_window = 0x7f0a001f;
-        public static final int amu_text_bubble = 0x7f0a0020;
-        public static final int amu_webview = 0x7f0a0021;
+        public static final int amu_info_window = 0x7f0a0020;
+        public static final int amu_text_bubble = 0x7f0a0021;
+        public static final int amu_webview = 0x7f0a0022;
     }
     public static final class raw {
         public static final int amu_ballon_gx_prefix = 0x7f0c0000;
@@ -134,9 +134,9 @@ public final class R {
         public static final int common_signin_button_text_long = 0x7f0d0041;
     }
     public static final class style {
-        public static final int amu_Bubble_TextAppearance_Dark = 0x7f0e018b;
-        public static final int amu_Bubble_TextAppearance_Light = 0x7f0e018c;
-        public static final int amu_ClusterIcon_TextAppearance = 0x7f0e018d;
+        public static final int amu_Bubble_TextAppearance_Dark = 0x7f0e018d;
+        public static final int amu_Bubble_TextAppearance_Light = 0x7f0e018e;
+        public static final int amu_ClusterIcon_TextAppearance = 0x7f0e018f;
     }
     public static final class styleable {
         public static final int[] LoadingImageView = { 0x7f030056, 0x7f0300b3, 0x7f0300b4 };
