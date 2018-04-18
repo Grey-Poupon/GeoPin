@@ -166,7 +166,7 @@ ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\Android
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:47:13-57
 	android:name
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:46:13-45
-activity#team3.teamproject.ForumPageActivity
+activity#team3.teamproject.ForumPostActivity
 ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:55:9-64:20
 	android:parentActivityName
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:58:13-59

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +24,15 @@ import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -78,6 +78,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        
     }
     /**
      * Manipulates the map once available.
@@ -108,6 +110,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             }
         });
+        try {
+            createComment("Test1","Comment","");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Uncomment to view all sensors
         //SensorPlacement();
@@ -148,7 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //addHeatMap(getAirPoints());
         /*debug to test getting the right data from the server
             * Stephen N*/
-        //for(JsonMessage msg : getAllSensorData()){
+        //for(JsonSensorMessage msg : getAllSensorData()){
         //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
         //}
     }
@@ -172,11 +179,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Rheyn Scholtz
     private void UpdateHeatMap () {
         // Get all sensors to place on the heatmap
-        List<JsonMessage> sensors = getSensorsFromType(overlayState);
+        List<JsonSensorMessage> sensors = getSensorsFromType(overlayState);
 
         List<WeightedLatLng> sensorData = new ArrayList<>();
 
-        for (JsonMessage sensor : sensors) {
+        for (JsonSensorMessage sensor : sensors) {
             sensorData.add(new WeightedLatLng(sensor.getLatLng(), 10.0));
         }
 
@@ -188,7 +195,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    public List<JsonMessage> getSensorsFromType(OverlayState type){
+    public List<JsonSensorMessage> getSensorsFromType(OverlayState type){
         String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
         if (type == OverlayState.Air) {
             urlPath += "Air%20Quality";
@@ -203,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             urlPath += "Traffic";
         }
 
-        List<JsonMessage> listOfSensors = new ArrayList<JsonMessage>();
+        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
         URL url = null;
         try {
             url = new URL(urlPath);
@@ -221,7 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(urlConnection!=null) {
             try {
-                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
                 return listOfSensors;
@@ -276,8 +283,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * gets all sensor data from server
      * Stephen N
      * */
-    public List<JsonMessage> getAllSensorData(){
-        List<JsonMessage> empty = new ArrayList<JsonMessage>();
+    public List<JsonSensorMessage> getAllSensorData(){
+        List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
         String message = "";
         URL url = null;
         try {
@@ -296,7 +303,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(urlConnection!=null) {
             try {
-                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
                 return empty;
@@ -308,7 +315,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // Rheyn Scholtz, place sensors on the map (viewing temp)
-    List<JsonMessage> sensorsToBePlaced;
+    List<JsonSensorMessage> sensorsToBePlaced;
 
     private void SensorPlacement() {
         sensorsToBePlaced = getAllSensorData();
@@ -326,11 +333,130 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void PlaceSensorsOnMap () {
-        for (JsonMessage sensor : sensorsToBePlaced) {
+        for (JsonSensorMessage sensor : sensorsToBePlaced) {
             mMap.addMarker(new MarkerOptions()
                     .position(sensor.getLatLng())
                     .title(sensor.getSensorName()));
         }
     }
+    private List<JsonPostMessage> getPost(String postID, String postTitle, String ownerID, String ownerName, String pinID, String pinName) throws Exception {
+        String URLend = "getPost.php?";
+        String URLParameters = String.format("selectID=%s&title=%s&description=%s&datePosted=%s&pinID=%s&pinName=s%", postID, postTitle, ownerID, ownerName, pinID, pinName);
+        return getPost(URLend, URLParameters);
+    }
+    private List<JsonCommentMessage> getComment(String postID, String ownerID, String ownerName) throws Exception {
+        String URLend = "getComment.php?";
+        String URLParameters = String.format("selectID=%s&description=%s&datePosted=%s&", postID, ownerID, ownerName);
+        return getComment(URLend,URLParameters);
+    }
+    private void createPost(String username, String title, String description,String pinID) throws Exception {
+        String URLend = "createPost.php?";
+        String URLParameters = String.format("username=%s&title=%s&description=%s&pinID=%s", username, title, description,pinID);
+        sendCreate(URLend,URLParameters);
+    }
 
+    private void createComment(String username, String comment, String postID) throws Exception {
+        String URLend = "createComment.php?";
+        String URLParameters = String.format("username=%s&comment=%s&selectID=%s", username,comment,postID);
+        sendCreate(URLend,URLParameters);
+    }
+
+    // Steve N
+    private void sendCreate(String url, String urlParameters) throws Exception {
+
+        URL obj = new URL("https://duffin.co/uo/"+url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+        while ((inputLine = bin.readLine()) != null) {
+        response.append(inputLine);
+
+        in.close();
+
+        //print result
+        System.out.println(response.toString());
+
+    }}
+
+    // Steve N
+    private List<JsonPostMessage> getPost(String url, String urlParameters) throws Exception {
+
+        URL obj = new URL("https://duffin.co/uo/"+url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        return JsonStreamReader.readPostJsonStream(in);
+    }
+
+// Steve N
+    private List<JsonCommentMessage> getComment(String url, String urlParameters) throws Exception {
+
+        URL obj = new URL("https://duffin.co/uo/"+url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        return JsonStreamReader.readCommentJsonStream(in);
+        }
 }
