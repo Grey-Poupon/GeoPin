@@ -14,13 +14,15 @@ public class JsonSensorData {
     Date date;
     double value;
     LatLng latLng;
+    int indexValue;
 
     String databaseUrlPath = "https://duffin.co/uo/retreiveSensors.php";
 
-    public JsonSensorData(int sensorID, Date date, double value){
+    public JsonSensorData(int sensorID, Date date, double value, int indexValue){
         this.sensorID = sensorID;
         this.date = date;
         this.value = value;
+        this.indexValue = indexValue;
     }
 
     public Date getDate() {
@@ -40,4 +42,6 @@ public class JsonSensorData {
     }
 
     public LatLng getLatLng () {return latLng;}
+
+    public int getIndexValue () {return indexValue;}
 }

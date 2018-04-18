@@ -1,6 +1,7 @@
 package team3.teamproject;
 
 import android.util.JsonReader;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Steve on 02/03/2018. Modified by Rheyn Scholtz
@@ -18,10 +20,17 @@ import java.util.List;
 
 public class JsonStreamReader {
 
-    public static List<JsonSensorData> readJsonSensorDataStream(InputStream in) {
+    public static int readHighestIndex(InputStream in) {
+        Scanner scan = new Scanner(in);
+        String s = scan.nextLine();
+        scan.close();
+        return Integer.parseInt(s);
+    }
+
+    public static List<JsonSensorData> readJsonSensorDataStream(InputStream in, int index) {
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
-            return readJsonSensorDataArray(reader);
+            return readJsonSensorDataArray(reader, index);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -38,12 +47,15 @@ public class JsonStreamReader {
         return null;
     }
 
-    private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader) throws IOException {
+    private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader, int index) throws IOException {
         List<JsonSensorData> messages = new ArrayList<JsonSensorData>();
 
         reader.beginArray();
         while (reader.hasNext()){
-            messages.add(readJsonSensorDataMessage(reader));
+            JsonSensorData nextSensorData = readJsonSensorDataMessage(reader);
+            if (nextSensorData.getIndexValue() == index) {
+                messages.add(nextSensorData);
+            }
         }
         reader.endArray();
         return messages;
@@ -54,6 +66,9 @@ public class JsonStreamReader {
         int sensorId = -1;
         double value = 0;
         Date date = new Date();
+        int indexValue = -1;
+
+        boolean found = false;
 
         reader.beginObject();
         while(reader.hasNext()){
@@ -78,9 +93,13 @@ public class JsonStreamReader {
                     e.printStackTrace();
                 }
             }
+
+            else if (name.equals("indexValue")) {
+                indexValue = reader.nextInt();
+            }
         }
         reader.endObject();
-        return new JsonSensorData(sensorId, date, value);
+        return new JsonSensorData(sensorId, date, value, indexValue);
     }
 
 

@@ -185,7 +185,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
-        Log.e("Progress", "Done");
+        if (allRelivantSensorData == null) {
+            Log.e("LIST SIZE", "allRelivantSensorData is null");
+            //return;
+        }
+
+        Log.e("Progress", "Done" + allRelivantSensorData.size());
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
@@ -241,20 +246,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else if (type == OverlayState.CO) {
             urlPath += "CO";
         }
-        List<JsonSensorData> listOfSensorDatabig = getSensorDataFromDatabase(urlPath);
 
-        //temp
-        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
-        Log.e("Long lat", "jere");
-        for (int i = 1; i <= 10; i ++) {
-            listOfSensorData.add(listOfSensorDatabig.get(i - 1));
+        //Will be replaced with graph functionality later
+
+        int newestIndex = getNewestIndex();
+        if (newestIndex == -1) {
+            return null;
+        }
+
+        List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
+
+        if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
+            return null;
+        }
+
+        Log.e("ERROR","before");
+        List<JsonMessage> allSensorData = getAllSensorData();
+        Log.e("ERROR","after");
+        if (allSensorData == null) {
+            Log.e("ERROR","Ruh roh, its null");
         }
 
         Log.e("Long lat", "Started");
         // Get long and lat values
         for (JsonSensorData sensorData : listOfSensorData) {
             Log.e("First", "++");
-            for(JsonMessage sensor : getAllSensorData()) {
+            for(JsonMessage sensor : allSensorData) {
                 Log.e("Second", "++");
                 if (sensor.sensorName.equals(sensorData.getSensorId())) {
                     Log.e("Long lat", "Found");
@@ -268,7 +285,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return listOfSensorData;
     }
 
-    private List<JsonSensorData> getSensorDataFromDatabase (String urlPath) {
+    private List<JsonSensorData> getSensorDataFromDatabase (String urlPath, int sensorIndex) {
+        if (sensorIndex == -1) {
+            return null;
+        }
+
         List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
         URL url = null;
         try {
@@ -288,7 +309,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(urlConnection!=null) {
 
             try {
-                return JsonStreamReader.readJsonSensorDataStream(urlConnection.getInputStream());
+                return JsonStreamReader.readJsonSensorDataStream(urlConnection.getInputStream(), sensorIndex);
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -298,6 +319,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         return listOfSensorData;
+    }
+
+    private int getNewestIndex () {
+        String urlPath = "https://duffin.co/uo/getIndex.php";
+
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return -1;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        if(urlConnection!=null) {
+
+            try {
+                return JsonStreamReader.readHighestIndex(urlConnection.getInputStream()) - 1;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return -1;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return -1;
     }
 
     private List<JsonMessage> getDataFromDatabase (String urlPath) {
