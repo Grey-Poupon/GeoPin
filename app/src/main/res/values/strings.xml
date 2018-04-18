@@ -31,4 +31,13 @@
     <string name="Bump">Bump</string>
     <string name="title_activity_forum_page">Post</string>
     <string name="title_activity_submit_page">SubmitPageActivity</string>
+
+    <array name="polutionTypes">
+        <item>Sound</item>
+        <item>Temperature</item>
+        <item>Humidity</item>
+        <item>NO2</item>
+        <item>NO</item>
+        <item>CO</item>
+    </array>
 </resources>

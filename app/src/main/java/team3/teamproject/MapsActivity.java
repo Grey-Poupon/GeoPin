@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
@@ -88,6 +89,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+        // Pollution selection
+        heatmapTypeSpinner = (Spinner)findViewById(R.id.heatmapType);
+
+        ArrayAdapter<CharSequence> heatmapTypeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.polutionTypes, android.R.layout.simple_spinner_item);
+        heatmapTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        heatmapTypeSpinner.setAdapter(heatmapTypeAdapter);
+        heatmapTypeSpinner.setOnItemSelectedListener(this);
     }
     /**
      * Manipulates the map once available.
@@ -234,6 +245,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //temp
         List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+        Log.e("Long lat", "jere");
         for (int i = 1; i <= 10; i ++) {
             listOfSensorData.add(listOfSensorDatabig.get(i - 1));
         }
