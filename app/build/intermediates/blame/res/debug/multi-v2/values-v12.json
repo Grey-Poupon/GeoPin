@@ -1,42 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\petym\\AndroidStudioProjects\\new\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v12\\values-v12.xml",
+            "outputFile": "D:\\Users\\rheyn\\AndroidStudioProjects\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v12\\values-v12.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a9cc63a47207923956fa7fb8bf50767a\\res\\values-v12\\values-v12.xml",
-                    "from": {
-                        "startLines": "2,5,8,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,279,479,598",
-                        "endLines": "4,7,8,9",
-                        "endColumns": "12,12,118,94",
-                        "endOffsets": "274,474,593,688"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v12\\values-v12.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8547ab0c8c60f3f47e9d1f9ffe03608b\\res\\values-v12\\values-v12.xml",
-                    "from": {
-                        "startLines": "2,5,8,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,279,479,598",
-                        "endLines": "4,7,8,9",
-                        "endColumns": "12,12,118,94",
-                        "endOffsets": "274,474,593,688"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v12\\values-v12.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\c60939077a1d25a3198274b17ae80151\\res\\values-v12\\values-v12.xml",
+                    "source": "C:\\Users\\rheyn\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\11925c110b89cedd7f68d19292a2007a\\res\\values-v12\\values-v12.xml",
                     "from": {
                         "startLines": "2,5,8,9",
                         "startColumns": "4,4,4,4",
