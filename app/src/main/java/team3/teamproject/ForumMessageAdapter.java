@@ -70,7 +70,7 @@ private ForumMessage source;
                 @Override
                 public void onClick(View widget) {
                     if (source != null) {
-                        ListView listView = page.findViewById(R.id.commentsList);
+                        ListView listView = (ListView) page.findViewById(R.id.commentsList);
                         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                         listView.setSelection(page.getAdapter().getPosition(source));
 

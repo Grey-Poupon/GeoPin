@@ -29,6 +29,21 @@
                     }
                 }
             ]
+        },
+        {
+            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\c60939077a1d25a3198274b17ae80151\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
         }
     ]
 }

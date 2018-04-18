@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -78,6 +81,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
     /**
      * Manipulates the map once available.
@@ -335,6 +341,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // log out button click listener
     public void onLogOutClick(View view){
+        LoginManager.getInstance().logOut();
 
+        Intent logOutScreen = new Intent(this, LoginActivity.class);
+        startActivity(logOutScreen);
     }
 }
