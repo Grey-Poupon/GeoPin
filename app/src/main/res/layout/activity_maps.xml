@@ -17,6 +17,18 @@
         tools:context="team3.teamproject.MapsActivity" />
 
     <ImageButton
+        android:id="@+id/logOutButton"
+        android:layout_width="@dimen/activity_log_out_button"
+        android:layout_height="@dimen/activity_log_out_button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="@dimen/activity_toggle_buttons_end"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/button_environmental"
+        android:contentDescription="@string/button_environmental"
+        android:onClick="onLogOutClick" />
+
+    <ImageButton
         android:id="@+id/environmentButton"
         android:layout_width="@dimen/activity_toggle_buttons"
         android:layout_height="@dimen/activity_toggle_buttons"

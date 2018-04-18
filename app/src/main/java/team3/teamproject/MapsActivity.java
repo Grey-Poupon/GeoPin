@@ -333,4 +333,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    // log out button click listener
+    public void onLogOutClick(View view){
+
+    }
 }
