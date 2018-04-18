@@ -97,18 +97,16 @@
                 android:text="@string/action_register"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/facebookLogIn_button"
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_login_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_login_height"
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@drawable/facebook_background"
-                android:drawableStart="@drawable/facebook_logo"
-                android:onClick="onLoginFacebookClick"
-                android:text="@string/action_facebook"
-                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
+            />
 
             <Button
                 android:id="@+id/without_login_button"

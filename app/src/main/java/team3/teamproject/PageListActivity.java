@@ -42,7 +42,7 @@ public class PageListActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
-        ListView lv = findViewById(R.id.messageList);
+        ListView lv = (ListView) findViewById(R.id.messageList);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

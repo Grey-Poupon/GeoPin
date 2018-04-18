@@ -9,6 +9,9 @@
     <string name="title_activity_forum">Forum</string>
 
     <!-- Strings related to login -->
+    <string name="facebook_app_id">2040301499520945</string>
+    <string name="fb_login_protocol_scheme">fb2040301499520945</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
@@ -28,4 +31,13 @@
     <string name="Bump">Bump</string>
     <string name="title_activity_forum_page">Post</string>
     <string name="title_activity_submit_page">SubmitPageActivity</string>
+
+    <array name="polutionTypes">
+        <item>Sound</item>
+        <item>Temperature</item>
+        <item>Humidity</item>
+        <item>NO2</item>
+        <item>NO</item>
+        <item>CO</item>
+    </array>
 </resources>

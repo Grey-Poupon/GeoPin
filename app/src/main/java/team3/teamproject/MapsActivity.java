@@ -7,7 +7,13 @@ import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,7 +42,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
     private GoogleMap mMap;
     private TileOverlay mOverlay;
@@ -65,6 +71,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
     private final String[] forumMarkerTitle = {"PageListActivity"};
 
+    private Spinner heatmapTypeSpinner;
+
     public MapsActivity() {
     }
 
@@ -79,7 +87,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+
+        // Pollution selection
+        heatmapTypeSpinner = (Spinner)findViewById(R.id.heatmapType);
+
+        ArrayAdapter<CharSequence> heatmapTypeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.polutionTypes, android.R.layout.simple_spinner_item);
+        heatmapTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        heatmapTypeSpinner.setAdapter(heatmapTypeAdapter);
+        heatmapTypeSpinner.setOnItemSelectedListener(this);
     }
     /**
      * Manipulates the map once available.
@@ -139,15 +159,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(update);
     }
 
-    public void onMapEnvironmentClick(View view) {
-        if(overlayState == OverlayState.Environmental){return;}
+    // Rheyn Scholtz
 
-        overlayState = OverlayState.Environmental;
-        UpdateHeatMap();
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
+        if (selectedPollution.equals(OverlayState.CO.toString()))  {
+            UpdateHeatMap(OverlayState.CO);
+        }
+        else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
+            UpdateHeatMap(OverlayState.Humidity);
+        }
+        else if (selectedPollution.equals(OverlayState.NO.toString())) {
+            UpdateHeatMap(OverlayState.NO);
+        }
+        else if (selectedPollution.equals(OverlayState.NO2.toString())) {
+            UpdateHeatMap(OverlayState.NO2);
+        }
+        else if (selectedPollution.equals(OverlayState.Sound.toString())) {
+            UpdateHeatMap(OverlayState.Sound);
+        }
+        else {
+            UpdateHeatMap(OverlayState.Temperature);
+        }
     }
 
     public void onMapAirClick(View view) {
-        if(overlayState == OverlayState.Air){return;}
+        if (overlayState == OverlayState.Air) {
+            return;
+        }
 
         overlayState = OverlayState.Air;
         UpdateHeatMap();
@@ -159,35 +198,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
         //}
     }
-
-    public void onMapTrafficClick(View view) {
-        if(overlayState == OverlayState.Traffic){return;}
-
-        overlayState = OverlayState.Traffic;
-        UpdateHeatMap();
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        return;
     }
 
-    public void onMapWeatherClick(View view) {
-        if(overlayState == OverlayState.Weather){return;}
+    private void UpdateHeatMap (OverlayState pollutionType) {
+        // Get all sensor data to place on the heatmap
+        List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
-        overlayState = OverlayState.Weather;
-        UpdateHeatMap();
+        if (allRelivantSensorData == null) {
+            Log.e("LIST SIZE", "allRelivantSensorData is null");
+            //return;
+        }
+
+        Log.e("Progress", "Done" + allRelivantSensorData.size());
+
+        // Find the smallest and largest value
+        double min = allRelivantSensorData.get(0).value;
+        double max = allRelivantSensorData.get(0).value;
+
+        for (JsonSensorData sensorData : allRelivantSensorData) {
+            if (sensorData.value < min) {
+                min = sensorData.value;
+            }
+            if (sensorData.value > max) {
+                max = sensorData.value;
+            }
+        }
     }
-
-
 
     // Rheyn Scholtz
     private void UpdateHeatMap () {
         // Get all sensors to place on the heatmap
-        List<JsonSensorMessage> sensors = getSensorsFromType(overlayState);
+        List<JsonSensorData> sensors = getSensorsFromType(overlayState);
+        List<WeightedLatLng> mapData = new ArrayList<>();
 
-        List<WeightedLatLng> sensorData = new ArrayList<>();
-
-        for (JsonSensorMessage sensor : sensors) {
-            sensorData.add(new WeightedLatLng(sensor.getLatLng(), 10.0));
+        for (JsonSensorData sensorData : sensors) {
+            mapData.add(new WeightedLatLng(sensorData.getLatLng(), 10.0));
         }
+        Log.e("Progress", "Applied intencity");
 
-        mProvider = new HeatmapTileProvider.Builder().weightedData(sensorData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        mProvider = new HeatmapTileProvider.Builder().weightedData(mapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
 
         if (mOverlay != null) {
             mOverlay.remove();
@@ -195,21 +246,136 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    public List<JsonSensorMessage> getSensorsFromType(OverlayState type){
+    public List<JsonSensorData> getSensorsFromType(OverlayState type){
         String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
         if (type == OverlayState.Air) {
             urlPath += "Air%20Quality";
         }
-        else if (type == OverlayState.Weather) {
-            urlPath += "Weather";
+        else if (type == OverlayState.Temperature) {
+            urlPath += "Temperature";
         }
-        else if (type == OverlayState.Environmental) {
-            urlPath += "Environmental";
+        else if (type == OverlayState.Humidity) {
+            urlPath += "Humidity";
         }
-        else {
-            urlPath += "Traffic";
+        else if (type == OverlayState.NO2) {
+            urlPath += "NO2";
+        }
+        else if (type == OverlayState.NO) {
+            urlPath += "NO";
+        }
+        else if (type == OverlayState.CO) {
+            urlPath += "CO";
         }
 
+        //Will be replaced with graph functionality later
+
+        int newestIndex = getNewestIndex();
+        if (newestIndex == -1) {
+            return null;
+        }
+
+        List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
+
+        if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
+            return null;
+        }
+
+        Log.e("ERROR","before");
+        List<JsonSensorMessage> allSensorData = getAllSensorData();
+        Log.e("ERROR","after");
+        if (allSensorData == null) {
+            Log.e("ERROR","Ruh roh, its null");
+        }
+
+        Log.e("Long lat", "Started");
+        // Get long and lat values
+        for (JsonSensorData sensorData : listOfSensorData) {
+            Log.e("First", "++");
+            for(JsonSensorMessage sensor : allSensorData) {
+                Log.e("Second", "++");
+                if (sensor.sensorName.equals(sensorData.getSensorId())) {
+                    Log.e("Long lat", "Found");
+                    sensorData.applyLatLong(sensor.getLatLng());
+                    break;
+                }
+            }
+        }
+
+        Log.e("Long lat", "Completed");
+        return listOfSensorData;
+    }
+
+    private List<JsonSensorData> getSensorDataFromDatabase (String urlPath, int sensorIndex) {
+        if (sensorIndex == -1) {
+            return null;
+        }
+
+        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return listOfSensorData;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return listOfSensorData;
+        }
+        if(urlConnection!=null) {
+
+            try {
+                return JsonStreamReader.readJsonSensorDataStream(urlConnection.getInputStream(), sensorIndex);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return listOfSensorData;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return listOfSensorData;
+    }
+
+    private int getNewestIndex () {
+        String urlPath = "https://duffin.co/uo/getIndex.php";
+
+        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return -1;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        if(urlConnection!=null) {
+
+            try {
+                return JsonStreamReader.readHighestIndex(urlConnection.getInputStream()) - 1;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return -1;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return -1;
+    }
+
+    private List<JsonSensorMessage> getDataFromDatabase (String urlPath) {
         List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
         URL url = null;
         try {
@@ -226,7 +392,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return listOfSensors;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
             try {
                 return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
@@ -459,4 +625,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return JsonStreamReader.readCommentJsonStream(in);
         }
+
+    // log out button click listener
+    public void onLogOutClick(View view){
+        LoginManager.getInstance().logOut();
+
+        Intent logOutScreen = new Intent(this, LoginActivity.class);
+        startActivity(logOutScreen);
+    }
 }
