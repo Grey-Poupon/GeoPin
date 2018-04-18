@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -39,7 +41,7 @@ import java.util.ListIterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
     private GoogleMap mMap;
     private TileOverlay mOverlay;
@@ -67,6 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Marker>  forumMarkers = new ArrayList<Marker>();
     private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
     private final String[] forumMarkerTitle = {"PageListActivity"};
+
+    private Spinner heatmapTypeSpinner;
 
     public MapsActivity() {
     }
@@ -138,55 +142,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(update);
     }
 
-    public void onMapEnvironmentClick(View view) {
-        if(overlayState == OverlayState.Environmental){return;}
-
-        overlayState = OverlayState.Environmental;
-        UpdateHeatMap();
-    }
-
-    public void onMapAirClick(View view) {
-        if(overlayState == OverlayState.Air){return;}
-
-        overlayState = OverlayState.Air;
-        UpdateHeatMap();
-
-        //addHeatMap(getAirPoints());
-        /*debug to test getting the right data from the server
-            * Stephen N*/
-        //for(JsonMessage msg : getAllSensorData()){
-        //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
-        //}
-    }
-
-    public void onMapTrafficClick(View view) {
-        if(overlayState == OverlayState.Traffic){return;}
-
-        overlayState = OverlayState.Traffic;
-        UpdateHeatMap();
-    }
-
-    public void onMapWeatherClick(View view) {
-        if(overlayState == OverlayState.Weather){return;}
-
-        overlayState = OverlayState.Weather;
-        UpdateHeatMap();
-    }
-
-
-
     // Rheyn Scholtz
-    private void UpdateHeatMap () {
-        // Get all sensors to place on the heatmap
-        List<JsonMessage> sensors = getSensorsFromType(overlayState);
 
-        List<WeightedLatLng> sensorData = new ArrayList<>();
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
+        if (selectedPollution.equals(OverlayState.CO.toString()))  {
+            UpdateHeatMap(OverlayState.CO);
+        }
+        else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
+            UpdateHeatMap(OverlayState.Humidity);
+        }
+        else if (selectedPollution.equals(OverlayState.NO.toString())) {
+            UpdateHeatMap(OverlayState.NO);
+        }
+        else if (selectedPollution.equals(OverlayState.NO2.toString())) {
+            UpdateHeatMap(OverlayState.NO2);
+        }
+        else if (selectedPollution.equals(OverlayState.Sound.toString())) {
+            UpdateHeatMap(OverlayState.Sound);
+        }
+        else {
+            UpdateHeatMap(OverlayState.Temperature);
+        }
+    }
 
-        for (JsonMessage sensor : sensors) {
-            sensorData.add(new WeightedLatLng(sensor.getLatLng(), 10.0));
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        return;
+    }
+
+    private void UpdateHeatMap (OverlayState pollutionType) {
+        // Get all sensor data to place on the heatmap
+        List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
+
+        Log.e("Progress", "Done");
+
+        // Find the smallest and largest value
+        double min = allRelivantSensorData.get(0).value;
+        double max = allRelivantSensorData.get(0).value;
+
+        for (JsonSensorData sensorData : allRelivantSensorData) {
+            if (sensorData.value < min) {
+                min = sensorData.value;
+            }
+            if (sensorData.value > max) {
+                max = sensorData.value;
+            }
         }
 
-        mProvider = new HeatmapTileProvider.Builder().weightedData(sensorData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        Log.e("Progress", "Min max done");
+
+        List<WeightedLatLng> mapData = new ArrayList<>();
+
+        for (JsonSensorData sensorData : allRelivantSensorData) {
+            double intensity = (sensorData.value - min) / (max - min);
+            double lat = sensorData.getLatLng().latitude;
+            double lon = sensorData.getLatLng().longitude;
+            mapData.add(new WeightedLatLng(new LatLng(lat, lon), intensity)); //error here
+        }
+
+        Log.e("Progress", "Applied intencity");
+
+        mProvider = new HeatmapTileProvider.Builder().weightedData(mapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
 
         if (mOverlay != null) {
             mOverlay.remove();
@@ -194,21 +210,85 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    public List<JsonMessage> getSensorsFromType(OverlayState type){
-        String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
-        if (type == OverlayState.Air) {
-            urlPath += "Air%20Quality";
+    public List<JsonSensorData> getSensorsFromType(OverlayState type){
+        String urlPath = "https://duffin.co/uo/getData.php?property=";
+        if (type == OverlayState.Sound) {
+            urlPath += "Sound";
         }
-        else if (type == OverlayState.Weather) {
-            urlPath += "Weather";
+        else if (type == OverlayState.Temperature) {
+            urlPath += "Temperature";
         }
-        else if (type == OverlayState.Environmental) {
-            urlPath += "Environmental";
+        else if (type == OverlayState.Humidity) {
+            urlPath += "Humidity";
         }
-        else {
-            urlPath += "Traffic";
+        else if (type == OverlayState.NO2) {
+            urlPath += "NO2";
+        }
+        else if (type == OverlayState.NO) {
+            urlPath += "NO";
+        }
+        else if (type == OverlayState.CO) {
+            urlPath += "CO";
+        }
+        List<JsonSensorData> listOfSensorDatabig = getSensorDataFromDatabase(urlPath);
+
+        //temp
+        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+        for (int i = 1; i <= 10; i ++) {
+            listOfSensorData.add(listOfSensorDatabig.get(i - 1));
         }
 
+        Log.e("Long lat", "Started");
+        // Get long and lat values
+        for (JsonSensorData sensorData : listOfSensorData) {
+            Log.e("First", "++");
+            for(JsonMessage sensor : getAllSensorData()) {
+                Log.e("Second", "++");
+                if (sensor.sensorName.equals(sensorData.getSensorId())) {
+                    Log.e("Long lat", "Found");
+                    sensorData.applyLatLong(sensor.getLatLng());
+                    break;
+                }
+            }
+        }
+
+        Log.e("Long lat", "Completed");
+        return listOfSensorData;
+    }
+
+    private List<JsonSensorData> getSensorDataFromDatabase (String urlPath) {
+        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return listOfSensorData;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return listOfSensorData;
+        }
+        if(urlConnection!=null) {
+
+            try {
+                return JsonStreamReader.readJsonSensorDataStream(urlConnection.getInputStream());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return listOfSensorData;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return listOfSensorData;
+    }
+
+    private List<JsonMessage> getDataFromDatabase (String urlPath) {
         List<JsonMessage> listOfSensors = new ArrayList<JsonMessage>();
         URL url = null;
         try {
@@ -225,7 +305,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return listOfSensors;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
             try {
                 return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {

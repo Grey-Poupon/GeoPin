@@ -7,8 +7,8 @@ package team3.teamproject;
 // Modified by Rheyn Scholtz
 
 public enum OverlayState {
-    Sound,
     Temperature,
+    Sound,
     Humidity,
     NO2,
     NO,
