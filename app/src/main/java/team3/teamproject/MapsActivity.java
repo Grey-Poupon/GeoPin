@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
+import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.CameraUpdate;
@@ -131,7 +132,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         try {
-            createComment("Test1","Comment","");
+            // make true to test comment creation
+           if(false){ PostStreamReader.createComment("Test1","Comment","");}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -505,126 +507,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .title(sensor.getSensorName()));
         }
     }
-    private List<JsonPostMessage> getPost(String postID, String postTitle, String ownerID, String ownerName, String pinID, String pinName) throws Exception {
-        String URLend = "getPost.php?";
-        String URLParameters = String.format("selectID=%s&title=%s&description=%s&datePosted=%s&pinID=%s&pinName=s%", postID, postTitle, ownerID, ownerName, pinID, pinName);
-        return getPost(URLend, URLParameters);
-    }
-    private List<JsonCommentMessage> getComment(String postID, String ownerID, String ownerName) throws Exception {
-        String URLend = "getComment.php?";
-        String URLParameters = String.format("selectID=%s&description=%s&datePosted=%s&", postID, ownerID, ownerName);
-        return getComment(URLend,URLParameters);
-    }
-    private void createPost(String username, String title, String description,String pinID) throws Exception {
-        String URLend = "createPost.php?";
-        String URLParameters = String.format("username=%s&title=%s&description=%s&pinID=%s", username, title, description,pinID);
-        sendCreate(URLend,URLParameters);
-    }
-
-    private void createComment(String username, String comment, String postID) throws Exception {
-        String URLend = "createComment.php?";
-        String URLParameters = String.format("username=%s&comment=%s&selectID=%s", username,comment,postID);
-        sendCreate(URLend,URLParameters);
-    }
-
-    // Steve N
-    private void sendCreate(String url, String urlParameters) throws Exception {
-
-        URL obj = new URL("https://duffin.co/uo/"+url);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        // Send post request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
-
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-
-        InputStream in = con.getInputStream();
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-
-        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-        while ((inputLine = bin.readLine()) != null) {
-        response.append(inputLine);
-
-        in.close();
-
-        //print result
-        System.out.println(response.toString());
-
-    }}
-
-    // Steve N
-    private List<JsonPostMessage> getPost(String url, String urlParameters) throws Exception {
-
-        URL obj = new URL("https://duffin.co/uo/"+url);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        // Send post request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
-
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-
-        InputStream in = con.getInputStream();
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        return JsonStreamReader.readPostJsonStream(in);
-    }
-
-// Steve N
-    private List<JsonCommentMessage> getComment(String url, String urlParameters) throws Exception {
-
-        URL obj = new URL("https://duffin.co/uo/"+url);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        // Send post request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
-
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-
-        InputStream in = con.getInputStream();
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        return JsonStreamReader.readCommentJsonStream(in);
-        }
 
     // log out button click listener
     public void onLogOutClick(View view){
