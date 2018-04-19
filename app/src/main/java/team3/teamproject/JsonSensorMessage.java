@@ -5,7 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Date;
 
 /**
- * Created by Steve on 02/03/2018.
+ * Created by Steve on 02/03/2018. Modified by Rheyn Scholtz
  */
 
 public class JsonSensorMessage {

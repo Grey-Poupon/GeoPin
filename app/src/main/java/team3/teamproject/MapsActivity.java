@@ -191,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         overlayState = OverlayState.Air;
-        UpdateHeatMap();
+        //UpdateHeatMap();
 
         //addHeatMap(getAirPoints());
         /*debug to test getting the right data from the server
@@ -209,11 +209,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
         if (allRelivantSensorData == null) {
-            Log.e("LIST SIZE", "allRelivantSensorData is null");
-            //return;
+            Log.e("SENSOR ERROR", "No data is found");
+            return;
         }
 
-        Log.e("Progress", "Done" + allRelivantSensorData.size());
+        Log.e("PROGRESS", "Got all sensor data");
+
+        // Apply the server to get the datas locations
+        List<JsonSensorMessage> allSensorData = getAllSensorData();
+
+        Log.e("PROGRESS", "Got all sensor locations");
+
+        // Find the location of the sensor
+        for (int i = 1; i <= allRelivantSensorData.size(); i ++) {
+            int id = allRelivantSensorData.get(i - 1).getSensorId();
+            for (JsonSensorMessage sensorItem : allSensorData) {
+                if (sensorItem.getSensorName().equals(Integer.toString(id))) {
+                    LatLng location = sensorItem.getLatLng();
+                    allRelivantSensorData.get(i - 1).applyLocation(sensorItem.getLatLng());
+                    break;
+                }
+            }
+        }
+
+        Log.e("PROGRESS", "All data processed");
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
@@ -227,20 +246,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 max = sensorData.value;
             }
         }
+
+        List<WeightedLatLng> mapData = new ArrayList<>();
+
+
+        for (JsonSensorData sensorData : allRelivantSensorData) {
+            LatLng location = sensorData.getLatLng();
+            if (location != null) {
+                mapData.add(new WeightedLatLng(location, (sensorData.getValue() - min) / (max - min)));
+            }
+            else {
+                Log.e("NO LOCATION FOUND", "No location found for sensor:" + sensorData.getSensorId());
+            }
+        }
+
+        placeDataOnMap(mapData);
     }
 
     // Rheyn Scholtz
-    private void UpdateHeatMap () {
-        // Get all sensors to place on the heatmap
-        List<JsonSensorData> sensors = getSensorsFromType(overlayState);
-        List<WeightedLatLng> mapData = new ArrayList<>();
+    private void placeDataOnMap (List<WeightedLatLng> heatmapData) {
 
-        for (JsonSensorData sensorData : sensors) {
-            mapData.add(new WeightedLatLng(sensorData.getLatLng(), 10.0));
-        }
-        Log.e("Progress", "Applied intencity");
-
-        mProvider = new HeatmapTileProvider.Builder().weightedData(mapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        mProvider.setRadius(50);
 
         if (mOverlay != null) {
             mOverlay.remove();
@@ -249,7 +276,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public List<JsonSensorData> getSensorsFromType(OverlayState type){
-        String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
+        String urlPath = "https://duffin.co/uo/getData.php?property=";
         if (type == OverlayState.Air) {
             urlPath += "Air%20Quality";
         }
@@ -268,6 +295,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else if (type == OverlayState.CO) {
             urlPath += "CO";
         }
+        else {
+            urlPath += "Sound";
+        }
 
         //Will be replaced with graph functionality later
 
@@ -279,31 +309,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
 
         if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
+            Log.e("PROGRESS","listOfSensorData null");
             return null;
         }
 
-        Log.e("ERROR","before");
-        List<JsonSensorMessage> allSensorData = getAllSensorData();
-        Log.e("ERROR","after");
-        if (allSensorData == null) {
-            Log.e("ERROR","Ruh roh, its null");
-        }
-
-        Log.e("Long lat", "Started");
-        // Get long and lat values
-        for (JsonSensorData sensorData : listOfSensorData) {
-            Log.e("First", "++");
-            for(JsonSensorMessage sensor : allSensorData) {
-                Log.e("Second", "++");
-                if (sensor.sensorName.equals(sensorData.getSensorId())) {
-                    Log.e("Long lat", "Found");
-                    sensorData.applyLatLong(sensor.getLatLng());
-                    break;
-                }
-            }
-        }
-
-        Log.e("Long lat", "Completed");
         return listOfSensorData;
     }
 
@@ -365,7 +374,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(urlConnection!=null) {
 
             try {
-                return JsonStreamReader.readHighestIndex(urlConnection.getInputStream()) - 1;
+                return JsonStreamReader.readHighestIndex(urlConnection.getInputStream()) - 10;
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -456,7 +465,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String message = "";
         URL url = null;
         try {
-            url = new URL("https://duffin.co/uo/retreiveSensors.php");
+            url = new URL("https://duffin.co/uo/getSensors.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
 
@@ -471,6 +480,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(urlConnection!=null) {
             try {
+                Log.e("PROGRESS", "Calling");
                 return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
