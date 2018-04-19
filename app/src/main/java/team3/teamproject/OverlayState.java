@@ -12,5 +12,6 @@ public enum OverlayState {
     Humidity,
     NO2,
     NO,
-    CO
+    CO,
+    Air
 }

@@ -8,13 +8,13 @@ import java.util.Date;
  * Created by Steve on 02/03/2018.
  */
 
-public class JsonMessage {
+public class JsonSensorMessage {
     String sensorName;
     LatLng latLng;
     double baseHeight;
     Date date;
 
-    public JsonMessage(String sensorName,double lat,double lon,double baseHeight,Date date){
+    public JsonSensorMessage(String sensorName, double lat, double lon, double baseHeight, Date date){
         this.sensorName = sensorName;
         this.latLng = new LatLng(lat,lon);
         this.baseHeight = baseHeight;

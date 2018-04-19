@@ -33,9 +33,9 @@ public class SubmitPageActivity extends AppCompatActivity {
         });
     }
 
-    public ForumPage createForumPage(String title, String text){
+    public ForumPost createForumPage(String title, String text){
         String uID = ((User) this.getApplication()).getUserID();
-        ForumPage post = new ForumPage(title,text,uID,ID,getNewID(),new Date());
+        ForumPost post = new ForumPost(title,text,uID,ID,getNewID(),new Date());
         return post;
 
     }

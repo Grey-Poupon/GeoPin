@@ -4,7 +4,7 @@ import android.os.Parcel;
 
 import java.util.Date;
 
-public class ForumPage extends ForumMessage  {
+public class ForumPost extends ForumMessage  {
 
     public String getTitle() {
         return title;
@@ -12,25 +12,25 @@ public class ForumPage extends ForumMessage  {
 
     private String title;
 
-    public ForumPage(String title, String text, String uID, String boardID, String ID, Date date) {
+    public ForumPost(String title, String text, String uID, String boardID, String ID, Date date) {
         super(text, uID, boardID, ID, date);
         this.title = title;
     }
 
-    protected ForumPage(Parcel in) {
+    protected ForumPost(Parcel in) {
         super(in);
         this.title = in.readString();
     }
 
-    public static final Creator<ForumPage> CREATOR = new Creator<ForumPage>() {
+    public static final Creator<ForumPost> CREATOR = new Creator<ForumPost>() {
         @Override
-        public ForumPage createFromParcel(Parcel in) {
-            return new ForumPage(in);
+        public ForumPost createFromParcel(Parcel in) {
+            return new ForumPost(in);
         }
 
         @Override
-        public ForumPage[] newArray(int size) {
-            return new ForumPage[size];
+        public ForumPost[] newArray(int size) {
+            return new ForumPost[size];
         }
     };
 

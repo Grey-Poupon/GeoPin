@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
+import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,14 +31,15 @@ import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -87,6 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
@@ -129,6 +131,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             }
         });
+        try {
+            // make true to test comment creation
+           if(false){ PostStreamReader.createComment("Test1","Comment","");}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Uncomment to view all sensors
         //SensorPlacement();
@@ -177,6 +185,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    public void onMapAirClick(View view) {
+        if (overlayState == OverlayState.Air) {
+            return;
+        }
+
+        overlayState = OverlayState.Air;
+        UpdateHeatMap();
+
+        //addHeatMap(getAirPoints());
+        /*debug to test getting the right data from the server
+            * Stephen N*/
+        //for(JsonSensorMessage msg : getAllSensorData()){
+        //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
+        //}
+    }
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
     }
@@ -204,18 +227,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 max = sensorData.value;
             }
         }
+    }
 
-        Log.e("Progress", "Min max done");
-
+    // Rheyn Scholtz
+    private void UpdateHeatMap () {
+        // Get all sensors to place on the heatmap
+        List<JsonSensorData> sensors = getSensorsFromType(overlayState);
         List<WeightedLatLng> mapData = new ArrayList<>();
 
-        for (JsonSensorData sensorData : allRelivantSensorData) {
-            double intensity = (sensorData.value - min) / (max - min);
-            double lat = sensorData.getLatLng().latitude;
-            double lon = sensorData.getLatLng().longitude;
-            mapData.add(new WeightedLatLng(new LatLng(lat, lon), intensity)); //error here
+        for (JsonSensorData sensorData : sensors) {
+            mapData.add(new WeightedLatLng(sensorData.getLatLng(), 10.0));
         }
-
         Log.e("Progress", "Applied intencity");
 
         mProvider = new HeatmapTileProvider.Builder().weightedData(mapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
@@ -227,9 +249,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public List<JsonSensorData> getSensorsFromType(OverlayState type){
-        String urlPath = "https://duffin.co/uo/getData.php?property=";
-        if (type == OverlayState.Sound) {
-            urlPath += "Sound";
+        String urlPath = "https://duffin.co/uo/retreiveSensors.php?type=";
+        if (type == OverlayState.Air) {
+            urlPath += "Air%20Quality";
         }
         else if (type == OverlayState.Temperature) {
             urlPath += "Temperature";
@@ -261,7 +283,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         Log.e("ERROR","before");
-        List<JsonMessage> allSensorData = getAllSensorData();
+        List<JsonSensorMessage> allSensorData = getAllSensorData();
         Log.e("ERROR","after");
         if (allSensorData == null) {
             Log.e("ERROR","Ruh roh, its null");
@@ -271,7 +293,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Get long and lat values
         for (JsonSensorData sensorData : listOfSensorData) {
             Log.e("First", "++");
-            for(JsonMessage sensor : allSensorData) {
+            for(JsonSensorMessage sensor : allSensorData) {
                 Log.e("Second", "++");
                 if (sensor.sensorName.equals(sensorData.getSensorId())) {
                     Log.e("Long lat", "Found");
@@ -324,6 +346,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int getNewestIndex () {
         String urlPath = "https://duffin.co/uo/getIndex.php";
 
+        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
         URL url = null;
         try {
             url = new URL(urlPath);
@@ -354,8 +377,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return -1;
     }
 
-    private List<JsonMessage> getDataFromDatabase (String urlPath) {
-        List<JsonMessage> listOfSensors = new ArrayList<JsonMessage>();
+    private List<JsonSensorMessage> getDataFromDatabase (String urlPath) {
+        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
         URL url = null;
         try {
             url = new URL(urlPath);
@@ -373,7 +396,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if (urlConnection != null) {
             try {
-                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
                 return listOfSensors;
@@ -428,8 +451,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * gets all sensor data from server
      * Stephen N
      * */
-    public List<JsonMessage> getAllSensorData(){
-        List<JsonMessage> empty = new ArrayList<JsonMessage>();
+    public List<JsonSensorMessage> getAllSensorData(){
+        List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
         String message = "";
         URL url = null;
         try {
@@ -448,7 +471,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(urlConnection!=null) {
             try {
-                return JsonStreamReader.readJsonStream(urlConnection.getInputStream());
+                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
                 return empty;
@@ -460,7 +483,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // Rheyn Scholtz, place sensors on the map (viewing temp)
-    List<JsonMessage> sensorsToBePlaced;
+    List<JsonSensorMessage> sensorsToBePlaced;
 
     private void SensorPlacement() {
         sensorsToBePlaced = getAllSensorData();
@@ -478,7 +501,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void PlaceSensorsOnMap () {
-        for (JsonMessage sensor : sensorsToBePlaced) {
+        for (JsonSensorMessage sensor : sensorsToBePlaced) {
             mMap.addMarker(new MarkerOptions()
                     .position(sensor.getLatLng())
                     .title(sensor.getSensorName()));

@@ -14,16 +14,16 @@ import java.util.List;
  * Created by Steve on 06/03/2018.
  */
 
-public class ForumPageAdapter extends ArrayAdapter<ForumPage> {
+public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
 
-    public ForumPageAdapter(@NonNull Context context, List<ForumPage> resources) {
+    public ForumPostAdapter(@NonNull Context context, List<ForumPost> resources) {
         super(context,0, resources);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ForumPage post = getItem(position);
+        ForumPost post = getItem(position);
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.forum_post_layout, parent, false);

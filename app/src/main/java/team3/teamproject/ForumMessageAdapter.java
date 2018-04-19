@@ -2,7 +2,6 @@ package team3.teamproject;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Date;
@@ -24,12 +22,12 @@ import java.util.Date;
  */
 
 public class ForumMessageAdapter extends ArrayAdapter<ForumMessage>{
-ForumPageActivity page;
+ForumPostActivity page;
 private String msgID;
 private Date msgDate;
 private ForumMessage source;
 
-    public ForumMessageAdapter(@NonNull Context context, List<ForumMessage> resources,ForumPageActivity page) {
+    public ForumMessageAdapter(@NonNull Context context, List<ForumMessage> resources,ForumPostActivity page) {
         super(context,0, resources);
         this.page = page;
     }
@@ -94,13 +92,6 @@ private ForumMessage source;
         this.msgDate = msg.getDate();
 
         // functionality for bump msg button
-        Button bumpBtn = (Button) convertView.findViewById(R.id.bumpBtn);
-        bumpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                page.bumpMsg(msgID,msgDate);
-            }
-        });
 
         return convertView;
     }

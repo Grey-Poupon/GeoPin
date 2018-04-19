@@ -21,9 +21,9 @@ import java.util.List;
  * Created by Steve on 08/03/2018.
  */
 
-public class ForumPageActivity extends AppCompatActivity {
+public class ForumPostActivity extends AppCompatActivity {
 
-    private ForumPage post;
+    private ForumPost post;
     private List<ForumMessage> messages;
     private HashMap<String, ForumMessage> msgMap = new HashMap<>();
     private ForumMessageAdapter adapter;
@@ -33,10 +33,10 @@ public class ForumPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forum_page);
+        setContentView(R.layout.activity_forum_post);
 
         //get the data from intent
-        post = getIntent().getParcelableExtra("ForumPage");
+        post = getIntent().getParcelableExtra("ForumPost");
 
         // set variables
         this.messages = getChildren(post);
