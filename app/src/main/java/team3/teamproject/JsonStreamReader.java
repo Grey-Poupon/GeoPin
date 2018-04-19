@@ -170,6 +170,9 @@ public class JsonStreamReader {
             else if(name.equals("type")){
                 type = reader.nextString();
             }
+            else {
+                Log.e("NAME", name);
+            }
         }
         reader.endObject();
         return new JsonMessage(sensorName,lat,lon,baseHeight,date);
