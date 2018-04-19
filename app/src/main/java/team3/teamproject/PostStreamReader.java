@@ -18,24 +18,26 @@ public class PostStreamReader {
 
 
     public static List<JsonPostMessage> getPosts(String pinID) throws Exception {
-        String URLend = "getPosts.php?";
+        String URLend = "getPost.php?";
         String URLParameters = "pinID="+pinID;
         return getPosts(URLend, URLParameters);
     }
     public static List<JsonCommentMessage> getComments(String postID) throws Exception {
-        String URLend = "getComments.php?";
+        String URLend = "getComment.php?";
         String URLParameters = "postID="+postID;
         return getComments(URLend,URLParameters);
     }
     public static void createPost(String username, String title, String description,String pinID) throws Exception {
         String URLend = "createPost.php?";
-        String URLParameters = String.format("username=%s&title=%s&description=%s&pinID=%s", username, title, description,pinID);
+        if(username==null){username = "test";}
+        String URLParameters = String.format("username=%s&title=%s&description=%s&pin=%s", username, title, description,pinID);
         sendCreate(URLend,URLParameters);
     }
 
     public static void createComment(String username, String comment, String postID) throws Exception {
         String URLend = "createComment.php?";
-        String URLParameters = String.format("username=%s&comment=%s&ID=%s", username,comment,postID);
+        if(username==null){username="test";}
+        String URLParameters = String.format("username=%s&comment=%s&postID=%s", username,comment,postID);
         sendCreate(URLend,URLParameters);
     }
 
@@ -71,12 +73,12 @@ public class PostStreamReader {
         while ((inputLine = bin.readLine()) != null) {
             response.append(inputLine);
 
-            in.close();
-
             //print result
             System.out.println(response.toString());
 
-        }}
+        }
+        in.close();
+    }
 
     // Steve N
     private static List<JsonPostMessage> getPosts(String url, String urlParameters) throws Exception {

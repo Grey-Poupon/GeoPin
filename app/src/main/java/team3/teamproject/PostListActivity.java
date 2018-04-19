@@ -18,6 +18,7 @@ public class PostListActivity extends AppCompatActivity {
 
     private List<ForumPost> posts = new ArrayList<>();
     private String ID;
+    private String title;
     private ForumPostAdapter adapter;
     public PostListActivity(){}
 
@@ -34,6 +35,7 @@ public class PostListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
         ID = getIntent().getStringExtra("PinID");
+        title = getIntent().getStringExtra("title");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +84,7 @@ public class PostListActivity extends AppCompatActivity {
 
     // setups all the dynamic elements of the activity
     private void createForum() {
-        ((TextView) findViewById(R.id.forumTitle)).setText("Title");
+        ((TextView) findViewById(R.id.forumTitle)).setText(title);
         setupMessageText();
     }
 

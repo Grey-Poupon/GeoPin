@@ -3,6 +3,8 @@ package team3.teamproject;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -102,9 +104,63 @@ public class JsonStreamReader {
         return new JsonSensorData(sensorId, date, value, indexValue);
     }
 
+    public static List<Pin> readJsonPinStream(InputStream in){
+        JsonReader reader =  new JsonReader(new InputStreamReader(in));
+        try {
+            return readJsonPinArray(reader);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                reader.close();
 
+            } catch (IOException e) {
+                e.printStackTrace();
 
+            }
+        }
+        return null;
+    }
 
+    private static List<Pin> readJsonPinArray(JsonReader reader) throws IOException {
+        List<Pin> messages = new ArrayList<Pin>();
+
+        reader.beginArray();
+        while (reader.hasNext()){
+            messages.add(readJsonPinMessage(reader));
+        }
+        reader.endArray();
+        return messages;
+    }
+
+    private static Pin readJsonPinMessage(JsonReader reader) throws IOException{
+
+        String ID = "";
+        double longitude = 0d;
+        double latitude = 0d;
+        String name = "";
+
+        reader.beginObject();
+        while(reader.hasNext()){
+            String msg = reader.nextName();
+            if(msg.equals("ID")){
+                ID = reader.nextString();
+            }
+            else if(msg.equals("longitude")){
+                longitude = reader.nextDouble();
+            }
+            else if(msg.equals("latitude")){
+                latitude = reader.nextDouble();
+            }
+            else if(msg.equals("name")){
+                name = reader.nextString();
+            }
+        }
+        reader.endObject();
+        return new Pin(ID,new LatLng(latitude,longitude),name);
+    }
 
 
     public static List<JsonSensorMessage> readSensorJsonStream(InputStream in) {
@@ -203,16 +259,21 @@ public class JsonStreamReader {
 
 
     private static JsonSensorMessage readSensorJsonMsg(JsonReader reader) throws IOException {
+        String ID = "";
         String sensorName = "";
         double lat = 0;
         double lon = 0;
         double baseHeight = 0;
         Date date = new Date();
         String type = "";
+
         reader.beginObject();
         while(reader.hasNext()){
             String name = reader.nextName();
-            if(name.equals("sensorName")){
+            if(name.equals("ID")){
+                ID = reader.nextString();
+            }
+            else if(name.equals("sensorName")){
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){
@@ -240,7 +301,7 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonSensorMessage(sensorName,lat,lon,baseHeight,date);
+        return new JsonSensorMessage(ID,sensorName,lat,lon,baseHeight,date);
     }
 
     private static JsonPostMessage readPostJsonMsg(JsonReader reader) throws IOException {

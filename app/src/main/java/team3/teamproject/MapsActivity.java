@@ -64,8 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * List to manage the forum markers, add location and title to add a new Marker
      * */
     private List<Marker>  forumMarkers = new ArrayList<Marker>();
-    private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
-    private final String[] forumMarkerTitle = {"PostListActivity"};
+
 
     private Spinner heatmapTypeSpinner;
 
@@ -96,6 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         heatmapTypeSpinner.setAdapter(heatmapTypeAdapter);
         heatmapTypeSpinner.setOnItemSelectedListener(this);
+
+        Pin.addPins(getAllPins());
     }
     /**
      * Manipulates the map once available.
@@ -121,31 +122,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Intent forum = new Intent(MapsActivity.this,PostListActivity.class);
-                forum.putExtra("PinID",marker.getTitle());
+                forum.putExtra("PinID",(String)marker.getTag());
+                forum.putExtra("title",marker.getTitle());
                 startActivity(forum);
                 return true;
             }
         });
-        try {
-            // make true to test comment creation
-           if(false){ PostStreamReader.createComment("Test1","Comment","");}
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         // Uncomment to view all sensors
         //SensorPlacement();
     }
 
     private void setupForumMarkers(GoogleMap map){
-        for(int i = 0;i<forumMarkerLocation.length;i++) {
-            forumMarkers.add(map.addMarker(new MarkerOptions()
-                    .position(forumMarkerLocation[i])
-                    .title(forumMarkerTitle[i])));
+        for(Pin pin: Pin.allPins){
+            Marker m = map.addMarker(
+                    new MarkerOptions()
+                            .position(pin.getLongLat())
+                            .title(pin.getName()));
+            m.setTag(pin.getID());
+            forumMarkers.add(m);
         }
     }
-
-
 
     /**
      * move the camera when screen launched
@@ -510,5 +508,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent logOutScreen = new Intent(this, LoginActivity.class);
         startActivity(logOutScreen);
+    }
+
+    public List<Pin> getAllPins(){
+        List<Pin> empty = new ArrayList<Pin>();
+        String message = "";
+        URL url = null;
+        try {
+            url = new URL("https://duffin.co/uo/getPins.php");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+            return empty;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return empty;
+        }
+        if(urlConnection!=null) {
+            try {
+                return JsonStreamReader.readJsonPinStream(urlConnection.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return empty;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return empty;
     }
 }

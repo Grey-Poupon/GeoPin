@@ -125,7 +125,7 @@ public class ForumPostActivity extends AppCompatActivity {
 
     private void addMsgToServer(ForumMessage message) {
         try {
-            PostStreamReader.createComment(message.getUserID(),message.getText(),message.getID());
+            PostStreamReader.createComment(message.getUserID(),message.getText(),message.getParentID());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -48,6 +48,7 @@ public class JsonPostMessage {
     }
 
     public static List<ForumPost> toListForumPost(List<JsonPostMessage> msgs, String postID){
+        if(msgs == null){return new ArrayList<ForumPost>();}
         List<ForumPost> forumMsgs = new ArrayList<ForumPost>();
         for(JsonPostMessage msg: msgs){
             forumMsgs.add(toForumPost(msg,postID));

@@ -9,16 +9,23 @@ import java.util.Date;
  */
 
 public class JsonSensorMessage {
+    String ID;
     String sensorName;
     LatLng latLng;
     double baseHeight;
     Date date;
 
-    public JsonSensorMessage(String sensorName, double lat, double lon, double baseHeight, Date date){
+    public JsonSensorMessage(String ID, String sensorName, double lat, double lon, double baseHeight, Date date){
+        this.ID = ID;
+
         this.sensorName = sensorName;
         this.latLng = new LatLng(lat,lon);
         this.baseHeight = baseHeight;
         this.date = date;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public LatLng getLatLng() {
