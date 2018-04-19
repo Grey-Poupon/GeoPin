@@ -39,7 +39,7 @@ public class ForumPostActivity extends AppCompatActivity {
         post = getIntent().getParcelableExtra("ForumPost");
 
         // set variables
-        this.messages = getChildren(post);
+        this.messages = getComments(post);
         this.adapter = new ForumMessageAdapter(this, messages,this);
         populateMap(messages);
 
@@ -100,16 +100,14 @@ public class ForumPostActivity extends AppCompatActivity {
         }
     }
 
-    private List<ForumMessage> getChildren(ForumMessage message) {
-        //ToDo get messages from server
-        List<ForumMessage> messages = new ArrayList<>();
-        messages.add(new ForumMessage("Test 1","STE",post.getID(),"1",  new Date()));
-        messages.add(new ForumMessage("Test 2","STE",post.getID(),"2",  new Date()));
-        messages.add(new ForumMessage("Test 3","STE",post.getID(),"3",  new Date()));
-        messages.add(new ForumMessage("Test 4","STE",post.getID(),"4",  new Date()));
-        messages.add(new ForumMessage("Test 5","STE",post.getID(),"5",  new Date()));
-        Collections.sort(messages);
-        return messages;
+    private List<ForumMessage> getComments(ForumPost post) {
+        try {
+           return JsonCommentMessage.toListForumMessages(PostStreamReader.getComments(post.getID()),post.getID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<ForumMessage>();
 
     }
     private void createForumMessage(String txt){
@@ -121,11 +119,16 @@ public class ForumPostActivity extends AppCompatActivity {
 
     private String getNewMsgID() {
         //ToDo get msgId from server to stop id duplication
+        if(messages.size()<1){return "1";}
         return String.valueOf(Integer.parseInt(messages.get(messages.size()-1).getID())+1);
     }
 
     private void addMsgToServer(ForumMessage message) {
-        //ToDo add msg to server
+        try {
+            PostStreamReader.createComment(message.getUserID(),message.getText(),message.getParentID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private void addMessageToList(ForumMessage message) {
         adapter.add(message);
@@ -134,13 +137,7 @@ public class ForumPostActivity extends AppCompatActivity {
         ListView lv = ((ListView) findViewById(R.id.commentsList));
         lv.setSelection(lv.getAdapter().getCount()-1);
     }
-    private void bumpMsgOnServer(String msgID,Date date){
-        //Todo implement bump msg command
-    }
-    public void bumpMsg(String msgID,Date date){
-        msgMap.get(msgID).setLastBump(date);
-        bumpMsgOnServer(msgID,date);
-    }
+
     public ForumMessageAdapter getAdapter() {
         return adapter;
     }

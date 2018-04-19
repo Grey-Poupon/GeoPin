@@ -17,25 +17,27 @@ import javax.net.ssl.HttpsURLConnection;
 public class PostStreamReader {
 
 
-    public static List<JsonPostMessage> getPost(String postID, String postTitle, String ownerID, String ownerName, String pinID, String pinName) throws Exception {
+    public static List<JsonPostMessage> getPosts(String pinID) throws Exception {
         String URLend = "getPost.php?";
-        String URLParameters = String.format("selectID=%s&title=%s&description=%s&datePosted=%s&pinID=%s&pinName=s%", postID, postTitle, ownerID, ownerName, pinID, pinName);
-        return getPost(URLend, URLParameters);
+        String URLParameters = "pinID="+pinID;
+        return getPosts(URLend, URLParameters);
     }
-    public static List<JsonCommentMessage> getComment(String postID, String ownerID, String ownerName) throws Exception {
+    public static List<JsonCommentMessage> getComments(String postID) throws Exception {
         String URLend = "getComment.php?";
-        String URLParameters = String.format("selectID=%s&description=%s&datePosted=%s&", postID, ownerID, ownerName);
-        return getComment(URLend,URLParameters);
+        String URLParameters = "postID="+postID;
+        return getComments(URLend,URLParameters);
     }
     public static void createPost(String username, String title, String description,String pinID) throws Exception {
         String URLend = "createPost.php?";
-        String URLParameters = String.format("username=%s&title=%s&description=%s&pinID=%s", username, title, description,pinID);
+        if(username==null){username = "test";}
+        String URLParameters = String.format("username=%s&title=%s&description=%s&pin=%s", username, title, description,pinID);
         sendCreate(URLend,URLParameters);
     }
 
     public static void createComment(String username, String comment, String postID) throws Exception {
         String URLend = "createComment.php?";
-        String URLParameters = String.format("username=%s&comment=%s&selectID=%s", username,comment,postID);
+        if(username==null){username="test";}
+        String URLParameters = String.format("username=%s&comment=%s&postID=%s", username,comment,postID);
         sendCreate(URLend,URLParameters);
     }
 
@@ -71,15 +73,15 @@ public class PostStreamReader {
         while ((inputLine = bin.readLine()) != null) {
             response.append(inputLine);
 
-            in.close();
-
             //print result
             System.out.println(response.toString());
 
-        }}
+        }
+        in.close();
+    }
 
     // Steve N
-    private static List<JsonPostMessage> getPost(String url, String urlParameters) throws Exception {
+    private static List<JsonPostMessage> getPosts(String url, String urlParameters) throws Exception {
 
         URL obj = new URL("https://duffin.co/uo/"+url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -109,7 +111,7 @@ public class PostStreamReader {
     }
 
     // Steve N
-    private static List<JsonCommentMessage> getComment(String url, String urlParameters) throws Exception {
+    private static List<JsonCommentMessage> getComments(String url, String urlParameters) throws Exception {
 
         URL obj = new URL("https://duffin.co/uo/"+url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();

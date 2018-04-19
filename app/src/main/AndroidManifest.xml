@@ -64,7 +64,7 @@
             android:label="@string/title_activity_maps"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".PageListActivity"
+            android:name=".PostListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName=".MapsActivity">
             <intent-filter>
@@ -76,7 +76,7 @@
         <activity
             android:name=".ForumPostActivity"
             android:label="@string/title_activity_forum_page"
-            android:parentActivityName=".PageListActivity">
+            android:parentActivityName=".PostListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

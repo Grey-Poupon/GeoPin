@@ -14,17 +14,20 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class PageListActivity extends AppCompatActivity {
+public class PostListActivity extends AppCompatActivity {
 
     private List<ForumPost> posts = new ArrayList<>();
     private String ID;
+    private String title;
     private ForumPostAdapter adapter;
-    public PageListActivity(){}
+    public PostListActivity(){}
 
     private void getPosts() {
-        //TODO get messsages from server
-        posts.add(new ForumPost("Title 1","Test 1","STE",ID,"2",new Date()));
-        posts.add(new ForumPost("Title 2","Test 2","STE",ID,"3",new Date()));
+        try {
+            posts = JsonPostMessage.toListForumPost(PostStreamReader.getPosts(ID),ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -32,6 +35,7 @@ public class PageListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
         ID = getIntent().getStringExtra("PinID");
+        title = getIntent().getStringExtra("title");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,20 +67,24 @@ public class PageListActivity extends AppCompatActivity {
         // if creation was successful
         if(resultCode == RESULT_OK){
             ForumPost newPage = data.getParcelableExtra("Page");
-            addNewPage(newPage);
+            addNewPost(newPage);
         }
     }
 
-    private void addNewPage(ForumPost newPage) {
-        // ToDO add new page to server
-        adapter.add(newPage);
+    private void addNewPost(ForumPost newPost) {
+        try {
+            PostStreamReader.createPost(newPost.getUserID(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapter.add(newPost);
         ListView lv = (ListView) findViewById(R.id.messageList);
         lv.setSelection(lv.getAdapter().getCount()-1);
     }
 
     // setups all the dynamic elements of the activity
     private void createForum() {
-        ((TextView) findViewById(R.id.forumTitle)).setText("Title");
+        ((TextView) findViewById(R.id.forumTitle)).setText(title);
         setupMessageText();
     }
 

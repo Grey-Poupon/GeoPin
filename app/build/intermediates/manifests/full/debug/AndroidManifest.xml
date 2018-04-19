@@ -82,7 +82,7 @@
             android:label="@string/title_activity_maps"
             android:parentActivityName="team3.teamproject.LoginActivity" />
         <activity
-            android:name="team3.teamproject.PageListActivity"
+            android:name="team3.teamproject.PostListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName="team3.teamproject.MapsActivity" >
             <intent-filter>
@@ -94,7 +94,7 @@
         <activity
             android:name="team3.teamproject.ForumPostActivity"
             android:label="@string/title_activity_forum_page"
-            android:parentActivityName="team3.teamproject.PageListActivity" >
+            android:parentActivityName="team3.teamproject.PostListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
