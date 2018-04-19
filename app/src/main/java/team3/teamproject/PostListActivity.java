@@ -14,17 +14,19 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class PageListActivity extends AppCompatActivity {
+public class PostListActivity extends AppCompatActivity {
 
     private List<ForumPost> posts = new ArrayList<>();
     private String ID;
     private ForumPostAdapter adapter;
-    public PageListActivity(){}
+    public PostListActivity(){}
 
     private void getPosts() {
-        //TODO get messsages from server
-        posts.add(new ForumPost("Title 1","Test 1","STE",ID,"2",new Date()));
-        posts.add(new ForumPost("Title 2","Test 2","STE",ID,"3",new Date()));
+        try {
+            posts = JsonPostMessage.toListForumPost(PostStreamReader.getPosts(ID),ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -63,13 +65,17 @@ public class PageListActivity extends AppCompatActivity {
         // if creation was successful
         if(resultCode == RESULT_OK){
             ForumPost newPage = data.getParcelableExtra("Page");
-            addNewPage(newPage);
+            addNewPost(newPage);
         }
     }
 
-    private void addNewPage(ForumPost newPage) {
-        // ToDO add new page to server
-        adapter.add(newPage);
+    private void addNewPost(ForumPost newPost) {
+        try {
+            PostStreamReader.createPost(newPost.getUserID(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapter.add(newPost);
         ListView lv = (ListView) findViewById(R.id.messageList);
         lv.setSelection(lv.getAdapter().getCount()-1);
     }

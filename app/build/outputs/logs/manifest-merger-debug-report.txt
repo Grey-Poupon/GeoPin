@@ -213,7 +213,7 @@ ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\Android
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:64:13-56
 	android:name
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:63:13-41
-activity#team3.teamproject.PageListActivity
+activity#team3.teamproject.PostListActivity
 ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:66:9-75:20
 	android:parentActivityName
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:69:13-55

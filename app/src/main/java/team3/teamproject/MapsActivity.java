@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
-import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,11 +30,7 @@ import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -70,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * */
     private List<Marker>  forumMarkers = new ArrayList<Marker>();
     private final LatLng[] forumMarkerLocation = {new LatLng(54.973701,-1.624397)};
-    private final String[] forumMarkerTitle = {"PageListActivity"};
+    private final String[] forumMarkerTitle = {"PostListActivity"};
 
     private Spinner heatmapTypeSpinner;
 
@@ -125,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent forum = new Intent(MapsActivity.this,PageListActivity.class);
+                Intent forum = new Intent(MapsActivity.this,PostListActivity.class);
                 forum.putExtra("PinID",marker.getTitle());
                 startActivity(forum);
                 return true;
@@ -205,6 +200,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void UpdateHeatMap (OverlayState pollutionType) {
+        if(true){return ;}
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 

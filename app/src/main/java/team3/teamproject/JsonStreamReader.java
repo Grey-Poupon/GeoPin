@@ -241,7 +241,8 @@ public class JsonStreamReader {
     }
 
     private static JsonPostMessage readPostJsonMsg(JsonReader reader) throws IOException {
-        String selectID = "";
+        String ID = "";
+        String ownerID = "";
         String title = "";
         String description = "";
         Date datePosted = null;
@@ -249,13 +250,16 @@ public class JsonStreamReader {
         reader.beginObject();
         while(reader.hasNext()){
             String name = reader.nextName();
-            if(name.equals("SELECT ID")){
-                selectID = reader.nextString();
+            if(name.equals("ID")){
+                ID = reader.nextString();
             }
-            else if(name.equals("userID")){
+            else if(name.equals("ownerID")){
+                ownerID = reader.nextString();
+            }
+            else if(name.equals("title")){
                 title = reader.nextString();
             }
-            else if(name.equals("comment")){
+            else if(name.equals("description")){
                 description = reader.nextString();
             }
             else if(name.equals("datePosted")){
@@ -268,7 +272,7 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonPostMessage(selectID,title,description,datePosted);
+        return new JsonPostMessage(ID,ownerID,title,description,datePosted);
     }
 
     private static JsonCommentMessage readCommentJsonMsg(JsonReader reader) throws IOException {
@@ -280,7 +284,7 @@ public class JsonStreamReader {
         reader.beginObject();
         while(reader.hasNext()){
             String name = reader.nextName();
-            if(name.equals("selectID")){
+            if(name.equals("ID")){
                 selectID = reader.nextString();
             }
             else if(name.equals("userID")){
