@@ -141,8 +141,8 @@ public class LoginActivity extends AppCompatActivity{
     /** register click button listener
      */
     public void onLoginRegisterClick(View view){
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
+        Intent registrationScreen = new Intent(this, RegistrationActivity.class);
+        startActivity(registrationScreen);
     }
 
 

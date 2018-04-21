@@ -6,16 +6,21 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
@@ -40,6 +45,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
@@ -60,11 +66,13 @@ import javax.net.ssl.HttpsURLConnection;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener, OnChartGestureListener, OnChartValueSelectedListener {
 
     private LineChart mChart;
+    private DialogFragment logoutDialog;
 
     private GoogleMap mMap;
     private TileOverlay mOverlay;
     private HeatmapTileProvider mProvider;
     private OverlayState overlayState;
+    private static final String TAG = MapsActivity.class.getSimpleName();
 
     private LatLng startlocation = new LatLng(54.973701, -1.624397);
     private final int maxZoom = 15;
@@ -86,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private List<Marker> forumMarkers = new ArrayList<Marker>();
 
-
+    private Toolbar appToolbar;
     private Spinner heatmapTypeSpinner;
 
     public MapsActivity() {
@@ -107,11 +115,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        logoutDialog = new LogoutDialog();
+        appToolbar = (Toolbar) findViewById(R.id.toolbar3);
         // Pollution selection
         heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
 
         ArrayAdapter<CharSequence> heatmapTypeAdapter = ArrayAdapter.createFromResource(this,
-                R.array.polutionTypes, android.R.layout.simple_spinner_item);
+                R.array.polutionTypes, R.layout.custom_spinner_item);
         heatmapTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         heatmapTypeSpinner.setAdapter(heatmapTypeAdapter);
@@ -152,12 +162,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.map_style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
         startLocation(startlocation, 15);
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         // mMap.getUiSettings().setZoomGesturesEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
+        mMap.getUiSettings().setTiltGesturesEnabled(false);
         mMap.setMaxZoomPreference(maxZoom);
         mMap.setMinZoomPreference(minZoom);
         mMap.setLatLngBoundsForCameraTarget(mapBounds);
@@ -557,15 +581,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    // log out button click listener
-    public void onLogOutClick(View view) {
-        LoginManager.getInstance().logOut();
-
-        Intent logOutScreen = new Intent(this, LoginActivity.class);
-        startActivity(logOutScreen);
-    }
-
-    public List<Pin> getAllPins() {
+    public List<Pin> getAllPins(){
         List<Pin> empty = new ArrayList<Pin>();
         String message = "";
         URL url = null;
@@ -667,6 +683,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
+    }
+
+    public void onMenuClick(View view){
+        PopupMenu popup = new PopupMenu(MapsActivity.this, view);
+        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.help:
+
+                        return true;
+                    case R.id.myAcc:
+
+                        return true;
+                    case R.id.logOutButton:
+                        logoutDialog.show(getFragmentManager(), "logoutDialog");
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popup.show();
+    }
+
+    public void onRefreshClick(View view){
+        return;
+    }
+
+    // log out button click listener
+    public void onLogOutClick(View view) {
+        LoginManager.getInstance().logOut();
+
+        Intent logOutScreen = new Intent(this, LoginActivity.class);
+        startActivity(logOutScreen);
     }
 
 }
