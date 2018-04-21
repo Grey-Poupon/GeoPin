@@ -3,11 +3,10 @@
 
 
     <item
-        android:id="@+id/help"
-        android:title="Help"/>
-
-    <item
         android:id="@+id/logIn"
         android:title="Log in"/>
+    <item
+        android:id="@+id/contact"
+        android:title="Contact US"/>
 
 </menu>

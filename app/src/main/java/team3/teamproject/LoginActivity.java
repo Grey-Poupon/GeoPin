@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity{
     /** without login click button listener
      */
     public void onWithoutLoginClick(View view){
-        Intent mapScreen = new Intent(this, MapsActivity.class);
+        Intent mapScreen = new Intent(this, LoadingBarActivity.class);
         startActivity(mapScreen);
     }
 }

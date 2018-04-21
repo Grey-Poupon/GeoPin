@@ -90,7 +90,15 @@
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ContactFormActivity"
+            android:label="@string/contact_activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LoadingBarActivity"
+            android:label="@string/loading_bar_activity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

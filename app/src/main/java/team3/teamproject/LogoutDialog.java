@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.facebook.login.LoginManager;
 
 /**
  * Created by Petr Makarov on 21.04.2018.
@@ -19,7 +22,9 @@ public class LogoutDialog extends DialogFragment {
                 .setTitle(R.string.alert_title)
                 .setPositiveButton(R.string.alert_positive, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // logout process
+                        LoginManager.getInstance().logOut();
+
+
                     }
                 })
                 .setNegativeButton(R.string.alert_negative, new DialogInterface.OnClickListener() {

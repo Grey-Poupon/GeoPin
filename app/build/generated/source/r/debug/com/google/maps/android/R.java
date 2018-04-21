@@ -72,18 +72,18 @@ public final class R {
         public static final int adjust_width = 0x7f090016;
         public static final int amu_text = 0x7f09001a;
         public static final int auto = 0x7f09001b;
-        public static final int dark = 0x7f090040;
+        public static final int dark = 0x7f090041;
         public static final int hybrid = 0x7f09005f;
         public static final int icon_only = 0x7f090062;
         public static final int light = 0x7f09006c;
         public static final int none = 0x7f090085;
         public static final int normal = 0x7f090086;
-        public static final int satellite = 0x7f0900a4;
-        public static final int standard = 0x7f0900c6;
-        public static final int terrain = 0x7f0900ce;
-        public static final int webview = 0x7f0900ed;
-        public static final int wide = 0x7f0900ee;
-        public static final int window = 0x7f0900ef;
+        public static final int satellite = 0x7f0900a6;
+        public static final int standard = 0x7f0900c8;
+        public static final int terrain = 0x7f0900d0;
+        public static final int webview = 0x7f0900ef;
+        public static final int wide = 0x7f0900f0;
+        public static final int window = 0x7f0900f1;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f0a0006;
@@ -134,9 +134,9 @@ public final class R {
         public static final int common_signin_button_text_long = 0x7f0f005e;
     }
     public static final class style {
-        public static final int amu_Bubble_TextAppearance_Dark = 0x7f100181;
-        public static final int amu_Bubble_TextAppearance_Light = 0x7f100182;
-        public static final int amu_ClusterIcon_TextAppearance = 0x7f100183;
+        public static final int amu_Bubble_TextAppearance_Dark = 0x7f100182;
+        public static final int amu_Bubble_TextAppearance_Light = 0x7f100183;
+        public static final int amu_ClusterIcon_TextAppearance = 0x7f100184;
     }
     public static final class styleable {
         public static final int[] LoadingImageView = { 0x7f040056, 0x7f0400b1, 0x7f0400b2 };
