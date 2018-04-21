@@ -53,7 +53,7 @@ public class ForumPostActivity extends AppCompatActivity {
         listView.setClickable(true);
 
         ((TextView) findViewById(R.id.postTitle)).setText(post.getTitle());
-        ((TextView) findViewById(R.id.date)).setText(post.getDateString());
+       ((TextView) findViewById(R.id.date)).setText(post.getDateString());
         ((TextView) findViewById(R.id.usrName)).setText(post.getUserID());
         ((TextView) findViewById(R.id.postTxt)).setText(post.getText());
 
