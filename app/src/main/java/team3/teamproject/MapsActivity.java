@@ -213,7 +213,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void UpdateHeatMap (OverlayState pollutionType) {
-        if(true){return ;}
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
@@ -233,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (int i = 1; i <= allRelivantSensorData.size(); i ++) {
             int id = allRelivantSensorData.get(i - 1).getSensorId();
             for (JsonSensorMessage sensorItem : allSensorData) {
-                if (sensorItem.getSensorName().equals(Integer.toString(id))) {
+                if (sensorItem.getID().equals(Integer.toString(id))) {
                     LatLng location = sensorItem.getLatLng();
                     allRelivantSensorData.get(i - 1).applyLocation(sensorItem.getLatLng());
                     break;
@@ -275,6 +274,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Rheyn Scholtz
     private void placeDataOnMap (List<WeightedLatLng> heatmapData) {
 
+        if(heatmapData.size()<1){return;}
         mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
         mProvider.setRadius(50);
 
