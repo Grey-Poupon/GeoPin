@@ -6,10 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,15 @@ import android.widget.Spinner;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,32 +56,35 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener, OnChartGestureListener, OnChartValueSelectedListener {
+
+    private LineChart mChart;
 
     private GoogleMap mMap;
     private TileOverlay mOverlay;
     private HeatmapTileProvider mProvider;
     private OverlayState overlayState;
 
-    private LatLng startlocation = new LatLng(54.973701,-1.624397);
+    private LatLng startlocation = new LatLng(54.973701, -1.624397);
     private final int maxZoom = 15;
     private final int minZoom = 13;
     private final int radiusBlur = 35;
     private final LatLngBounds mapBounds = new LatLngBounds(
-            new LatLng(54.85,-1.7), new LatLng(55.07,-1.52));
+            new LatLng(54.85, -1.7), new LatLng(55.07, -1.52));
 
     private int[] colours = {
-            Color.rgb(152,236,220),
-            Color.rgb(75,205,179),
-            Color.rgb(30,148,126),
-            Color.rgb(0,91,73)};
+            Color.rgb(152, 236, 220),
+            Color.rgb(75, 205, 179),
+            Color.rgb(30, 148, 126),
+            Color.rgb(0, 91, 73)};
 
-    private float[] startPoints = {0.1f,0.4f,0.7f,1f};
+    private float[] startPoints = {0.1f, 0.4f, 0.7f, 1f};
 
     /**
      * List to manage the forum markers, add location and title to add a new Marker
-     * */
-    private List<Marker>  forumMarkers = new ArrayList<Marker>();
+     */
+    private List<Marker> forumMarkers = new ArrayList<Marker>();
 
 
     private Spinner heatmapTypeSpinner;
@@ -93,7 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AppEventsLogger.activateApp(this);
 
         // Pollution selection
-        heatmapTypeSpinner = (Spinner)findViewById(R.id.heatmapType);
+        heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
 
         ArrayAdapter<CharSequence> heatmapTypeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.polutionTypes, android.R.layout.simple_spinner_item);
@@ -103,7 +118,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         heatmapTypeSpinner.setOnItemSelectedListener(this);
 
         Pin.addPins(getAllPins());
+        //Tyler chart stuff
+        mChart = (LineChart) findViewById(R.id.lineChart);
+        mChart.setOnChartGestureListener(MapsActivity.this);
+        mChart.setOnChartValueSelectedListener(MapsActivity.this);
+
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        yValues.add(new Entry(0, 20f));
+        yValues.add(new Entry(1, 30f));
+        yValues.add(new Entry(2, 60f));
+        yValues.add(new Entry(3, 10f));
+        yValues.add(new Entry(4, 50f));
+        yValues.add(new Entry(5, 35f));
+        LineDataSet set1 = new LineDataSet(yValues, "set 1");
+        set1.setFillAlpha(110);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+
+        mChart.setData(data);
     }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -118,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
-       // mMap.getUiSettings().setZoomGesturesEnabled(false);
+        // mMap.getUiSettings().setZoomGesturesEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
         mMap.setMaxZoomPreference(maxZoom);
         mMap.setMinZoomPreference(minZoom);
@@ -127,7 +165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if(marker.getTitle()!=null) {
+                if (marker.getTitle() != null) {
                     Intent forum = new Intent(MapsActivity.this, PostListActivity.class);
                     forum.putExtra("PinID", (String) marker.getTag());
                     forum.putExtra("title", marker.getTitle());
@@ -142,15 +180,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //SensorPlacement();
     }
 
-    private void setupForumMarkers(GoogleMap map){
-        for(Pin pin: Pin.allPins){
-
+    private void setupForumMarkers(GoogleMap map) {
+        for (Pin pin : Pin.allPins) {
             Marker text = map.addMarker(
                     new MarkerOptions()
                             .position(pin.getLongLat())
                             .title(pin.getName())
                             .icon(createText(pin.getName())));
-            text.setAnchor(0.5f,0f);
+            text.setAnchor(0.5f, 0f);
+
             Marker m = map.addMarker(
                     new MarkerOptions()
                             .position(pin.getLongLat())
@@ -173,22 +211,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
-        if (selectedPollution.equals(OverlayState.CO.toString()))  {
+        if (selectedPollution.equals(OverlayState.CO.toString())) {
             UpdateHeatMap(OverlayState.CO);
-        }
-        else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
+        } else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
             UpdateHeatMap(OverlayState.Humidity);
-        }
-        else if (selectedPollution.equals(OverlayState.NO.toString())) {
+        } else if (selectedPollution.equals(OverlayState.NO.toString())) {
             UpdateHeatMap(OverlayState.NO);
-        }
-        else if (selectedPollution.equals(OverlayState.NO2.toString())) {
+        } else if (selectedPollution.equals(OverlayState.NO2.toString())) {
             UpdateHeatMap(OverlayState.NO2);
-        }
-        else if (selectedPollution.equals(OverlayState.Sound.toString())) {
+        } else if (selectedPollution.equals(OverlayState.Sound.toString())) {
             UpdateHeatMap(OverlayState.Sound);
-        }
-        else {
+        } else {
             UpdateHeatMap(OverlayState.Temperature);
         }
     }
@@ -208,11 +241,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
         //}
     }
+
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
     }
 
-    private void UpdateHeatMap (OverlayState pollutionType) {
+    private void UpdateHeatMap(OverlayState pollutionType) {
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
@@ -229,7 +263,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.e("PROGRESS", "Got all sensor locations");
 
         // Find the location of the sensor
-        for (int i = 1; i <= allRelivantSensorData.size(); i ++) {
+        for (int i = 1; i <= allRelivantSensorData.size(); i++) {
             int id = allRelivantSensorData.get(i - 1).getSensorId();
             for (JsonSensorMessage sensorItem : allSensorData) {
                 if (sensorItem.getID().equals(Integer.toString(id))) {
@@ -262,8 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng location = sensorData.getLatLng();
             if (location != null) {
                 mapData.add(new WeightedLatLng(location, (sensorData.getValue() - min) / (max - min)));
-            }
-            else {
+            } else {
                 Log.e("NO LOCATION FOUND", "No location found for sensor:" + sensorData.getSensorId());
             }
         }
@@ -272,10 +305,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // Rheyn Scholtz
-    private void placeDataOnMap (List<WeightedLatLng> heatmapData) {
+    private void placeDataOnMap(List<WeightedLatLng> heatmapData) {
 
-        if(heatmapData.size()<1){return;}
-        mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        if (heatmapData.size() < 1) {
+            return;
+        }
+
+        mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
         mProvider.setRadius(50);
 
         if (mOverlay != null) {
@@ -284,27 +320,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    public List<JsonSensorData> getSensorsFromType(OverlayState type){
+    public List<JsonSensorData> getSensorsFromType(OverlayState type) {
         String urlPath = "https://duffin.co/uo/getData.php?property=";
         if (type == OverlayState.Air) {
             urlPath += "Air%20Quality";
-        }
-        else if (type == OverlayState.Temperature) {
+        } else if (type == OverlayState.Temperature) {
             urlPath += "Temperature";
-        }
-        else if (type == OverlayState.Humidity) {
+        } else if (type == OverlayState.Humidity) {
             urlPath += "Humidity";
-        }
-        else if (type == OverlayState.NO2) {
+        } else if (type == OverlayState.NO2) {
             urlPath += "NO2";
-        }
-        else if (type == OverlayState.NO) {
+        } else if (type == OverlayState.NO) {
             urlPath += "NO";
-        }
-        else if (type == OverlayState.CO) {
+        } else if (type == OverlayState.CO) {
             urlPath += "CO";
-        }
-        else {
+        } else {
             urlPath += "Sound";
         }
 
@@ -318,14 +348,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
 
         if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
-            Log.e("PROGRESS","listOfSensorData null");
+            Log.e("PROGRESS", "listOfSensorData null");
             return null;
         }
 
         return listOfSensorData;
     }
 
-    private List<JsonSensorData> getSensorDataFromDatabase (String urlPath, int sensorIndex) {
+    private List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
         if (sensorIndex == -1) {
             return null;
         }
@@ -346,12 +376,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return listOfSensorData;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
 
             try {
                 return JsonStreamReader.readJsonSensorDataStream(urlConnection.getInputStream(), sensorIndex);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 return listOfSensorData;
             } finally {
@@ -361,7 +390,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return listOfSensorData;
     }
 
-    private int getNewestIndex () {
+    private int getNewestIndex() {
         String urlPath = "https://duffin.co/uo/getIndex.php";
 
         List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
@@ -380,12 +409,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return -1;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
 
             try {
                 return JsonStreamReader.readHighestIndex(urlConnection.getInputStream()) - 10;
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 return -1;
             } finally {
@@ -395,7 +423,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return -1;
     }
 
-    private List<JsonSensorMessage> getDataFromDatabase (String urlPath) {
+    private List<JsonSensorMessage> getDataFromDatabase(String urlPath) {
         List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
         URL url = null;
         try {
@@ -427,7 +455,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * back button listener, returns to home screen
-     *
+     * <p>
      * Created by Petr Makarov
      */
     @Override
@@ -440,18 +468,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * adds a heatmap overlay, takes Weighted points
+     *
      * @Stephen Northrop
      */
     private void addHeatMap(List<WeightedLatLng> points) {
         if (mOverlay != null) {
             mOverlay.remove();
         }
-        mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours,startPoints)).build();
+        mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
     /**
      * Just test points for debugging
+     *
      * @Stephen Northrop
      */
     private List<WeightedLatLng> getTestPoints() {
@@ -459,17 +489,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double lat = startlocation.latitude;
         double lon = startlocation.longitude;
 
-        for (double y = 0; y < 0.005; y+=0.001)
-            for (double x = 0; x < 0.005; x+=0.001) {
-                list.add(new WeightedLatLng(new LatLng(lat+x, lon+y), 10));
+        for (double y = 0; y < 0.005; y += 0.001)
+            for (double x = 0; x < 0.005; x += 0.001) {
+                list.add(new WeightedLatLng(new LatLng(lat + x, lon + y), 10));
             }
-        return  list;
+        return list;
     }
+
     /**
      * gets all sensor data from server
      * Stephen N
-     * */
-    public List<JsonSensorMessage> getAllSensorData(){
+     */
+    public List<JsonSensorMessage> getAllSensorData() {
         List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
         String message = "";
         URL url = null;
@@ -487,7 +518,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return empty;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
             try {
                 Log.e("PROGRESS", "Calling");
                 return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
@@ -509,17 +540,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (sensorsToBePlaced != null) {
             PlaceSensorsOnMap();
-        }
-        else {
+        } else {
             Log.e("STATE", "else");
             mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(54.973701,-1.626498))
+                    .position(new LatLng(54.973701, -1.626498))
                     .title("test"));
             Log.e("STATE", "marker created");
         }
     }
 
-    private void PlaceSensorsOnMap () {
+    private void PlaceSensorsOnMap() {
         for (JsonSensorMessage sensor : sensorsToBePlaced) {
             mMap.addMarker(new MarkerOptions()
                     .position(sensor.getLatLng())
@@ -528,14 +558,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // log out button click listener
-    public void onLogOutClick(View view){
+    public void onLogOutClick(View view) {
         LoginManager.getInstance().logOut();
 
         Intent logOutScreen = new Intent(this, LoginActivity.class);
         startActivity(logOutScreen);
     }
 
-    public List<Pin> getAllPins(){
+    public List<Pin> getAllPins() {
         List<Pin> empty = new ArrayList<Pin>();
         String message = "";
         URL url = null;
@@ -553,7 +583,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
             return empty;
         }
-        if(urlConnection!=null) {
+        if (urlConnection != null) {
             try {
                 return JsonStreamReader.readJsonPinStream(urlConnection.getInputStream());
             } catch (IOException e) {
@@ -566,7 +596,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
-    public BitmapDescriptor createText (String text) {
+    public BitmapDescriptor createText(String text) {
 
         Paint textPaint = new Paint();
         textPaint.setTypeface(Typeface.SERIF);
@@ -578,13 +608,65 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int width = (int) textWidth;
         int height = (int) textHeight;
 
-        Bitmap image = Bitmap.createBitmap(width, height+10, Bitmap.Config.ARGB_8888);
+        Bitmap image = Bitmap.createBitmap(width, height + 10, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(image);
 
-        canvas.translate(0,height);
+        canvas.translate(0, height);
         canvas.drawText(text, 0, 0, textPaint);
         BitmapDescriptor textBitmap = BitmapDescriptorFactory.fromBitmap(image);
         return textBitmap;
     }
+
+
+    @Override
+    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    @Override
+    public void onChartLongPressed(MotionEvent me) {
+
+    }
+
+    @Override
+    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+    }
+
+    @Override
+    public void onChartSingleTapped(MotionEvent me) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
+
+    @Override
+    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+    }
+
+    @Override
+    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+    }
+
+    @Override
+    public void onChartDoubleTapped(MotionEvent me) {
+
+    }
+
+    @Override
+    public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
+    }
+
 }

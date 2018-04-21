@@ -32,15 +32,23 @@ dependencies {
     implementation project(':facebook')
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> PinItmaster/master
 // solves dependencies for facebook
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
+<<<<<<< HEAD
         if(requested.group == 'com.android.support')
         {
             if(!requested.name.startsWith("multidex"))
             {
+=======
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+>>>>>>> PinItmaster/master
                 details.useVersion '25.3.0'
             }
         }

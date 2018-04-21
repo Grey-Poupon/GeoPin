@@ -1,5 +1,10 @@
 package team3.teamproject;
 
+<<<<<<< HEAD
+=======
+import android.util.Log;
+
+>>>>>>> PinItmaster/master
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -16,6 +21,10 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class PostStreamReader {
 
+<<<<<<< HEAD
+=======
+    private String message; // used for getting messages from server
+>>>>>>> PinItmaster/master
 
     public static List<JsonPostMessage> getPosts(String pinID) throws Exception {
         String URLend = "getPost.php?";
@@ -76,10 +85,62 @@ public class PostStreamReader {
             //print result
             System.out.println(response.toString());
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> PinItmaster/master
         }
         in.close();
     }
 
+<<<<<<< HEAD
+=======
+    // used for getting response from server
+    public static String sendCreateString(String url, String urlParameters) throws Exception {
+
+        String answer = null;
+        URL obj = new URL("https://duffin.co/uo/"+url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+        while ((inputLine = bin.readLine()) != null) {
+            response.append(inputLine);
+
+            //returns result
+            answer = response.toString();
+
+
+        }
+
+        in.close();
+        return answer;
+    }
+
+
+
+>>>>>>> PinItmaster/master
     // Steve N
     private static List<JsonPostMessage> getPosts(String url, String urlParameters) throws Exception {
 

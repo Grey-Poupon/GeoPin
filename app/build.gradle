@@ -18,6 +18,13 @@ android {
     }
 }
 
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.maps.android:android-maps-utils:0.4+'
@@ -30,7 +37,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':facebook')
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
+
 
 
 // solves dependencies for facebook
