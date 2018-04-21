@@ -1,7 +1,11 @@
 package team3.teamproject;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +23,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -121,10 +127,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent forum = new Intent(MapsActivity.this,PostListActivity.class);
-                forum.putExtra("PinID",(String)marker.getTag());
-                forum.putExtra("title",marker.getTitle());
-                startActivity(forum);
+                if(marker.getTitle()!=null) {
+                    Intent forum = new Intent(MapsActivity.this, PostListActivity.class);
+                    forum.putExtra("PinID", (String) marker.getTag());
+                    forum.putExtra("title", marker.getTitle());
+                    startActivity(forum);
+                }
                 return true;
             }
         });
@@ -136,6 +144,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void setupForumMarkers(GoogleMap map){
         for(Pin pin: Pin.allPins){
+
+            Marker text = map.addMarker(
+                    new MarkerOptions()
+                            .position(pin.getLongLat())
+                            .title(pin.getName())
+                            .icon(createText(pin.getName())));
+            text.setAnchor(0.5f,0f);
             Marker m = map.addMarker(
                     new MarkerOptions()
                             .position(pin.getLongLat())
@@ -539,5 +554,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         return empty;
+    }
+
+    public BitmapDescriptor createText (String text) {
+
+        Paint textPaint = new Paint();
+        textPaint.setTypeface(Typeface.SERIF);
+        textPaint.setTextSize(30);
+
+        float textWidth = textPaint.measureText(text);
+        float textHeight = textPaint.getTextSize();
+
+        int width = (int) textWidth;
+        int height = (int) textHeight;
+
+        Bitmap image = Bitmap.createBitmap(width, height+10, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(image);
+
+        canvas.translate(0,height);
+        canvas.drawText(text, 0, 0, textPaint);
+        BitmapDescriptor textBitmap = BitmapDescriptorFactory.fromBitmap(image);
+        return textBitmap;
     }
 }
