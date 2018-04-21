@@ -1,5 +1,6 @@
 package team3.teamproject;
 
+import android.os.Debug;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -53,7 +54,9 @@ public class JsonStreamReader {
         List<JsonSensorData> messages = new ArrayList<JsonSensorData>();
 
         reader.beginArray();
+
         while (reader.hasNext()){
+
             JsonSensorData nextSensorData = readJsonSensorDataMessage(reader);
             if (nextSensorData.getIndexValue() == index) {
                 messages.add(nextSensorData);
@@ -64,15 +67,13 @@ public class JsonStreamReader {
     }
 
     private static JsonSensorData readJsonSensorDataMessage(JsonReader reader) throws IOException {
-
         int sensorId = -1;
         double value = 0;
         Date date = new Date();
         int indexValue = -1;
 
-        boolean found = false;
-
         reader.beginObject();
+
         while(reader.hasNext()){
             String name = "";
             try {
@@ -82,7 +83,7 @@ public class JsonStreamReader {
                 name = reader.nextString();
             }
             if(name.equals("sensorID")){
-                sensorId = reader.nextInt();
+                sensorId = Integer.parseInt(reader.nextString());
             }
             else if(name.equals("value")){
                 value = reader.nextDouble();
@@ -95,7 +96,6 @@ public class JsonStreamReader {
                     e.printStackTrace();
                 }
             }
-
             else if (name.equals("indexValue")) {
                 indexValue = reader.nextInt();
             }
@@ -269,18 +269,29 @@ public class JsonStreamReader {
 
         reader.beginObject();
         while(reader.hasNext()){
+<<<<<<< HEAD
+            String name = "";
+            try {
+                name = reader.nextName();
+            }
+            catch (IllegalStateException e) {
+                name = reader.nextString();
+            }
+            if(name.equals("ID")){
+=======
             String name = reader.nextName();
             if(name.equals("ID")){
                 ID = reader.nextString();
             }
             else if(name.equals("sensorName")){
+>>>>>>> 38330d5a138a770b3e7722acc39bad5217b98035
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){
-                lon = reader.nextDouble();
+                lon = Double.parseDouble(reader.nextString());
             }
             else if(name.equals("latitude")){
-                lat = reader.nextDouble();
+                lat = Double.parseDouble(reader.nextString());
             }
             else if(name.equals("baseHeight")){
                 baseHeight = reader.nextDouble();
@@ -295,9 +306,6 @@ public class JsonStreamReader {
             }
             else if(name.equals("type")){
                 type = reader.nextString();
-            }
-            else {
-                Log.e("NAME", name);
             }
         }
         reader.endObject();
