@@ -49,9 +49,11 @@ import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -65,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TileOverlay mOverlay;
     private HeatmapTileProvider mProvider;
     private OverlayState overlayState;
+    private HashMap<String,JsonSensorMessage> sensors;
 
     private LatLng startlocation = new LatLng(54.973701, -1.624397);
     private final int maxZoom = 15;
@@ -106,6 +109,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+        // get sensors from server
+        sensors = createSensorMap();
 
         // Pollution selection
         heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
@@ -226,21 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void onMapAirClick(View view) {
-        if (overlayState == OverlayState.Air) {
-            return;
-        }
 
-        overlayState = OverlayState.Air;
-        //UpdateHeatMap();
-
-        //addHeatMap(getAirPoints());
-        /*debug to test getting the right data from the server
-            * Stephen N*/
-        //for(JsonSensorMessage msg : getAllSensorData()){
-        //    Log.d("app","Name:"+msg.getSensorName()+"Lat"+msg.getLatLng().latitude+"Long:"+msg.getLatLng().longitude+"Height:"+msg.getBaseHeight()+"Date:"+msg.getDate());
-        //}
-    }
 
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
@@ -257,21 +249,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Log.e("PROGRESS", "Got all sensor data");
 
-        // Apply the server to get the datas locations
-        List<JsonSensorMessage> allSensorData = getAllSensorData();
+        LatLng latLng = null;
+        for(int i =0;i<allRelivantSensorData.size();i++){
 
-        Log.e("PROGRESS", "Got all sensor locations");
-
-        // Find the location of the sensor
-        for (int i = 1; i <= allRelivantSensorData.size(); i++) {
-            int id = allRelivantSensorData.get(i - 1).getSensorId();
-            for (JsonSensorMessage sensorItem : allSensorData) {
-                if (sensorItem.getID().equals(Integer.toString(id))) {
-                    LatLng location = sensorItem.getLatLng();
-                    allRelivantSensorData.get(i - 1).applyLocation(sensorItem.getLatLng());
-                    break;
-                }
+            String id = Integer.toString(allRelivantSensorData.get(i).getSensorId());
+            JsonSensorMessage sensor = sensors.get(id);
+            // any sensor data that doesnt match the sensor we have dont use
+            if(sensor!=null) {
+                latLng = sensor.getLatLng();
             }
+            allRelivantSensorData.get(i).applyLocation(latLng);
         }
 
         Log.e("PROGRESS", "All data processed");
@@ -532,6 +519,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
+    private HashMap<String,JsonSensorMessage> createSensorMap(){
+        HashMap<String,JsonSensorMessage> map = new HashMap<>();
+        List<JsonSensorMessage> sensors = getAllSensorData();
+        for(JsonSensorMessage sensor: sensors){
+            map.put(sensor.getID(),sensor);
+        }
+        return map;
+    }
+
+
     // Rheyn Scholtz, place sensors on the map (viewing temp)
     List<JsonSensorMessage> sensorsToBePlaced;
 
@@ -617,7 +614,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor textBitmap = BitmapDescriptorFactory.fromBitmap(image);
         return textBitmap;
     }
-
 
     @Override
     public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
