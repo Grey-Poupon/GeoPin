@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +45,7 @@ public class ForumPostActivity extends AppCompatActivity {
         this.adapter = new ForumMessageAdapter(this, messages,this);
         populateMap(messages);
 
+
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.commentsList);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -50,9 +53,10 @@ public class ForumPostActivity extends AppCompatActivity {
         listView.setClickable(true);
 
         ((TextView) findViewById(R.id.postTitle)).setText(post.getTitle());
-        ((TextView) findViewById(R.id.date)).setText(post.getDateString());
+       ((TextView) findViewById(R.id.date)).setText(post.getDateString());
         ((TextView) findViewById(R.id.usrName)).setText(post.getUserID());
         ((TextView) findViewById(R.id.postTxt)).setText(post.getText());
+
 
         // list view onclick
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

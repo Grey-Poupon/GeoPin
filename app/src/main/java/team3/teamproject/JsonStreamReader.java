@@ -88,7 +88,7 @@ public class JsonStreamReader {
             else if(name.equals("value")){
                 value = reader.nextDouble();
             }
-            else if(name.equals("latest")){
+            else if(name.equals("date")){
                 // try to parse string into Date Time
                 try {
                     date = ForumMessage.format.parse(reader.nextString());
@@ -269,22 +269,17 @@ public class JsonStreamReader {
 
         reader.beginObject();
         while(reader.hasNext()){
-<<<<<<< HEAD
             String name = "";
             try {
                 name = reader.nextName();
             }
             catch (IllegalStateException e) {
-                name = reader.nextString();
+                throw new IOException();
             }
-            if(name.equals("ID")){
-=======
-            String name = reader.nextName();
             if(name.equals("ID")){
                 ID = reader.nextString();
             }
             else if(name.equals("sensorName")){
->>>>>>> 38330d5a138a770b3e7722acc39bad5217b98035
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){
