@@ -12,8 +12,9 @@ public class ForumPost extends ForumMessage  {
 
     private String title;
 
-    public ForumPost(String title, String text, String uID, String boardID, String ID, Date date) {
-        super(text, uID, boardID, ID, date);
+
+    public ForumPost(String title,String username, String text, String uID, String boardID, String ID, Date date) {
+        super(text,username, uID, boardID, ID, date);
         this.title = title;
     }
 

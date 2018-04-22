@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,23 +24,21 @@ public class ForumMessage implements Comparable, Parcelable {
     private String ID;
     private String parentID;
     private Date date;
-    private List<ForumMessage> replies = new ArrayList<>();
-    private Date lastBump;
+    private String username;
+    private URL url;
 
-    public ForumMessage(String text, String uID, String parentID,String ID,Date date){
+    public ForumMessage(String text,String username, String uID, String parentID,String ID,Date date){
         this.text = text;
         this.userID = uID;
+        this.username = username;
         this.parentID = parentID;
         this.ID = ID;
         this.date = date;
-        this.lastBump = date;
+        this.url = PostStreamReader.getUserImage(username);
     }
 
 
 
-    public void setReplies(List<ForumMessage> msgs){
-        replies = msgs;
-    }
     public String getText() {
         return text;
     }
@@ -56,9 +55,6 @@ public class ForumMessage implements Comparable, Parcelable {
         return ID;
     }
 
-    public List<ForumMessage> getReplies() {
-        return replies;
-    }
 
     public String getDateString() {
         return format.format(date);
@@ -73,6 +69,18 @@ public class ForumMessage implements Comparable, Parcelable {
     }
 
 
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public URL getUrl() {
+        return url;
+    }
+
+
     protected ForumMessage(Parcel in) {
         text = in.readString();
         userID = in.readString();
@@ -80,12 +88,8 @@ public class ForumMessage implements Comparable, Parcelable {
         parentID = in.readString();
         long tmpDate = in.readLong();
         date = tmpDate != -1 ? new Date(tmpDate) : null;
-        if (in.readByte() == 0x01) {
-            replies = new ArrayList<ForumMessage>();
-            in.readList(replies, ForumMessage.class.getClassLoader());
-        } else {
-            replies = null;
-        }
+        username = in.readString();
+        url = (URL) in.readValue(URL.class.getClassLoader());
     }
 
     @Override
@@ -100,12 +104,8 @@ public class ForumMessage implements Comparable, Parcelable {
         dest.writeString(ID);
         dest.writeString(parentID);
         dest.writeLong(date != null ? date.getTime() : -1L);
-        if (replies == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeList(replies);
-        }
+        dest.writeString(username);
+        dest.writeValue(url);
     }
 
     @SuppressWarnings("unused")
@@ -120,11 +120,4 @@ public class ForumMessage implements Comparable, Parcelable {
             return new ForumMessage[size];
         }
     };
-
-    public void setLastBump(Date date) {
-        this.lastBump = date;
-    }
-    public Date getLastBump(){
-        return  lastBump;
-    }
 }

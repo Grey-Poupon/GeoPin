@@ -60,10 +60,6 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-
         InputStream in = con.getInputStream();
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -74,7 +70,6 @@ public class PostStreamReader {
             response.append(inputLine);
 
             //print result
-            System.out.println(response.toString());
 
         }
         in.close();
@@ -82,7 +77,6 @@ public class PostStreamReader {
     // used for getting response from server Mantas S
     public static String sendCreateString(String url, String urlParameters) throws Exception {
 
-        String answer = null;
         URL obj = new URL("https://duffin.co/uo/"+url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
@@ -99,9 +93,6 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
 
         InputStream in = con.getInputStream();
         String inputLine;
@@ -111,15 +102,11 @@ public class PostStreamReader {
         BufferedReader bin = new BufferedReader(new InputStreamReader(in));
         while ((inputLine = bin.readLine()) != null) {
             response.append(inputLine);
-
-            //returns result
-            answer = response.toString();
-
-
         }
+        //returns result
 
         in.close();
-        return answer;
+        return response.toString();
     }
 
     // Steve N
@@ -141,9 +128,6 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
 
         InputStream in = con.getInputStream();
         String inputLine;
@@ -171,14 +155,44 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
 
         InputStream in = con.getInputStream();
         String inputLine;
         StringBuffer response = new StringBuffer();
 
         return JsonStreamReader.readCommentJsonStream(in);
+    }
+
+    public static URL getUserImage(String username) throws Exception{
+        URL obj = new URL("https://duffin.co/uo/getUserImage.php?name=");
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(username);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+        while ((inputLine = bin.readLine()) != null) {
+            response.append(inputLine);
+        }
+        //returns result
+
+        in.close();
+        return new URL(response.toString());
     }
 }

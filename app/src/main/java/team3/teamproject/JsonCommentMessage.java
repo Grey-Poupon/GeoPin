@@ -9,11 +9,12 @@ import java.util.List;
  */
 
 public class JsonCommentMessage {
-    String ID, userID, comment;
+    String ID, userID, comment, username;
     Date date;
 
-    public JsonCommentMessage(String ID, String userID, String comment, Date date) {
+    public JsonCommentMessage(String ID,String username, String userID, String comment, Date date) {
         this.ID = ID;
+        this.username = username;
         this.userID = userID;
         this.comment = comment;
         this.date = date;
@@ -21,6 +22,10 @@ public class JsonCommentMessage {
 
     public String getID() {
         return ID;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getUserID() {
@@ -36,7 +41,7 @@ public class JsonCommentMessage {
     }
 
     public static ForumMessage toForumMessage( JsonCommentMessage msg,String postID){
-        return new ForumMessage(msg.getComment(),msg.getUserID(),postID,msg.getID(),msg.getDate());
+        return new ForumMessage(msg.getComment(),msg.getUsername(),msg.getUserID(),postID,msg.getID(),msg.getDate());
     }
     public static List<ForumMessage> toListForumMessages(List<JsonCommentMessage> msgs, String postID){
         if(msgs == null){return new ArrayList<ForumMessage>();}

@@ -312,6 +312,7 @@ public class JsonStreamReader {
         String ownerID = "";
         String title = "";
         String description = "";
+        String username = "";
         Date datePosted = null;
 
         reader.beginObject();
@@ -319,6 +320,9 @@ public class JsonStreamReader {
             String name = reader.nextName();
             if(name.equals("ID")){
                 ID = reader.nextString();
+            }
+            else if(name.equals("name")){
+                username = reader.nextString();
             }
             else if(name.equals("ownerID")){
                 ownerID = reader.nextString();
@@ -339,12 +343,13 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonPostMessage(ID,ownerID,title,description,datePosted);
+        return new JsonPostMessage(ID,username,ownerID,title,description,datePosted);
     }
 
     private static JsonCommentMessage readCommentJsonMsg(JsonReader reader) throws IOException {
-        String selectID = "";
+        String ID = "";
         String userID = "";
+        String username = "";
         String comment = "";
         Date date = new Date();
 
@@ -352,10 +357,13 @@ public class JsonStreamReader {
         while(reader.hasNext()){
             String name = reader.nextName();
             if(name.equals("ID")){
-                selectID = reader.nextString();
+                ID = reader.nextString();
             }
             else if(name.equals("userID")){
                 userID = reader.nextString();
+            }
+            else if(name.equals("name")){
+                username = reader.nextString();
             }
             else if(name.equals("comment")){
                 comment = reader.nextString();
@@ -370,7 +378,7 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonCommentMessage(selectID,userID,comment,date);
+        return new JsonCommentMessage(ID,username,userID,comment,date);
     }
 
 }

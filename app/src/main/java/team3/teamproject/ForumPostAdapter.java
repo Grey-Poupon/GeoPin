@@ -32,7 +32,7 @@ public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
         TextView creator = convertView.findViewById(R.id.postCreator);
 
         title.setText(post.getTitle());
-        creator.setText(post.getUserID());
+        creator.setText(post.getUsername());
 
         return convertView;
     }

@@ -116,7 +116,9 @@ public class ForumPostActivity extends AppCompatActivity {
     }
     private void createForumMessage(String txt){
         String uID = ((User) this.getApplication()).getUserID();
-        ForumMessage message = new ForumMessage(txt,uID,post.getID(),getNewMsgID(),new Date());
+        String username = ((User) this.getApplication()).getUserName();
+
+        ForumMessage message = new ForumMessage(txt,username,uID,post.getID(),getNewMsgID(),new Date());
         addMsgToServer(message);
         addMessageToList(message);
     }
