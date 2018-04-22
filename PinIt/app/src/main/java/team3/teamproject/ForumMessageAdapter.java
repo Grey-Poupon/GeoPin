@@ -37,9 +37,10 @@ private ForumMessage source;
 
         ForumMessage msg = getItem(position);
 
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_comment_layout, parent, false);
         }
+
         // get name date msg
         TextView name = convertView.findViewById(R.id.usrName);
         TextView date = convertView.findViewById(R.id.date);

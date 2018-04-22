@@ -2,43 +2,32 @@ package team3.teamproject;
 
 import android.app.Application;
 
+import java.net.URL;
+
 /**
  * Created by Steve on 22/03/2018.
  */
 
 public class User extends Application {
-    private String UserID;
-
-    //Added fields for user name, last name, and email
-    private String UserName;
-    private String UserLastName;
-    private String UserEmail;
+    private String userID;
+    private String userName;
+    private URL userImageURL;
 
     public String getUserID() {
-        return UserID;
+        return userID;
     }
     public String getUserName() {
-        return UserName;
+        return userName;
     }
-    public String getUserLastName() {
-        return UserLastName;
-    }
-    public String getUserEmail() {
-        return UserEmail;
-    }
+    public URL getUserImageURL() {return userImageURL;}
 
 
-    public void setUserID(String userID) {
-        this.UserID = userID;
-    }
+    public void setUserID(String userID) {this.userID = userID;}
     public void setUserName(String userName) {
-        this.UserName = userName;
+        this.userName = userName;
     }
-    public void setUserLastName(String userLastName) {
-        this.UserLastName = userLastName;
-    }
-    public void setUserEmail(String userEmail) {
-        this.UserEmail = userEmail;
+    public void setUserImageURL(URL userImageURL) {
+        this.userImageURL = userImageURL;
     }
 
 }

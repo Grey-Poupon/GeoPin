@@ -39,16 +39,16 @@ public final class R {
         public static final int zOrderOnTop = 0x7f040199;
     }
     public static final class color {
-        public static final int common_google_signin_btn_text_dark = 0x7f06003f;
-        public static final int common_google_signin_btn_text_dark_default = 0x7f060040;
-        public static final int common_google_signin_btn_text_dark_disabled = 0x7f060041;
-        public static final int common_google_signin_btn_text_dark_focused = 0x7f060042;
-        public static final int common_google_signin_btn_text_dark_pressed = 0x7f060043;
-        public static final int common_google_signin_btn_text_light = 0x7f060044;
-        public static final int common_google_signin_btn_text_light_default = 0x7f060045;
-        public static final int common_google_signin_btn_text_light_disabled = 0x7f060046;
-        public static final int common_google_signin_btn_text_light_focused = 0x7f060047;
-        public static final int common_google_signin_btn_text_light_pressed = 0x7f060048;
+        public static final int common_google_signin_btn_text_dark = 0x7f060040;
+        public static final int common_google_signin_btn_text_dark_default = 0x7f060041;
+        public static final int common_google_signin_btn_text_dark_disabled = 0x7f060042;
+        public static final int common_google_signin_btn_text_dark_focused = 0x7f060043;
+        public static final int common_google_signin_btn_text_dark_pressed = 0x7f060044;
+        public static final int common_google_signin_btn_text_light = 0x7f060045;
+        public static final int common_google_signin_btn_text_light_default = 0x7f060046;
+        public static final int common_google_signin_btn_text_light_disabled = 0x7f060047;
+        public static final int common_google_signin_btn_text_light_focused = 0x7f060048;
+        public static final int common_google_signin_btn_text_light_pressed = 0x7f060049;
     }
     public static final class drawable {
         public static final int amu_bubble_mask = 0x7f08005a;
@@ -72,71 +72,71 @@ public final class R {
         public static final int adjust_width = 0x7f090016;
         public static final int amu_text = 0x7f09001a;
         public static final int auto = 0x7f09001b;
-        public static final int dark = 0x7f090040;
-        public static final int hybrid = 0x7f090061;
-        public static final int icon_only = 0x7f090064;
-        public static final int light = 0x7f09006e;
+        public static final int dark = 0x7f090041;
+        public static final int hybrid = 0x7f09005f;
+        public static final int icon_only = 0x7f090062;
+        public static final int light = 0x7f09006c;
         public static final int none = 0x7f090084;
         public static final int normal = 0x7f090085;
-        public static final int satellite = 0x7f09009c;
-        public static final int standard = 0x7f0900be;
-        public static final int terrain = 0x7f0900c6;
-        public static final int webview = 0x7f0900df;
-        public static final int wide = 0x7f0900e0;
-        public static final int window = 0x7f0900e1;
+        public static final int satellite = 0x7f0900a6;
+        public static final int standard = 0x7f0900c8;
+        public static final int terrain = 0x7f0900d0;
+        public static final int webview = 0x7f0900ed;
+        public static final int wide = 0x7f0900ee;
+        public static final int window = 0x7f0900ef;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f0a0006;
     }
     public static final class layout {
-        public static final int amu_info_window = 0x7f0b0020;
-        public static final int amu_text_bubble = 0x7f0b0021;
-        public static final int amu_webview = 0x7f0b0022;
+        public static final int amu_info_window = 0x7f0b0022;
+        public static final int amu_text_bubble = 0x7f0b0023;
+        public static final int amu_webview = 0x7f0b0024;
     }
     public static final class raw {
-        public static final int amu_ballon_gx_prefix = 0x7f0d0000;
-        public static final int amu_basic_folder = 0x7f0d0001;
-        public static final int amu_basic_placemark = 0x7f0d0002;
-        public static final int amu_cdata = 0x7f0d0003;
-        public static final int amu_default_balloon = 0x7f0d0004;
-        public static final int amu_document_nest = 0x7f0d0005;
-        public static final int amu_draw_order_ground_overlay = 0x7f0d0006;
-        public static final int amu_extended_data = 0x7f0d0007;
-        public static final int amu_ground_overlay = 0x7f0d0008;
-        public static final int amu_ground_overlay_color = 0x7f0d0009;
-        public static final int amu_inline_style = 0x7f0d000a;
-        public static final int amu_multigeometry_placemarks = 0x7f0d000b;
-        public static final int amu_multiple_placemarks = 0x7f0d000c;
-        public static final int amu_nested_folders = 0x7f0d000d;
-        public static final int amu_nested_multigeometry = 0x7f0d000e;
-        public static final int amu_poly_style_boolean_alpha = 0x7f0d000f;
-        public static final int amu_poly_style_boolean_numeric = 0x7f0d0010;
-        public static final int amu_unknwown_folder = 0x7f0d0011;
-        public static final int amu_unsupported = 0x7f0d0012;
-        public static final int amu_visibility_ground_overlay = 0x7f0d0013;
+        public static final int amu_ballon_gx_prefix = 0x7f0e0000;
+        public static final int amu_basic_folder = 0x7f0e0001;
+        public static final int amu_basic_placemark = 0x7f0e0002;
+        public static final int amu_cdata = 0x7f0e0003;
+        public static final int amu_default_balloon = 0x7f0e0004;
+        public static final int amu_document_nest = 0x7f0e0005;
+        public static final int amu_draw_order_ground_overlay = 0x7f0e0006;
+        public static final int amu_extended_data = 0x7f0e0007;
+        public static final int amu_ground_overlay = 0x7f0e0008;
+        public static final int amu_ground_overlay_color = 0x7f0e0009;
+        public static final int amu_inline_style = 0x7f0e000a;
+        public static final int amu_multigeometry_placemarks = 0x7f0e000b;
+        public static final int amu_multiple_placemarks = 0x7f0e000c;
+        public static final int amu_nested_folders = 0x7f0e000d;
+        public static final int amu_nested_multigeometry = 0x7f0e000e;
+        public static final int amu_poly_style_boolean_alpha = 0x7f0e000f;
+        public static final int amu_poly_style_boolean_numeric = 0x7f0e0010;
+        public static final int amu_unknwown_folder = 0x7f0e0011;
+        public static final int amu_unsupported = 0x7f0e0012;
+        public static final int amu_visibility_ground_overlay = 0x7f0e0013;
     }
     public static final class string {
-        public static final int common_google_play_services_enable_button = 0x7f0e0047;
-        public static final int common_google_play_services_enable_text = 0x7f0e0048;
-        public static final int common_google_play_services_enable_title = 0x7f0e0049;
-        public static final int common_google_play_services_install_button = 0x7f0e004a;
-        public static final int common_google_play_services_install_title = 0x7f0e004c;
-        public static final int common_google_play_services_notification_ticker = 0x7f0e004e;
-        public static final int common_google_play_services_unknown_issue = 0x7f0e004f;
-        public static final int common_google_play_services_unsupported_text = 0x7f0e0050;
-        public static final int common_google_play_services_update_button = 0x7f0e0051;
-        public static final int common_google_play_services_update_text = 0x7f0e0052;
-        public static final int common_google_play_services_update_title = 0x7f0e0053;
-        public static final int common_google_play_services_updating_text = 0x7f0e0054;
-        public static final int common_google_play_services_wear_update_text = 0x7f0e0055;
-        public static final int common_open_on_phone = 0x7f0e0056;
-        public static final int common_signin_button_text = 0x7f0e0057;
-        public static final int common_signin_button_text_long = 0x7f0e0058;
+        public static final int common_google_play_services_enable_button = 0x7f0f004d;
+        public static final int common_google_play_services_enable_text = 0x7f0f004e;
+        public static final int common_google_play_services_enable_title = 0x7f0f004f;
+        public static final int common_google_play_services_install_button = 0x7f0f0050;
+        public static final int common_google_play_services_install_title = 0x7f0f0052;
+        public static final int common_google_play_services_notification_ticker = 0x7f0f0054;
+        public static final int common_google_play_services_unknown_issue = 0x7f0f0055;
+        public static final int common_google_play_services_unsupported_text = 0x7f0f0056;
+        public static final int common_google_play_services_update_button = 0x7f0f0057;
+        public static final int common_google_play_services_update_text = 0x7f0f0058;
+        public static final int common_google_play_services_update_title = 0x7f0f0059;
+        public static final int common_google_play_services_updating_text = 0x7f0f005a;
+        public static final int common_google_play_services_wear_update_text = 0x7f0f005b;
+        public static final int common_open_on_phone = 0x7f0f005c;
+        public static final int common_signin_button_text = 0x7f0f005d;
+        public static final int common_signin_button_text_long = 0x7f0f005e;
     }
     public static final class style {
-        public static final int amu_Bubble_TextAppearance_Dark = 0x7f0f0181;
-        public static final int amu_Bubble_TextAppearance_Light = 0x7f0f0182;
-        public static final int amu_ClusterIcon_TextAppearance = 0x7f0f0183;
+        public static final int amu_Bubble_TextAppearance_Dark = 0x7f100181;
+        public static final int amu_Bubble_TextAppearance_Light = 0x7f100182;
+        public static final int amu_ClusterIcon_TextAppearance = 0x7f100183;
     }
     public static final class styleable {
         public static final int[] LoadingImageView = { 0x7f040056, 0x7f0400b1, 0x7f0400b2 };

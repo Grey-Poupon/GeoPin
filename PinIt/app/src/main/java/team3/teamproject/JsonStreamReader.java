@@ -30,10 +30,10 @@ public class JsonStreamReader {
         return Integer.parseInt(s);
     }
 
-    public static List<JsonSensorData> readJsonSensorDataStream(InputStream in) {
+    public static List<JsonSensorData> readJsonSensorDataStream(InputStream in, int index) {
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
-            return readJsonSensorDataArray(reader);
+            return readJsonSensorDataArray(reader, index);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -50,13 +50,17 @@ public class JsonStreamReader {
         return null;
     }
 
-    private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader) throws IOException {
+    private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader, int index) throws IOException {
         List<JsonSensorData> messages = new ArrayList<JsonSensorData>();
 
         reader.beginArray();
 
         while (reader.hasNext()){
-            messages.add(readJsonSensorDataMessage(reader));
+
+            JsonSensorData nextSensorData = readJsonSensorDataMessage(reader);
+            if (nextSensorData.getIndexValue() == index) {
+                messages.add(nextSensorData);
+            }
         }
         reader.endArray();
         return messages;
@@ -84,7 +88,7 @@ public class JsonStreamReader {
             else if(name.equals("value")){
                 value = reader.nextDouble();
             }
-            else if(name.equals("latest")){
+            else if(name.equals("date")){
                 // try to parse string into Date Time
                 try {
                     date = ForumMessage.format.parse(reader.nextString());
@@ -270,9 +274,12 @@ public class JsonStreamReader {
                 name = reader.nextName();
             }
             catch (IllegalStateException e) {
-                name = reader.nextString();
+                throw new IOException();
             }
             if(name.equals("ID")){
+                ID = reader.nextString();
+            }
+            else if(name.equals("sensorName")){
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){

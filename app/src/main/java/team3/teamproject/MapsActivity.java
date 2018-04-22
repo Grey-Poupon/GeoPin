@@ -55,7 +55,6 @@ import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -681,7 +680,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void onMenuClick(View view){
+    public void onPMenuClick(final View view){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -689,14 +688,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
 
-                    case R.id.help:
-
+                    case R.id.contact:
+                        Intent contactUsScreen = new Intent(MapsActivity.this, ContactFormActivity.class);
+                        startActivity(contactUsScreen);
                         return true;
                     case R.id.myAcc:
 
                         return true;
                     case R.id.logOutButton:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
+
+
                         return true;
                     default:
                         return false;
@@ -710,12 +712,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return;
     }
 
-    // log out button click listener
-    public void onLogOutClick(View view) {
-        LoginManager.getInstance().logOut();
 
-        Intent logOutScreen = new Intent(this, LoginActivity.class);
-        startActivity(logOutScreen);
-    }
+
 
 }

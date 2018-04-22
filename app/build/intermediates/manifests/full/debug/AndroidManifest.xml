@@ -106,8 +106,16 @@
             android:label="@string/title_activity_submit_page"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="team3.teamproject.RegistrationActivity"
+            android:name="team3.teamproject.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="team3.teamproject.ContactFormActivity"
+            android:label="@string/contact_activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="team3.teamproject.LoadingBarActivity"
+            android:label="@string/loading_bar_activity"
             android:theme="@style/AppTheme" />
 
         <meta-data

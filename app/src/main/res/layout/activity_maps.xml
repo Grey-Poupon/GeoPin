@@ -15,7 +15,6 @@
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         android:visibility="visible">
 
         <Spinner
@@ -30,13 +29,13 @@
             android:id="@+id/menuButton"
             android:layout_width="@dimen/activity_menu_button"
             android:layout_height="@dimen/activity_menu_button"
+            android:layout_above="@+id/map"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="end"
-            android:layout_alignParentTop="true"
             android:layout_marginEnd="12dp"
-            android:layout_marginTop="12dp"
             android:background="@drawable/ic_menu"
             android:contentDescription="@string/button_menu"
-            android:onClick="onMenuClick" />
+            android:onClick="onPMenuClick" />
 
         <ImageButton
             android:id="@+id/refreshButton"
@@ -74,18 +73,9 @@
         android:layout_marginTop="70dp"
         android:background="@drawable/button_environmental"
         android:contentDescription="@string/button_environmental"
-        android:onClick="onLogOutClick"
+        android:onClick="onLogOutButtonClick"
         android:visibility="invisible"
         tools:ignore="NotSibling" />
-
-<!--    <Spinner
-        android:id="@+id/heatmapType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="175dp" />-->
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
