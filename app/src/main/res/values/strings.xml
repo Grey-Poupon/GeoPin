@@ -70,5 +70,6 @@
     <string name="reg_password">Password</string>
     <string name="reg_create_account">Create Account</string>
     <string name="reg_go_back">Go back</string>
+    <string name="profile_picture">profile picture</string>
 
 </resources>

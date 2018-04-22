@@ -120,4 +120,8 @@ public class ForumMessage implements Comparable, Parcelable {
             return new ForumMessage[size];
         }
     };
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 }

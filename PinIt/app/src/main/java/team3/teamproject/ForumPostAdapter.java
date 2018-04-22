@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +34,9 @@ public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
 
         title.setText(post.getTitle());
         creator.setText(post.getUserID());
+
+        ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
+        profilePic.setImageDrawable(ImageHandler.LoadImageFromURL(convertView.getResources()));
 
         return convertView;
     }

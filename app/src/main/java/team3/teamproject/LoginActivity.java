@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+
+
 import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.View;
 
@@ -41,7 +44,9 @@ import java.util.regex.Pattern;
  * Class used for loginning in to application
  * Modified by Mantas Sutas
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
+    private static LoginActivity loginActivity;
+
 
 
     private CallbackManager callbackManager; // used for facebook log in
@@ -118,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        loginActivity = this;
 
         mUserName = (EditText) findViewById(R.id.username_login);
         mPassword = (EditText) findViewById(R.id.password_login);
@@ -141,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                 ((User) this.getApplication()).setUserName(facebookName);
 
                 ((User) this.getApplication()).setUserImageURL(profile_picture);
-
 
 
                 String newID = PostStreamReader.sendCreateString("createUser.php",
@@ -220,13 +225,10 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(result.equals("1"))
-            {
+            if (result.equals("1")) {
                 Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
                 startActivity(loadingScreen);
-            }
-            else
-            {
+            } else {
                 mNotifyUserLogin.setTextColor(Color.RED);
                 mNotifyUserLogin.setText(error);
             }
@@ -255,4 +257,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(loadingScreen);
     }
 
+    public static LoginActivity getLoginActivity() {
+        return loginActivity;
+    }
 }
+

@@ -45,6 +45,12 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:ems="10" />
+
+        <TextView
+            android:id="@+id/notifyUserRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/reg_create_account"
