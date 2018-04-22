@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,14 +73,22 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     private void addNewPost(ForumPost newPost) {
+        String newID = "-1";
         try {
-            PostStreamReader.createPost(newPost.getUserID(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
+            newID = PostStreamReader.createPost(newPost.getUserID(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        adapter.add(newPost);
-        ListView lv = (ListView) findViewById(R.id.messageList);
-        lv.setSelection(lv.getAdapter().getCount()-1);
+        if(newID!="-1") {
+            newPost.setID(newID);
+            adapter.add(newPost);
+            ListView lv = (ListView) findViewById(R.id.messageList);
+            lv.setSelection(adapter.getPosition(newPost));
+        }
+        else{
+            Toast errorNotification = Toast.makeText(getApplicationContext(),"Post failed to send",Toast.LENGTH_SHORT);
+            errorNotification.show();
+        }
     }
 
     // setups all the dynamic elements of the activity

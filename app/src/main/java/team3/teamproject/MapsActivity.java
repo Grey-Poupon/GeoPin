@@ -256,8 +256,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
-
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
     }
@@ -267,11 +265,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
         if (allRelivantSensorData == null) {
-            Log.e("SENSOR ERROR", "No data is found");
             return;
         }
-
-        Log.e("PROGRESS", "Got all sensor data");
 
         LatLng latLng = null;
         for(int i =0;i<allRelivantSensorData.size();i++){
@@ -281,15 +276,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // any sensor data that doesnt match the sensor we have dont use
             if(sensor!=null) {
                 latLng = sensor.getLatLng();
+                allRelivantSensorData.get(i).applyLocation(latLng);
             }
-            allRelivantSensorData.get(i).applyLocation(latLng);
         }
 
         Log.e("PROGRESS", "All data processed");
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
-        double max = allRelivantSensorData.get(0).value;
+        double max = allRelivantSensorData.get(allRelivantSensorData.size()-1).value;
 
         for (JsonSensorData sensorData : allRelivantSensorData) {
             if (sensorData.value < min) {
@@ -307,16 +302,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng location = sensorData.getLatLng();
             if (location != null) {
                 mapData.add(new WeightedLatLng(location, (sensorData.getValue() - min) / (max - min)));
-            } else {
-                Log.e("NO LOCATION FOUND", "No location found for sensor:" + sensorData.getSensorId());
             }
         }
-
         placeDataOnMap(mapData);
     }
 
     // Rheyn Scholtz
-    private void placeDataOnMap(List<WeightedLatLng> heatmapData) {
+    public void placeDataOnMap(List<WeightedLatLng> heatmapData) {
 
         if (heatmapData.size() < 1) {
             return;
@@ -353,25 +345,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         int newestIndex = getNewestIndex();
         if (newestIndex == -1) {
-            return null;
+            return new ArrayList<JsonSensorData>();
         }
 
         List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
 
-        if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
-            Log.e("PROGRESS", "listOfSensorData null");
-            return null;
+        if (listOfSensorData == null)  {
+            return new ArrayList<JsonSensorData>();
         }
 
         return listOfSensorData;
     }
 
-    private List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
-        if (sensorIndex == -1) {
-            return null;
+    public List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
+        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+
+        if (sensorIndex < 0) {
+            return listOfSensorData;
         }
 
-        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
         URL url = null;
         try {
             url = new URL(urlPath);
@@ -434,36 +426,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return -1;
     }
 
-    private List<JsonSensorMessage> getDataFromDatabase(String urlPath) {
-        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
-        URL url = null;
-        try {
-            url = new URL(urlPath);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-
-            return listOfSensors;
-        }
-        HttpsURLConnection urlConnection = null;
-        try {
-            urlConnection = (HttpsURLConnection) url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return listOfSensors;
-        }
-        if (urlConnection != null) {
-            try {
-                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return listOfSensors;
-            } finally {
-                urlConnection.disconnect();
-            }
-        }
-        return listOfSensors;
-    }
-
     /**
      * back button listener, returns to home screen
      * <p>
@@ -478,42 +440,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * adds a heatmap overlay, takes Weighted points
-     *
-     * @Stephen Northrop
-     */
-    private void addHeatMap(List<WeightedLatLng> points) {
-        if (mOverlay != null) {
-            mOverlay.remove();
-        }
-        mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
-        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-    }
-
-    /**
-     * Just test points for debugging
-     *
-     * @Stephen Northrop
-     */
-    private List<WeightedLatLng> getTestPoints() {
-        List<WeightedLatLng> list = new ArrayList<>();
-        double lat = startlocation.latitude;
-        double lon = startlocation.longitude;
-
-        for (double y = 0; y < 0.005; y += 0.001)
-            for (double x = 0; x < 0.005; x += 0.001) {
-                list.add(new WeightedLatLng(new LatLng(lat + x, lon + y), 10));
-            }
-        return list;
-    }
-
-    /**
      * gets all sensor data from server
      * Stephen N
      */
     public List<JsonSensorMessage> getAllSensorData() {
         List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
-        String message = "";
         URL url = null;
         try {
             url = new URL("https://duffin.co/uo/getSensors.php");
@@ -531,7 +462,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if (urlConnection != null) {
             try {
-                Log.e("PROGRESS", "Calling");
                 return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -543,7 +473,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
-    private HashMap<String,JsonSensorMessage> createSensorMap(){
+    public HashMap<String,JsonSensorMessage> createSensorMap(){
         HashMap<String,JsonSensorMessage> map = new HashMap<>();
         List<JsonSensorMessage> sensors = getAllSensorData();
         for(JsonSensorMessage sensor: sensors){
@@ -552,31 +482,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return map;
     }
 
-
-    // Rheyn Scholtz, place sensors on the map (viewing temp)
-    List<JsonSensorMessage> sensorsToBePlaced;
-
-    private void SensorPlacement() {
-        sensorsToBePlaced = getAllSensorData();
-
-        if (sensorsToBePlaced != null) {
-            PlaceSensorsOnMap();
-        } else {
-            Log.e("STATE", "else");
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(54.973701, -1.626498))
-                    .title("test"));
-            Log.e("STATE", "marker created");
-        }
-    }
-
-    private void PlaceSensorsOnMap() {
-        for (JsonSensorMessage sensor : sensorsToBePlaced) {
-            mMap.addMarker(new MarkerOptions()
-                    .position(sensor.getLatLng())
-                    .title(sensor.getSensorName()));
-        }
-    }
 
     public List<Pin> getAllPins(){
         List<Pin> empty = new ArrayList<Pin>();

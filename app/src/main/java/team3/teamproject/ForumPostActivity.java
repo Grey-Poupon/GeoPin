@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,7 @@ public class ForumPostActivity extends AppCompatActivity {
                 cleanCommentBox();
             }
         });
-    }
+   }
 
     private void cleanCommentBox() {
         // wipe text
@@ -104,35 +105,41 @@ public class ForumPostActivity extends AppCompatActivity {
         }
     }
 
-    private List<ForumMessage> getComments(ForumPost post) {
-        try {
-           return JsonCommentMessage.toListForumMessages(PostStreamReader.getComments(post.getID()),post.getID());
-        } catch (Exception e) {
-            e.printStackTrace();
+    public List<ForumMessage> getComments(ForumPost post) {
+        if(post.getID() != "-1"){
+            try {
+                return JsonCommentMessage.toListForumMessages(PostStreamReader.getComments(post.getID()), post.getID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return new ArrayList<ForumMessage>();
 
     }
     private void createForumMessage(String txt){
+        String newID = "-1";
         String uID = ((User) this.getApplication()).getUserID();
-        ForumMessage message = new ForumMessage(txt,uID,post.getID(),getNewMsgID(),new Date());
-        addMsgToServer(message);
-        addMessageToList(message);
+        ForumMessage message = new ForumMessage(txt,uID,post.getID(),"-1",new Date());
+
+        newID = addMsgToServer(message);
+        if(newID!="-1") {
+            message.setID(newID);
+            addMessageToList(message);
+        }
+        else{
+            Toast errorNotification = Toast.makeText(getApplicationContext(),"message failed to send",Toast.LENGTH_SHORT);
+            errorNotification.show();
+        }
     }
 
-    private String getNewMsgID() {
-        //ToDo get msgId from server to stop id duplication
-        if(messages.size()<1){return "1";}
-        return String.valueOf(Integer.parseInt(messages.get(messages.size()-1).getID())+1);
-    }
-
-    private void addMsgToServer(ForumMessage message) {
+    private String addMsgToServer(ForumMessage message) {
         try {
-            PostStreamReader.createComment(message.getUserID(),message.getText(),message.getParentID());
+           return PostStreamReader.createComment(message.getUserID(),message.getText(),message.getParentID());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "-1";
     }
     private void addMessageToList(ForumMessage message) {
         adapter.add(message);

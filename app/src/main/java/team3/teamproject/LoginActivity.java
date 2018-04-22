@@ -3,6 +3,7 @@ package team3.teamproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.facebook.AccessToken;
@@ -27,7 +28,7 @@ import org.json.JSONObject;
 import java.util.*;
 
 public class LoginActivity extends AppCompatActivity{
-
+    private static LoginActivity loginActivity;
 
     private CallbackManager callbackManager; // used for facebook log in
     private static final String EMAIL = "email";
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity{
 
             }
         });
-
+        loginActivity = this;
 
     }
     public void displayUserInfo(JSONObject object)
@@ -151,5 +152,8 @@ public class LoginActivity extends AppCompatActivity{
     public void onWithoutLoginClick(View view){
         Intent mapScreen = new Intent(this, MapsActivity.class);
         startActivity(mapScreen);
+    }
+    public static LoginActivity getLoginActivity() {
+        return loginActivity;
     }
 }
