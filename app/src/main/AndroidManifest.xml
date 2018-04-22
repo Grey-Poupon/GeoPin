@@ -67,21 +67,11 @@
             android:name=".PostListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName=".MapsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ForumPostActivity"
             android:label="@string/title_activity_forum_page"
             android:parentActivityName=".PostListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SubmitPageActivity"

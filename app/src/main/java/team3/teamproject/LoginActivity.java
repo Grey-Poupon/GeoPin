@@ -116,9 +116,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mUserName = (EditText) findViewById(R.id.userNameLog);
+        mUserName = (EditText) findViewById(R.id.username_login);
         //if(mUserName.getText().toString())
-        mPassword = (EditText) findViewById(R.id.password);
+        mPassword = (EditText) findViewById(R.id.password_login);
     }
 
     // used for setting facebook user details
@@ -227,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * register click button listener
      */
-    public void onRegisterClick(View view) {
+    public void onLoginRegisterClick(View view) {
         Intent register = new Intent(this, RegisterActivity.class);
         startActivity(register);
     }
@@ -241,8 +241,8 @@ public class LoginActivity extends AppCompatActivity {
         ((User) this.getApplication()).setUserName("GUEST");
 
 
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
+        Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
+        startActivity(loadingScreen);
     }
 
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v17\\values-v17.xml",
+            "outputFile": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v17\\values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\e3d2fc0ee04c27248ce5944c7e21910b\\res\\values-v17\\values-v17.xml",
+                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\983d41a1f97af539cc65d2cbd3835dec\\res\\values-v17\\values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,26,29,32,35,39,42,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",

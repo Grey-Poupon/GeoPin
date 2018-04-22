@@ -65,4 +65,10 @@
     <string name="contact_activity">ContactUsActivity</string>
     <string name="loading_bar_activity">LoadingBarActivity</string>
 
+    <string name="reg_registration">Registration</string>
+    <string name="reg_username">Username</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_create_account">Create Account</string>
+    <string name="reg_go_back">Go back</string>
+
 </resources>
