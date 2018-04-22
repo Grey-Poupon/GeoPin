@@ -22,9 +22,9 @@ public class LogoutDialog extends DialogFragment {
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.alert_message)
-                .setTitle(R.string.alert_title)
-                .setPositiveButton(R.string.alert_positive, new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.alert_lo_message)
+                .setTitle(R.string.alert_lo_title)
+                .setPositiveButton(R.string.alert_lo_positive, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         LoginManager.getInstance().logOut();
                         Intent logOutScreen = new Intent(getActivity(), LoginActivity.class);
@@ -32,7 +32,7 @@ public class LogoutDialog extends DialogFragment {
 
                     }
                 })
-                .setNegativeButton(R.string.alert_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.alert_lo_negative, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         LogoutDialog.super.onCancel(dialog);
                     }

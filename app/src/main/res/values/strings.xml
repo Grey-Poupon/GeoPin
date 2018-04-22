@@ -35,10 +35,10 @@
     <string name="title_activity_submit_page">SubmitPageActivity</string>
 
     <!-- Strings related to alert dialog -->
-    <string name="alert_title">Logout?</string>
-    <string name="alert_message">Are you sure you want to logout?</string>
-    <string name="alert_positive">Yes</string>
-    <string name="alert_negative">Cancel</string>
+    <string name="alert_lo_title">Sign out?</string>
+    <string name="alert_lo_message">Are you sure you want to sign out?</string>
+    <string name="alert_lo_positive">Yes</string>
+    <string name="alert_lo_negative">Cancel</string>
 
     <!-- Strings related to help page -->
     <string name="contact_form">Contact Us</string>
@@ -70,5 +70,10 @@
     <string name="reg_password">Password</string>
     <string name="reg_create_account">Create Account</string>
     <string name="reg_go_back">Go back</string>
+    <string name="forum_title">Enviroscope Forum</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="sign_in">Sign in</string>
+    <string name="my_account">My account</string>
+    <string name="sign_out">Sign out</string>
 
 </resources>

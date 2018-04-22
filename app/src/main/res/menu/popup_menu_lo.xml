@@ -3,10 +3,10 @@
 
 
     <item
-        android:id="@+id/logIn"
-        android:title="Log in"/>
+        android:id="@+id/login"
+        android:title="@string/sign_in"/>
     <item
         android:id="@+id/contact"
-        android:title="Contact US"/>
+        android:title="@string/contact_us"/>
 
 </menu>

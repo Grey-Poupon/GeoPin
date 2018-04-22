@@ -586,24 +586,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onPMenuClick(final View view){
+        if(!((User) this.getApplication()).getUserID().equals("GUEST")){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-
                     case R.id.contact:
                         Intent contactUsScreen = new Intent(MapsActivity.this, ContactFormActivity.class);
                         startActivity(contactUsScreen);
                         return true;
-                    case R.id.myAcc:
+                    case R.id.acc:
 
                         return true;
-                    case R.id.logOutButton:
+                    case R.id.logout:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
-
-
                         return true;
                     default:
                         return false;
@@ -611,6 +609,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         popup.show();
+    }else{
+        PopupMenu popupLo = new PopupMenu(MapsActivity.this, view);
+        popupLo.getMenuInflater().inflate(R.menu.popup_menu_lo, popupLo.getMenu());
+        popupLo.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.login:
+                        Intent loginScreen = new Intent(MapsActivity.this, LoginActivity.class);
+                        startActivity(loginScreen);
+                        return true;
+                    case R.id.contact:
+                        Intent contactUsScreen = new Intent(MapsActivity.this, ContactFormActivity.class);
+                        startActivity(contactUsScreen);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupLo.show();
+    }
     }
 
     public void onRefreshClick(View view){
