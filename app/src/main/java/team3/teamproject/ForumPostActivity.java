@@ -120,7 +120,9 @@ public class ForumPostActivity extends AppCompatActivity {
     private void createForumMessage(String txt){
         String newID = "-1";
         String uID = ((User) this.getApplication()).getUserID();
-        ForumMessage message = new ForumMessage(txt,uID,post.getID(),"-1",new Date());
+        String username = ((User) this.getApplication()).getUserName();
+        ForumMessage message = new ForumMessage(txt,username,uID,post.getID(),"-1",new Date());
+
 
         newID = addMsgToServer(message);
         if(newID!="-1") {

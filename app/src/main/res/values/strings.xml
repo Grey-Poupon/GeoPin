@@ -59,6 +59,15 @@
         <item>NO2</item>
         <item>NO</item>
         <item>CO</item>
+        <item>Wind_speed</item>
+        <item>NOX</item>
+        <item>O3</item>
+        <item>Pressure</item>
+        <item>Rain_Accumulation</item>
+        <item>Rain_Fall</item>
+        <item>Sewage_Level</item>
+        <item>Solar_Diffuseradiation</item>
+        <item>Visiblity</item>
     </array>
 
     <string name="title_activity_register">RegisterActivity</string>
@@ -75,5 +84,7 @@
     <string name="sign_in">Sign in</string>
     <string name="my_account">My account</string>
     <string name="sign_out">Sign out</string>
+    <string name="profile_picture">profile picture</string>
+
 
 </resources>

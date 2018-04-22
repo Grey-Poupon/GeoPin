@@ -27,6 +27,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -61,6 +62,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.Map;
+
 import javax.net.ssl.HttpsURLConnection;
 
 
@@ -76,6 +79,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private HashMap<String,JsonSensorMessage> sensors;
     private static final String TAG = MapsActivity.class.getSimpleName();
 
+
+    private int currentIndex = -1;
+    private OverlayState currentOverlayState = OverlayState.Sound;
+    private Map<String, Integer> dateToIndex = new HashMap<String, Integer>();
+    private Map indexToDate = new HashMap();
+    private DateValueFormatter dateValueFormatter = new DateValueFormatter();
+
     private LatLng startlocation = new LatLng(54.973701, -1.624397);
     private final int maxZoom = 15;
     private final int minZoom = 13;
@@ -83,11 +93,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLngBounds mapBounds = new LatLngBounds(
             new LatLng(54.85, -1.7), new LatLng(55.07, -1.52));
 
-    private int[] colours = {
+    private int[] colours;
+
+    private int[] weatherColours = {
             Color.rgb(152, 236, 220),
             Color.rgb(75, 205, 179),
             Color.rgb(30, 148, 126),
             Color.rgb(0, 91, 73)};
+
+    private int[] airColours = {
+            Color.rgb(234, 98, 96),
+            Color.rgb(204, 49, 46),
+            Color.rgb(195, 14, 23),
+            Color.rgb(174, 0, 7)};
+
+    private int[] enviromantColours = {
+            Color.rgb(108, 255, 35),
+            Color.rgb(116, 226, 72),
+            Color.rgb(111, 181, 76),
+            Color.rgb(111, 153, 78)};
 
     private float[] startPoints = {0.1f, 0.4f, 0.7f, 1f};
 
@@ -138,23 +162,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mChart.setOnChartGestureListener(MapsActivity.this);
         mChart.setOnChartValueSelectedListener(MapsActivity.this);
 
+        mChart.setDoubleTapToZoomEnabled(false);
+        mChart.setScaleYEnabled(false);
+        mChart.setPinchZoom(false);
+        mChart.setNoDataText("Select a category using the top left menu!");
 
-        ArrayList<Entry> yValues = new ArrayList<>();
-
-        yValues.add(new Entry(0, 20f));
-        yValues.add(new Entry(1, 30f));
-        yValues.add(new Entry(2, 60f));
-        yValues.add(new Entry(3, 10f));
-        yValues.add(new Entry(4, 50f));
-        yValues.add(new Entry(5, 35f));
-        LineDataSet set1 = new LineDataSet(yValues, "set 1");
-        set1.setFillAlpha(110);
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-
-        LineData data = new LineData(dataSets);
-
-        mChart.setData(data);
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setValueFormatter(dateValueFormatter);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(-15f);
+        updateGraph(currentOverlayState);
+        mChart.getLegend().setEnabled(false);
+        mChart.getAxisRight().setDrawLabels(false);
     }
 
     /**
@@ -209,6 +228,79 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //SensorPlacement();
     }
 
+
+
+
+    private void updateGraph(OverlayState pollutionType) {
+        String property = pollutionType.toString().toLowerCase();
+
+        List<JsonGraphMessage> x = getGraphValues("https://duffin.co/uo/getAverages.php?property=", property);
+        if(x==null || x.size()<1){return;}
+        ArrayList<Entry> values = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<String>();
+
+        for (JsonGraphMessage graphValue : x) {
+            dateToIndex.put(graphValue.getDate(), graphValue.getIndexValue());
+            dates.add(graphValue.getDate());
+            values.add(new Entry( graphValue.getIndexValue(), (float)graphValue.getValue()));
+        }
+        dateValueFormatter.setDates(dates);
+        setGraphValues(values, property);
+    }
+
+    private void setGraphValues(ArrayList<Entry> values, String property) {
+        LineDataSet set = new LineDataSet(values, "");
+        if (colours != null) {
+            set.setColors(colours[0]);
+        }
+        set.setFillAlpha(110);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set);
+        LineData data = new LineData(dataSets);
+
+        mChart.getDescription().setText("Showing average " + property + " over time");
+        mChart.invalidate();
+        mChart.clear();
+
+        mChart.setData(data);
+    }
+
+    private List<JsonGraphMessage> getGraphValues(String urlPath, String property) {
+        if (property == null || property == "") {
+            return null;
+        }
+        urlPath += property;
+        List<JsonGraphMessage> listOfGraphData = new ArrayList<JsonGraphMessage>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch(MalformedURLException e) {
+            Log.e("ERROR", "error with URL creation");
+            return listOfGraphData;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            Log.e("ERROR", "error with https url connection");
+            return listOfGraphData;
+        }
+        if(urlConnection!=null) {
+            try {
+                return JsonStreamReader.readJsonGraphStream(urlConnection.getInputStream(), property);
+            }
+            catch (IOException e) {
+                Log.e("ERROR", "error with urlConnection json stream reader");
+                return listOfGraphData;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return listOfGraphData;
+    }
+
+
+
     private void setupForumMarkers(GoogleMap map) {
         for (Pin pin : Pin.allPins) {
             Marker text = map.addMarker(
@@ -240,18 +332,80 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
+
+
         if (selectedPollution.equals(OverlayState.CO.toString())) {
-            UpdateHeatMap(OverlayState.CO);
-        } else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
-            UpdateHeatMap(OverlayState.Humidity);
-        } else if (selectedPollution.equals(OverlayState.NO.toString())) {
-            UpdateHeatMap(OverlayState.NO);
-        } else if (selectedPollution.equals(OverlayState.NO2.toString())) {
-            UpdateHeatMap(OverlayState.NO2);
-        } else if (selectedPollution.equals(OverlayState.Sound.toString())) {
-            UpdateHeatMap(OverlayState.Sound);
-        } else {
+            colours = airColours;
+            currentOverlayState = OverlayState.CO;
+        }
+        else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Humidity;
+        }
+        else if (selectedPollution.equals(OverlayState.NO.toString())) {
+            colours = airColours;
+            currentOverlayState = OverlayState.NO;
+        }
+        else if (selectedPollution.equals(OverlayState.NO2.toString())) {
+            colours = airColours;
+            currentOverlayState = OverlayState.NO2;
+        }
+        else if (selectedPollution.equals(OverlayState.Sound.toString())) {
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Sound;
+        }
+        else if (selectedPollution.equals(OverlayState.Temperature.toString())) {
+            colours = weatherColours;
             UpdateHeatMap(OverlayState.Temperature);
+        }
+        else if (selectedPollution.equals(OverlayState.Wind_speed.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Wind_speed;
+        }
+        else if (selectedPollution.equals(OverlayState.NOX.toString())) {
+            colours = airColours;
+            currentOverlayState = OverlayState.NOX;
+        }
+        else if (selectedPollution.equals(OverlayState.O3.toString())) {
+            colours = airColours;
+            currentOverlayState = OverlayState.O3;
+        }
+        else if (selectedPollution.equals(OverlayState.Pressure.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Pressure;
+        }
+        else if (selectedPollution.equals(OverlayState.Rain_Accumulation.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Rain_Accumulation;
+        }
+        else if (selectedPollution.equals(OverlayState.Rain_Fall.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Rain_Fall;
+        }
+        else if (selectedPollution.equals(OverlayState.Sewage_Level.toString())) {
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Sewage_Level;
+        }
+        else if (selectedPollution.equals(OverlayState.Solar_Diffuseradiation.toString())) {
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Solar_Diffuseradiation;
+        }
+        else if (selectedPollution.equals(OverlayState.Visiblity.toString())) {
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Visiblity;
+        }
+        else {
+            Log.e("UNKNOWN POLLUTION TYPE", "" + selectedPollution.toString());
+            currentOverlayState = null;
+        }
+
+        if (currentOverlayState != null) {
+            updateGraph(currentOverlayState);
+            currentIndex = -1;
+            UpdateHeatMap(currentOverlayState);
+        }
+        else {
+
         }
     }
 
@@ -263,7 +417,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
-        if (allRelivantSensorData == null) {
+        if (allRelivantSensorData == null || allRelivantSensorData.size() == 0) {
             return;
         }
 
@@ -279,7 +433,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        Log.e("PROGRESS", "All data processed");
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
@@ -322,35 +475,74 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    public List<JsonSensorData> getSensorsFromType(OverlayState type) {
+
+    public List<JsonSensorData> getSensorsFromType(OverlayState type){
         String urlPath = "https://duffin.co/uo/getData.php?property=";
-        if (type == OverlayState.Air) {
-            urlPath += "Air%20Quality";
-        } else if (type == OverlayState.Temperature) {
-            urlPath += "Temperature";
-        } else if (type == OverlayState.Humidity) {
-            urlPath += "Humidity";
-        } else if (type == OverlayState.NO2) {
-            urlPath += "NO2";
-        } else if (type == OverlayState.NO) {
-            urlPath += "NO";
-        } else if (type == OverlayState.CO) {
-            urlPath += "CO";
-        } else {
+        if (type == OverlayState.Sound) {
             urlPath += "Sound";
+        }
+        else if (type == OverlayState.Temperature) {
+            urlPath += "Temperature";
+        }
+        else if (type == OverlayState.Humidity) {
+            urlPath += "Humidity";
+        }
+        else if (type == OverlayState.NO2) {
+            urlPath += "NO2";
+        }
+        else if (type == OverlayState.NO) {
+            urlPath += "NO";
+        }
+        else if (type == OverlayState.CO) {
+            urlPath += "CO";
+        }
+        else if (type == OverlayState.Wind_speed) {
+            urlPath += "Windspeed";
+        }
+        else if (type == OverlayState.NOX) {
+            urlPath += "NOX";
+        }
+        else if (type == OverlayState.O3) {
+            urlPath += "O3";
+        }
+        else if (type == OverlayState.Pressure) {
+            urlPath += "Pressure";
+        }
+        else if (type == OverlayState.Rain_Accumulation) {
+            urlPath += "RainAccumulation";
+        }
+        else if (type == OverlayState.Rain_Fall) {
+            urlPath += "RainFall";
+        }
+        else if (type == OverlayState.Sewage_Level) {
+            urlPath += "SewageLevel";
+        }
+        else if (type == OverlayState.Solar_Diffuseradiation) {
+            urlPath += "SolarDiffuseradiation";
+        }
+        else if (type == OverlayState.Visiblity) {
+            urlPath += "Visiblity";
+        }
+        else {
+            Log.e("Overlay state error", "" + overlayState.toString() + " Not recognised");
         }
 
         //Will be replaced with graph functionality later
-
         int newestIndex = getNewestIndex();
+
+        if (currentIndex != -1) {
+            newestIndex = currentIndex;
+        }
+
         if (newestIndex == -1) {
-            return new ArrayList<JsonSensorData>();
+            return null;
         }
 
         List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
 
         if (listOfSensorData == null)  {
             return new ArrayList<JsonSensorData>();
+
         }
 
         return listOfSensorData;
@@ -543,6 +735,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
+        final String x = mChart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), mChart.getXAxis());
+
+
+        Log.e("TTESTING", dateValueFormatter.test());
+        Log.e("TTESTING", x);
+
+        currentIndex = Integer.parseInt(dateToIndex.get(x).toString());
+        UpdateHeatMap(currentOverlayState);
     }
 
     @Override

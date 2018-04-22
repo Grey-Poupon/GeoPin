@@ -83,7 +83,8 @@ private ForumMessage source;
             text.setText(msg.getText());
         }
         // set vars
-        name.setText(msg.getUserID());
+        name.setText(msg.getUsername());
+
         date.setText(msg.getDateString());
         id.setText(msg.getID());
         text.setMovementMethod(LinkMovementMethod.getInstance());

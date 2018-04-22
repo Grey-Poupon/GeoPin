@@ -33,10 +33,13 @@ public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
         TextView creator = convertView.findViewById(R.id.postCreator);
 
         title.setText(post.getTitle());
-        creator.setText(post.getUserID());
+        creator.setText(post.getUsername());
 
         ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
-        profilePic.setImageDrawable(ImageHandler.LoadImageFromURL(convertView.getResources()));
+        if(post.getUrl()!=null) {
+            profilePic.setImageDrawable(ImageHandler.LoadImageFromURL(convertView.getResources(),post.getUrl()));
+        }
+
 
         return convertView;
     }

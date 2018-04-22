@@ -16,9 +16,9 @@ public class ImageHandler {
     private static final int PIC_WIDTH = 50;
     private static final int PIC_HEIGHT = 50;
 
-    public static Drawable LoadImageFromURL(Resources resource) {
+    public static Drawable LoadImageFromURL(Resources resource,URL url) {
         try {
-            URL url = ((User) LoginActivity.getLoginActivity().getApplication()).getUserImageURL();
+
             InputStream is = (InputStream) url.getContent();
             Drawable pic = Drawable.createFromStream(is, "url");
             Bitmap bit = ((BitmapDrawable)pic).getBitmap();

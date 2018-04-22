@@ -23,6 +23,68 @@ import java.util.Scanner;
 public class JsonStreamReader {
 
 
+    public static List<JsonGraphMessage> readJsonGraphStream(InputStream in, String property) {
+        JsonReader reader =  new JsonReader(new InputStreamReader(in));
+        try {
+            return readJsonGraphArray(reader, property);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                reader.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+    private static List<JsonGraphMessage> readJsonGraphArray(JsonReader reader, String property) throws IOException {
+        List<JsonGraphMessage> messages = new ArrayList<JsonGraphMessage>();
+
+        reader.beginArray();
+
+        while (reader.hasNext()){
+            messages.add(readJsonGraphMessage(reader, property));
+        }
+        reader.endArray();
+        return messages;
+    }
+
+    private static JsonGraphMessage readJsonGraphMessage(JsonReader reader, String property) throws IOException {
+        double value = 0;
+        String date = "";
+        int indexValue = -1;
+
+        reader.beginObject();
+
+        while(reader.hasNext()){
+            String name = "";
+            try {
+                name = reader.nextName();
+            }
+            catch (IllegalStateException e) {
+                name = reader.nextString();
+            }
+            if(name.equals(property)){
+                value = reader.nextDouble();
+            }
+            else if(name.equals("date")){
+                // try to parse string into Date Time
+                date = reader.nextString();
+            }
+            else if (name.equals("indexValue")) {
+                indexValue = reader.nextInt();
+            }
+        }
+        reader.endObject();
+        return new JsonGraphMessage(date, value, indexValue);
+    }
+
     public static int readHighestIndex(InputStream in) {
         Scanner scan = new Scanner(in);
         String s = scan.nextLine();
@@ -285,6 +347,8 @@ public class JsonStreamReader {
         String ownerID = "";
         String title = "";
         String description = "";
+        String username = "";
+
         Date datePosted = null;
 
         reader.beginObject();
@@ -293,6 +357,10 @@ public class JsonStreamReader {
             if(name.equals("ID")){
                 ID = reader.nextString();
             }
+            else if(name.equals("name")){
+                username = reader.nextString();
+            }
+
             else if(name.equals("ownerID")){
                 ownerID = reader.nextString();
             }
@@ -312,7 +380,8 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonPostMessage(ID,ownerID,title,description,datePosted);
+        return new JsonPostMessage(ID,username,ownerID,title,description,datePosted);
+
     }
 
 
@@ -349,8 +418,9 @@ public class JsonStreamReader {
     }
 
     private static JsonCommentMessage readCommentJsonMsg(JsonReader reader) throws IOException {
-        String selectID = "";
+        String ID = "";
         String userID = "";
+        String username = "";
         String comment = "";
         Date date = new Date();
 
@@ -358,11 +428,16 @@ public class JsonStreamReader {
         while(reader.hasNext()){
             String name = reader.nextName();
             if(name.equals("ID")){
-                selectID = reader.nextString();
+                ID = reader.nextString();
+
             }
             else if(name.equals("userID")){
                 userID = reader.nextString();
             }
+            else if(name.equals("name")){
+                username = reader.nextString();
+            }
+
             else if(name.equals("comment")){
                 comment = reader.nextString();
             }
@@ -376,7 +451,8 @@ public class JsonStreamReader {
             }
         }
         reader.endObject();
-        return new JsonCommentMessage(selectID,userID,comment,date);
+        return new JsonCommentMessage(ID,username,userID,comment,date);
+
     }
 
 }

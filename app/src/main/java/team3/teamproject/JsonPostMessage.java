@@ -13,10 +13,13 @@ public class JsonPostMessage {
     String title;
     String description;
     String userID;
+    String username;
     Date datePosted;
 
-    public JsonPostMessage(String ID, String userID, String title, String description, Date datePosted) {
+    public JsonPostMessage(String ID, String username, String userID, String title, String description, Date datePosted) {
         this.ID = ID;
+        this.username = username;
+
         this.userID = userID;
         this.title = title;
         this.description = description;
@@ -26,6 +29,11 @@ public class JsonPostMessage {
     public String getID() {
         return ID;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
 
     public String getTitle() {
         return title;
@@ -44,7 +52,8 @@ public class JsonPostMessage {
     }
 
     public static ForumPost toForumPost(JsonPostMessage msg,String boardID){
-        return new ForumPost(msg.getTitle(),msg.getDescription(),msg.getUserID(),boardID,msg.getID(),msg.getDatePosted());
+        return new ForumPost(msg.getTitle(),msg.getUsername(),msg.getDescription(),msg.getUserID(),boardID,msg.getID(),msg.getDatePosted());
+
     }
 
     public static List<ForumPost> toListForumPost(List<JsonPostMessage> msgs, String postID){
