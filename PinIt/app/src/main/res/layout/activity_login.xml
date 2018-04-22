@@ -54,6 +54,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -71,6 +72,12 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/notifyUserLogIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
@@ -91,6 +98,7 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_login_button"
+                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_login_height"
                 android:textSize="@dimen/activity_login_facebook_text"
@@ -104,6 +112,7 @@
 
             <Button
                 android:id="@+id/without_login_button"
+                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_login_height"
                 android:layout_marginTop="@dimen/activity_login_small_margin"

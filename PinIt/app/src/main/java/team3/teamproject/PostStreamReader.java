@@ -2,6 +2,7 @@ package team3.teamproject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -27,22 +28,22 @@ public class PostStreamReader {
         String URLParameters = "postID="+postID;
         return getComments(URLend,URLParameters);
     }
-    public static void createPost(String username, String title, String description,String pinID) throws Exception {
+    public static String createPost(String username, String title, String description,String pinID) throws Exception {
         String URLend = "createPost.php?";
         if(username==null){username = "test";}
         String URLParameters = String.format("username=%s&title=%s&description=%s&pin=%s", username, title, description,pinID);
-        sendCreate(URLend,URLParameters);
+        return sendCreate(URLend,URLParameters);
     }
 
-    public static void createComment(String username, String comment, String postID) throws Exception {
+    public static String createComment(String username, String comment, String postID) throws Exception {
         String URLend = "createComment.php?";
         if(username==null){username="test";}
         String URLParameters = String.format("username=%s&comment=%s&postID=%s", username,comment,postID);
-        sendCreate(URLend,URLParameters);
+        return sendCreate(URLend,URLParameters);
     }
 
     // Steve N
-    private static void sendCreate(String url, String urlParameters) throws Exception {
+    private static String sendCreate(String url, String urlParameters) throws Exception {
 
         URL obj = new URL("https://duffin.co/uo/"+url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -72,12 +73,9 @@ public class PostStreamReader {
         BufferedReader bin = new BufferedReader(new InputStreamReader(in));
         while ((inputLine = bin.readLine()) != null) {
             response.append(inputLine);
-
-            //print result
-            System.out.println(response.toString());
-
         }
         in.close();
+        return response.toString();
     }
     // used for getting response from server Mantas S
     public static String sendCreateString(String url, String urlParameters) throws Exception {

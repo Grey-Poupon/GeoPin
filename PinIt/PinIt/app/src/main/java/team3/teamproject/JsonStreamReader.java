@@ -79,11 +79,7 @@ public class JsonStreamReader {
             try {
                 name = reader.nextName();
             }
-<<<<<<< HEAD
             catch (IllegalStateException e) {
-=======
-            catch (IOException e) {
->>>>>>> PinItmaster/master
                 name = reader.nextString();
             }
             if(name.equals("sensorID")){
@@ -92,7 +88,7 @@ public class JsonStreamReader {
             else if(name.equals("value")){
                 value = reader.nextDouble();
             }
-            else if(name.equals("latest")){
+            else if(name.equals("date")){
                 // try to parse string into Date Time
                 try {
                     date = ForumMessage.format.parse(reader.nextString());
@@ -278,17 +274,12 @@ public class JsonStreamReader {
                 name = reader.nextName();
             }
             catch (IllegalStateException e) {
-                name = reader.nextString();
+                throw new IOException();
             }
-<<<<<<< HEAD
-            if(name.equals("ID")){
-=======
-
             if(name.equals("ID")){
                 ID = reader.nextString();
             }
             else if(name.equals("sensorName")){
->>>>>>> PinItmaster/master
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){

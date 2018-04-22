@@ -27,6 +27,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -60,6 +61,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -76,6 +78,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private HashMap<String,JsonSensorMessage> sensors;
     private static final String TAG = MapsActivity.class.getSimpleName();
 
+    private int currentIndex = -1;
+    private OverlayState currentOverlayState = OverlayState.Sound;
+    private Map<String, Integer> dateToIndex = new HashMap<String, Integer>();
+    private Map indexToDate = new HashMap();
+    private DateValueFormatter dateValueFormatter = new DateValueFormatter();
+
     private LatLng startlocation = new LatLng(54.973701, -1.624397);
     private final int maxZoom = 15;
     private final int minZoom = 13;
@@ -83,11 +91,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLngBounds mapBounds = new LatLngBounds(
             new LatLng(54.85, -1.7), new LatLng(55.07, -1.52));
 
-    private int[] colours = {
+    private int[] colours;
+
+    private int[] weatherColours = {
             Color.rgb(152, 236, 220),
             Color.rgb(75, 205, 179),
             Color.rgb(30, 148, 126),
             Color.rgb(0, 91, 73)};
+
+    private int[] airColours = {
+            Color.rgb(234, 98, 96),
+            Color.rgb(204, 49, 46),
+            Color.rgb(195, 14, 23),
+            Color.rgb(174, 0, 7)};
+
+    private int[] enviromantColours = {
+            Color.rgb(108, 255, 35),
+            Color.rgb(116, 226, 72),
+            Color.rgb(111, 181, 76),
+            Color.rgb(111, 153, 78)};
 
     private float[] startPoints = {0.1f, 0.4f, 0.7f, 1f};
 
@@ -137,24 +159,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mChart = (LineChart) findViewById(R.id.lineChart);
         mChart.setOnChartGestureListener(MapsActivity.this);
         mChart.setOnChartValueSelectedListener(MapsActivity.this);
+        mChart.setDoubleTapToZoomEnabled(false);
+        mChart.setScaleYEnabled(false);
+        mChart.setPinchZoom(false);
+        mChart.setNoDataText("Select a category using the top left menu!");
 
-
-        ArrayList<Entry> yValues = new ArrayList<>();
-
-        yValues.add(new Entry(0, 20f));
-        yValues.add(new Entry(1, 30f));
-        yValues.add(new Entry(2, 60f));
-        yValues.add(new Entry(3, 10f));
-        yValues.add(new Entry(4, 50f));
-        yValues.add(new Entry(5, 35f));
-        LineDataSet set1 = new LineDataSet(yValues, "set 1");
-        set1.setFillAlpha(110);
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-
-        LineData data = new LineData(dataSets);
-
-        mChart.setData(data);
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setValueFormatter(dateValueFormatter);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(-15f);
+        updateGraph(currentOverlayState);
+        mChart.getLegend().setEnabled(false);
+        mChart.getAxisRight().setDrawLabels(false);
     }
 
     /**
@@ -209,6 +225,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //SensorPlacement();
     }
 
+
+
+
+    private void updateGraph(OverlayState pollutionType) {
+        String property = pollutionType.toString().toLowerCase();
+
+        List<JsonGraphMessage> x = getGraphValues("https://duffin.co/uo/getAverages.php?property=", property);
+        ArrayList<Entry> values = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<String>();
+
+        for (JsonGraphMessage graphValue : x) {
+            dateToIndex.put(graphValue.getDate(), graphValue.getIndexValue());
+            dates.add(graphValue.getDate());
+            values.add(new Entry( graphValue.getIndexValue(), (float)graphValue.getValue()));
+        }
+        dateValueFormatter.setDates(dates);
+        setGraphValues(values, property);
+    }
+
+    private void setGraphValues(ArrayList<Entry> values, String property) {
+        LineDataSet set = new LineDataSet(values, "");
+        set.setFillAlpha(110);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set);
+        LineData data = new LineData(dataSets);
+
+        mChart.getDescription().setText("Showing average " + property + " over time");
+        mChart.invalidate();
+        mChart.clear();
+
+        mChart.setData(data);
+    }
+
+    private List<JsonGraphMessage> getGraphValues(String urlPath, String property) {
+        if (property == null || property == "") {
+            return null;
+        }
+        urlPath += property;
+        List<JsonGraphMessage> listOfGraphData = new ArrayList<JsonGraphMessage>();
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch(MalformedURLException e) {
+            Log.e("ERROR", "error with URL creation");
+            return listOfGraphData;
+        }
+        HttpsURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            Log.e("ERROR", "error with https url connection");
+            return listOfGraphData;
+        }
+        if(urlConnection!=null) {
+            try {
+                return JsonStreamReader.readJsonGraphStream(urlConnection.getInputStream(), property);
+            }
+            catch (IOException e) {
+                Log.e("ERROR", "error with urlConnection json stream reader");
+                return listOfGraphData;
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        return listOfGraphData;
+    }
+
+
+
     private void setupForumMarkers(GoogleMap map) {
         for (Pin pin : Pin.allPins) {
             Marker text = map.addMarker(
@@ -240,57 +325,78 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
-        if (selectedPollution.equals(OverlayState.CO.toString()))  {
-            UpdateHeatMap(OverlayState.CO);
+
+        if (selectedPollution.equals(OverlayState.CO.toString())) {
+            colours = airColours;
+            currentOverlayState = OverlayState.CO;
         }
         else if (selectedPollution.equals(OverlayState.Humidity.toString())) {
-            UpdateHeatMap(OverlayState.Humidity);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Humidity;
         }
         else if (selectedPollution.equals(OverlayState.NO.toString())) {
-            UpdateHeatMap(OverlayState.NO);
+            colours = airColours;
+            currentOverlayState = OverlayState.NO;
         }
         else if (selectedPollution.equals(OverlayState.NO2.toString())) {
-            UpdateHeatMap(OverlayState.NO2);
+            colours = airColours;
+            currentOverlayState = OverlayState.NO2;
         }
         else if (selectedPollution.equals(OverlayState.Sound.toString())) {
-            UpdateHeatMap(OverlayState.Sound);
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Sound;
         }
         else if (selectedPollution.equals(OverlayState.Temperature.toString())) {
+            colours = weatherColours;
             UpdateHeatMap(OverlayState.Temperature);
         }
         else if (selectedPollution.equals(OverlayState.Wind_speed.toString())) {
-            UpdateHeatMap(OverlayState.Wind_speed);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Wind_speed;
         }
         else if (selectedPollution.equals(OverlayState.NOX.toString())) {
-            UpdateHeatMap(OverlayState.NOX);
+            colours = airColours;
+            currentOverlayState = OverlayState.NOX;
         }
         else if (selectedPollution.equals(OverlayState.O3.toString())) {
-            UpdateHeatMap(OverlayState.O3);
+            colours = airColours;
+            currentOverlayState = OverlayState.O3;
         }
         else if (selectedPollution.equals(OverlayState.Pressure.toString())) {
-            UpdateHeatMap(OverlayState.Pressure);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Pressure;
         }
         else if (selectedPollution.equals(OverlayState.Rain_Accumulation.toString())) {
-            UpdateHeatMap(OverlayState.Rain_Accumulation);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Rain_Accumulation;
         }
         else if (selectedPollution.equals(OverlayState.Rain_Fall.toString())) {
-            UpdateHeatMap(OverlayState.Rain_Fall);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Rain_Fall;
         }
         else if (selectedPollution.equals(OverlayState.Sewage_Level.toString())) {
-            UpdateHeatMap(OverlayState.Sewage_Level);
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Sewage_Level;
         }
         else if (selectedPollution.equals(OverlayState.Solar_Diffuseradiation.toString())) {
-            UpdateHeatMap(OverlayState.Solar_Diffuseradiation);
+            colours = weatherColours;
+            currentOverlayState = OverlayState.Solar_Diffuseradiation;
         }
         else if (selectedPollution.equals(OverlayState.Visiblity.toString())) {
-            UpdateHeatMap(OverlayState.Visiblity);
+            colours = enviromantColours;
+            currentOverlayState = OverlayState.Visiblity;
         }
         else {
             Log.e("UNKNOWN POLLUTION TYPE", "" + selectedPollution.toString());
+            currentOverlayState = null;
+        }
+
+        if (currentOverlayState != null) {
+            updateGraph(currentOverlayState);
+            currentIndex = -1;
+            UpdateHeatMap(currentOverlayState);
         }
     }
-
-
 
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
@@ -301,11 +407,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
         if (allRelivantSensorData == null) {
-            Log.e("SENSOR ERROR", "No data is found");
             return;
         }
-
-        Log.e("PROGRESS", "Got all sensor data");
 
         LatLng latLng = null;
         for(int i =0;i<allRelivantSensorData.size();i++){
@@ -315,15 +418,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // any sensor data that doesnt match the sensor we have dont use
             if(sensor!=null) {
                 latLng = sensor.getLatLng();
+                allRelivantSensorData.get(i).applyLocation(latLng);
             }
-            allRelivantSensorData.get(i).applyLocation(latLng);
         }
 
         Log.e("PROGRESS", "All data processed");
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
-        double max = allRelivantSensorData.get(0).value;
+        double max = allRelivantSensorData.get(allRelivantSensorData.size()-1).value;
 
         for (JsonSensorData sensorData : allRelivantSensorData) {
             if (sensorData.value < min) {
@@ -341,23 +444,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng location = sensorData.getLatLng();
             if (location != null) {
                 mapData.add(new WeightedLatLng(location, (sensorData.getValue() - min) / (max - min)));
-            } else {
-                Log.e("NO LOCATION FOUND", "No location found for sensor:" + sensorData.getSensorId());
             }
         }
-
         placeDataOnMap(mapData);
     }
 
     // Rheyn Scholtz
-    private void placeDataOnMap(List<WeightedLatLng> heatmapData) {
+    public void placeDataOnMap(List<WeightedLatLng> heatmapData) {
 
-        if ((heatmapData.size() < 1) || (heatmapData == null)) {
+        if (heatmapData.size() < 1) {
             return;
         }
 
         mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
-        mProvider.setRadius(40);
+        mProvider.setRadius(50);
 
         if (mOverlay != null) {
             mOverlay.remove();
@@ -433,12 +533,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return listOfSensorData;
     }
 
-    private List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
-        if (sensorIndex == -1) {
-            return null;
+    public List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
+        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
+
+        if (sensorIndex < 0) {
+            return listOfSensorData;
         }
 
-        List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
         URL url = null;
         try {
             url = new URL(urlPath);
@@ -501,36 +602,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return -1;
     }
 
-    private List<JsonSensorMessage> getDataFromDatabase(String urlPath) {
-        List<JsonSensorMessage> listOfSensors = new ArrayList<JsonSensorMessage>();
-        URL url = null;
-        try {
-            url = new URL(urlPath);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-
-            return listOfSensors;
-        }
-        HttpsURLConnection urlConnection = null;
-        try {
-            urlConnection = (HttpsURLConnection) url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return listOfSensors;
-        }
-        if (urlConnection != null) {
-            try {
-                return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return listOfSensors;
-            } finally {
-                urlConnection.disconnect();
-            }
-        }
-        return listOfSensors;
-    }
-
     /**
      * back button listener, returns to home screen
      * <p>
@@ -545,42 +616,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * adds a heatmap overlay, takes Weighted points
-     *
-     * @Stephen Northrop
-     */
-    private void addHeatMap(List<WeightedLatLng> points) {
-        if (mOverlay != null) {
-            mOverlay.remove();
-        }
-        mProvider = new HeatmapTileProvider.Builder().weightedData(points).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
-        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-    }
-
-    /**
-     * Just test points for debugging
-     *
-     * @Stephen Northrop
-     */
-    private List<WeightedLatLng> getTestPoints() {
-        List<WeightedLatLng> list = new ArrayList<>();
-        double lat = startlocation.latitude;
-        double lon = startlocation.longitude;
-
-        for (double y = 0; y < 0.005; y += 0.001)
-            for (double x = 0; x < 0.005; x += 0.001) {
-                list.add(new WeightedLatLng(new LatLng(lat + x, lon + y), 10));
-            }
-        return list;
-    }
-
-    /**
      * gets all sensor data from server
      * Stephen N
      */
     public List<JsonSensorMessage> getAllSensorData() {
         List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
-        String message = "";
         URL url = null;
         try {
             url = new URL("https://duffin.co/uo/getSensors.php");
@@ -598,7 +638,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if (urlConnection != null) {
             try {
-                Log.e("PROGRESS", "Calling");
                 return JsonStreamReader.readSensorJsonStream(urlConnection.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -610,7 +649,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
-    private HashMap<String,JsonSensorMessage> createSensorMap(){
+    public HashMap<String,JsonSensorMessage> createSensorMap(){
         HashMap<String,JsonSensorMessage> map = new HashMap<>();
         List<JsonSensorMessage> sensors = getAllSensorData();
         for(JsonSensorMessage sensor: sensors){
@@ -619,31 +658,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return map;
     }
 
-
-    // Rheyn Scholtz, place sensors on the map (viewing temp)
-    List<JsonSensorMessage> sensorsToBePlaced;
-
-    private void SensorPlacement() {
-        sensorsToBePlaced = getAllSensorData();
-
-        if (sensorsToBePlaced != null) {
-            PlaceSensorsOnMap();
-        } else {
-            Log.e("STATE", "else");
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(54.973701, -1.626498))
-                    .title("test"));
-            Log.e("STATE", "marker created");
-        }
-    }
-
-    private void PlaceSensorsOnMap() {
-        for (JsonSensorMessage sensor : sensorsToBePlaced) {
-            mMap.addMarker(new MarkerOptions()
-                    .position(sensor.getLatLng())
-                    .title(sensor.getSensorName()));
-        }
-    }
 
     public List<Pin> getAllPins(){
         List<Pin> empty = new ArrayList<Pin>();
@@ -705,7 +719,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
+        final String x = mChart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), mChart.getXAxis());
 
+
+        Log.e("TTESTING", dateValueFormatter.test());
+        Log.e("TTESTING", x);
+
+        currentIndex = Integer.parseInt(dateToIndex.get(x).toString());
+        UpdateHeatMap(currentOverlayState);
     }
 
     @Override

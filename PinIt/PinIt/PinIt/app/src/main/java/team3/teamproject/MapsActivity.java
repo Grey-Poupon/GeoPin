@@ -198,7 +198,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void UpdateHeatMap (OverlayState pollutionType) {
+<<<<<<< HEAD
+=======
         if(true){return ;}
+>>>>>>> PinItmaster/master
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
@@ -392,7 +395,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         HttpsURLConnection urlConnection = null;
         try {
-            urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection = (HttpsURLConnection) url.open Connection();
         } catch (IOException e) {
             e.printStackTrace();
             return listOfSensors;

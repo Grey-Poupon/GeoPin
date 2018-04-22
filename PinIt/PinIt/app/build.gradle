@@ -16,11 +16,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
+}
+
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.maps.android:android-maps-utils:0.4+'
+    compile 'com.android.support:support-v4:26.1.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
@@ -30,25 +39,19 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':facebook')
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> PinItmaster/master
+
 // solves dependencies for facebook
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
-<<<<<<< HEAD
         if(requested.group == 'com.android.support')
         {
             if(!requested.name.startsWith("multidex"))
             {
-=======
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
->>>>>>> PinItmaster/master
                 details.useVersion '25.3.0'
             }
         }

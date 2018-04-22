@@ -22,6 +22,74 @@ import java.util.Scanner;
 
 public class JsonStreamReader {
 
+    public static List<JsonGraphMessage> readJsonGraphStream(InputStream in, String property) {
+        JsonReader reader =  new JsonReader(new InputStreamReader(in));
+        try {
+            return readJsonGraphArray(reader, property);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                reader.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+    private static List<JsonGraphMessage> readJsonGraphArray(JsonReader reader, String property) throws IOException {
+        List<JsonGraphMessage> messages = new ArrayList<JsonGraphMessage>();
+
+        reader.beginArray();
+
+        while (reader.hasNext()){
+            messages.add(readJsonGraphMessage(reader, property));
+        }
+        reader.endArray();
+        return messages;
+    }
+
+    private static JsonGraphMessage readJsonGraphMessage(JsonReader reader, String property) throws IOException {
+        double value = 0;
+        String date = "";
+        int indexValue = -1;
+
+        reader.beginObject();
+
+        while(reader.hasNext()){
+            String name = "";
+            try {
+                name = reader.nextName();
+            }
+            catch (IllegalStateException e) {
+                name = reader.nextString();
+            }
+            if(name.equals(property)){
+                value = reader.nextDouble();
+            }
+            else if(name.equals("date")){
+                // try to parse string into Date Time
+                date = reader.nextString();
+            }
+            else if (name.equals("indexValue")) {
+                indexValue = reader.nextInt();
+            }
+        }
+        reader.endObject();
+        return new JsonGraphMessage(date, value, indexValue);
+    }
+
+
+
+
+
+
+
 
     public static int readHighestIndex(InputStream in) {
         Scanner scan = new Scanner(in);
@@ -30,6 +98,7 @@ public class JsonStreamReader {
         return Integer.parseInt(s);
     }
 
+                            /*Read data from sensors*/
     public static List<JsonSensorData> readJsonSensorDataStream(InputStream in, int index) {
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
@@ -47,7 +116,7 @@ public class JsonStreamReader {
 
             }
         }
-        return null;
+        return new ArrayList<JsonSensorData>();
     }
 
     private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader, int index) throws IOException {
@@ -104,6 +173,8 @@ public class JsonStreamReader {
         return new JsonSensorData(sensorId, date, value, indexValue);
     }
 
+
+                                /*Read all Pins*/
     public static List<Pin> readJsonPinStream(InputStream in){
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
@@ -163,48 +234,11 @@ public class JsonStreamReader {
     }
 
 
+                                /*Read all sensors*/
     public static List<JsonSensorMessage> readSensorJsonStream(InputStream in) {
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
             return readSensorJsonMsgArray(reader);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-        }
-        return null;
-    }
-
-    public static List<JsonPostMessage> readPostJsonStream(InputStream in) {
-        JsonReader reader =  new JsonReader(new InputStreamReader(in));
-        try {
-            return readPostJsonMsgArray(reader);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-        }
-        return null;
-    }
-
-    public static List<JsonCommentMessage> readCommentJsonStream(InputStream in) {
-        JsonReader reader =  new JsonReader(new InputStreamReader(in));
-        try {
-            return readCommentJsonMsgArray(reader);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -231,32 +265,6 @@ public class JsonStreamReader {
         reader.endArray();
         return messages;
     }
-
-    private static List<JsonPostMessage> readPostJsonMsgArray(JsonReader reader) throws IOException {
-        List<JsonPostMessage> messages = new ArrayList<JsonPostMessage>();
-
-        reader.beginArray();
-        while (reader.hasNext()) {
-            messages.add(readPostJsonMsg(reader));
-        }
-
-        reader.endArray();
-        return messages;
-    }
-
-    private static List<JsonCommentMessage> readCommentJsonMsgArray(JsonReader reader) throws IOException {
-        List<JsonCommentMessage> messages = new ArrayList<JsonCommentMessage>();
-
-        reader.beginArray();
-        while (reader.hasNext()) {
-            messages.add(readCommentJsonMsg(reader));
-        }
-
-        reader.endArray();
-        return messages;
-    }
-
-
 
     private static JsonSensorMessage readSensorJsonMsg(JsonReader reader) throws IOException {
         String ID = "";
@@ -307,6 +315,39 @@ public class JsonStreamReader {
         return new JsonSensorMessage(ID,sensorName,lat,lon,baseHeight,date);
     }
 
+
+                               /*Read posts from Pin*/
+    public static List<JsonPostMessage> readPostJsonStream(InputStream in) {
+        JsonReader reader =  new JsonReader(new InputStreamReader(in));
+        try {
+            return readPostJsonMsgArray(reader);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+    private static List<JsonPostMessage> readPostJsonMsgArray(JsonReader reader) throws IOException {
+        List<JsonPostMessage> messages = new ArrayList<JsonPostMessage>();
+
+        reader.beginArray();
+        while (reader.hasNext()) {
+            messages.add(readPostJsonMsg(reader));
+        }
+
+        reader.endArray();
+        return messages;
+    }
+
     private static JsonPostMessage readPostJsonMsg(JsonReader reader) throws IOException {
         String ID = "";
         String ownerID = "";
@@ -340,6 +381,39 @@ public class JsonStreamReader {
         }
         reader.endObject();
         return new JsonPostMessage(ID,ownerID,title,description,datePosted);
+    }
+
+
+                                /*Read comments from pins*/
+    public static List<JsonCommentMessage> readCommentJsonStream(InputStream in) {
+        JsonReader reader =  new JsonReader(new InputStreamReader(in));
+        try {
+            return readCommentJsonMsgArray(reader);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+    private static List<JsonCommentMessage> readCommentJsonMsgArray(JsonReader reader) throws IOException {
+        List<JsonCommentMessage> messages = new ArrayList<JsonCommentMessage>();
+
+        reader.beginArray();
+        while (reader.hasNext()) {
+            messages.add(readCommentJsonMsg(reader));
+        }
+
+        reader.endArray();
+        return messages;
     }
 
     private static JsonCommentMessage readCommentJsonMsg(JsonReader reader) throws IOException {
