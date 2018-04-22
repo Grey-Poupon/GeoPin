@@ -680,7 +680,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void onPMenuClick(View view){
+    public void onPMenuClick(final View view){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -697,6 +697,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return true;
                     case R.id.logOutButton:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
+                        //need to change it so that OK logs out
+                        onLogOutButtonClick(view);
+
                         return true;
                     default:
                         return false;
@@ -705,18 +708,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         popup.show();
     }
-
-    public void onRefreshClick(View view){
-        return;
-    }
-
-/*    // log out button click listener
-    public void onLogOutClick(View view) {
+    // log out button click listener
+    public void onLogOutButtonClick(View view) {
         LoginManager.getInstance().logOut();
 
         Intent logOutScreen = new Intent(this, LoginActivity.class);
         startActivity(logOutScreen);
-    }*/
+    }
+    public void onRefreshClick(View view){
+        return;
+    }
+
+
 
 
 }

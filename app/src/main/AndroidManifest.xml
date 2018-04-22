@@ -88,7 +88,7 @@
             android:label="@string/title_activity_submit_page"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme" />
         <activity
