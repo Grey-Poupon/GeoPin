@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\e3d2fc0ee04c27248ce5944c7e21910b\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\983d41a1f97af539cc65d2cbd3835dec\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\39d836d6e3c707804ef6991e75155f51\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\c6fbd7dc623833999f28cf1eb45263b9\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

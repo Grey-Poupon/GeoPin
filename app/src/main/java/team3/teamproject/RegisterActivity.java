@@ -30,8 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
 
-        mUserName = (EditText) findViewById(R.id.usernameText);
-        mPassword = (EditText) findViewById(R.id.passwordText);
+        mUserName = (EditText) findViewById(R.id.reg_username_edit);
+        mPassword = (EditText) findViewById(R.id.reg_password_edit);
 
 
     }

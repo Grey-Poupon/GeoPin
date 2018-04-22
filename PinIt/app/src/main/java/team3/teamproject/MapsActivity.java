@@ -357,7 +357,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mProvider = new HeatmapTileProvider.Builder().weightedData(heatmapData).radius(radiusBlur).gradient(new Gradient(colours, startPoints)).build();
-        mProvider.setRadius(30);
+        mProvider.setRadius(40);
 
         if (mOverlay != null) {
             mOverlay.remove();

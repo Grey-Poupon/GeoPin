@@ -13,7 +13,7 @@ import android.view.View;
 public class LoadingBarActivity extends Activity {
 
 
-    private final int WAIT_TIME = 2500;
+    private final int WAIT_TIME = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
