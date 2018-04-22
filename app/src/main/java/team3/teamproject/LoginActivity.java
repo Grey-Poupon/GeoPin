@@ -2,6 +2,7 @@ package team3.teamproject;
 
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mUserName;
     EditText mPassword;
+    TextView mNotifyUserLogin;
 
 
     private String facebookName;
@@ -100,8 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                 graphRequest.executeAsync();
 
 
-                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
-                startActivity(intent);
+                Intent loadingScreen = new Intent(LoginActivity.this, LoadingBarActivity.class);
+                startActivity(loadingScreen);
 
             }
 
@@ -117,8 +120,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mUserName = (EditText) findViewById(R.id.username_login);
-        //if(mUserName.getText().toString())
         mPassword = (EditText) findViewById(R.id.password_login);
+        mNotifyUserLogin = (TextView) findViewById(R.id.notifyUserLogIn);
     }
 
     // used for setting facebook user details
@@ -193,10 +196,12 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSignClick(View view) {
         String username = mUserName.getText().toString();
         String password = mPassword.getText().toString();
-        String result = "0";
+        // users wasn't able to log in
+        String result = null;
+        String error = "Your log in details are incorrect!";
         String id;
 
-        String userID;
+
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             try {
                 result = PostStreamReader.sendCreateString("validateUser.php",
@@ -217,8 +222,13 @@ public class LoginActivity extends AppCompatActivity {
             }
             if(result.equals("1"))
             {
-                Intent mapScreen = new Intent(this, MapsActivity.class);
-                startActivity(mapScreen);
+                Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
+                startActivity(loadingScreen);
+            }
+            else
+            {
+                mNotifyUserLogin.setTextColor(Color.RED);
+                mNotifyUserLogin.setText(error);
             }
 
         }
