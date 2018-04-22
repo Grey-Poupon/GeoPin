@@ -235,6 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String property = pollutionType.toString().toLowerCase();
 
         List<JsonGraphMessage> x = getGraphValues("https://duffin.co/uo/getAverages.php?property=", property);
+        if(x==null || x.size()<1){return;}
         ArrayList<Entry> values = new ArrayList<>();
         ArrayList<String> dates = new ArrayList<String>();
 
@@ -416,7 +417,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 
-        if (allRelivantSensorData == null) {
+        if (allRelivantSensorData == null || allRelivantSensorData.size() == 0) {
             return;
         }
 
@@ -432,7 +433,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        Log.e("PROGRESS", "All data processed");
 
         // Find the smallest and largest value
         double min = allRelivantSensorData.get(0).value;
