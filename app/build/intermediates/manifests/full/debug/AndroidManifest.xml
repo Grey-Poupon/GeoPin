@@ -85,29 +85,27 @@
             android:name="team3.teamproject.PostListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName="team3.teamproject.MapsActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="team3.teamproject.ForumPostActivity"
             android:label="@string/title_activity_forum_page"
             android:parentActivityName="team3.teamproject.PostListActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="team3.teamproject.SubmitPageActivity"
             android:label="@string/title_activity_submit_page"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="team3.teamproject.RegistrationActivity"
+            android:name="team3.teamproject.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="team3.teamproject.ContactFormActivity"
+            android:label="@string/contact_activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="team3.teamproject.LoadingBarActivity"
+            android:label="@string/loading_bar_activity"
             android:theme="@style/AppTheme" />
 
         <meta-data

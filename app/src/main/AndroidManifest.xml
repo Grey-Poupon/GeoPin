@@ -67,30 +67,28 @@
             android:name=".PostListActivity"
             android:label="@string/title_activity_forum"
             android:parentActivityName=".MapsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ForumPostActivity"
             android:label="@string/title_activity_forum_page"
             android:parentActivityName=".PostListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SubmitPageActivity"
             android:label="@string/title_activity_submit_page"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ContactFormActivity"
+            android:label="@string/contact_activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LoadingBarActivity"
+            android:label="@string/loading_bar_activity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

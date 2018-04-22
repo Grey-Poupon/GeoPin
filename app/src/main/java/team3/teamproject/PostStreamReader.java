@@ -77,6 +77,48 @@ public class PostStreamReader {
         in.close();
         return response.toString();
     }
+    // used for getting response from server Mantas S
+    public static String sendCreateString(String url, String urlParameters) throws Exception {
+
+        String answer = null;
+        URL obj = new URL("https://duffin.co/uo/"+url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream in = con.getInputStream();
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+        while ((inputLine = bin.readLine()) != null) {
+            response.append(inputLine);
+
+            //returns result
+            answer = response.toString();
+
+
+        }
+
+        in.close();
+        return answer;
+    }
 
     // Steve N
     private static List<JsonPostMessage> getPosts(String url, String urlParameters) throws Exception {

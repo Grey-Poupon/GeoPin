@@ -1,10 +1,5 @@
 package team3.teamproject;
 
-<<<<<<< HEAD
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-=======
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +7,6 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
->>>>>>> PinItmaster/master
 import android.view.View;
 
 import com.facebook.AccessToken;
@@ -29,40 +23,37 @@ import com.facebook.login.widget.LoginButton;
 
 
 import android.view.WindowManager;
-<<<<<<< HEAD
-=======
 import android.widget.EditText;
->>>>>>> PinItmaster/master
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class LoginActivity extends AppCompatActivity{
+/**
+ * Class used for loginning in to application
+ * Modified by Mantas Sutas
+ */
+public class LoginActivity extends AppCompatActivity {
 
 
     private CallbackManager callbackManager; // used for facebook log in
-    private static final String EMAIL = "email";
+    //private static final String EMAIL = "email";
     LoginButton facebookLoginButton; // facebook log in button
     private AccessTokenTracker accessTokenTracker; // tracks the log in status so that user
     // doesn't need to log in more than once
 
-<<<<<<< HEAD
-=======
     EditText mUserName;
     EditText mPassword;
 
 
-
     private String facebookName;
 
-    public static boolean isGuest;
-
-
-
->>>>>>> PinItmaster/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +61,9 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-<<<<<<< HEAD
-=======
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
->>>>>>> PinItmaster/master
 
         // looks if the user is already logged in to the app
         accessTokenTracker = new AccessTokenTracker() {
@@ -88,36 +76,30 @@ public class LoginActivity extends AppCompatActivity{
         updateWithToken(AccessToken.getCurrentAccessToken());
 
         //below is for facebook log in
-        facebookLoginButton = (LoginButton)findViewById(R.id.facebook_login_button);
+        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         facebookLoginButton.setReadPermissions("email", "public_profile");
 
         callbackManager = CallbackManager.Factory.create();
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-<<<<<<< HEAD
-                String userid = loginResult.getAccessToken().getUserId();
-=======
 
-                isGuest = false;
->>>>>>> PinItmaster/master
 
                 GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 displayUserInfo(object);
+
                             }
                         });
 
                 Bundle parameters = new Bundle();
-<<<<<<< HEAD
-                parameters.putString("fields" , "first_name, last_name, email, id");
-=======
-                parameters.putString("fields" , "first_name, last_name");
->>>>>>> PinItmaster/master
+                parameters.putString("fields", "id, first_name, last_name");
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
+
+
                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                 startActivity(intent);
 
@@ -134,37 +116,51 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-<<<<<<< HEAD
-
-    }
-    public void displayUserInfo(JSONObject object)
-    {
-        String first_name, last_name, email, id;
-=======
-        mUserName   = (EditText)findViewById(R.id.userNameLog);
+        mUserName = (EditText) findViewById(R.id.username_login);
         //if(mUserName.getText().toString())
-        mPassword   = (EditText)findViewById(R.id.password);
+        mPassword = (EditText) findViewById(R.id.password_login);
     }
-    public void displayUserInfo(JSONObject object)
-    {
-        String first_name, last_name;
->>>>>>> PinItmaster/master
-        try
-        {
-            first_name = object.getString("first_name");
-            last_name = object.getString("last_name");
-<<<<<<< HEAD
-            email = object.getString("email");
+
+    // used for setting facebook user details
+    public void displayUserInfo(JSONObject object) {
+        String id, first_name, last_name = null;
+        URL profile_picture = null;
+        try {
             id = object.getString("id");
-=======
+            try {
+                profile_picture =
+                        new URL("https://graph.facebook.com/" +
+                                id + "/picture?width=500&height=500");
 
-            facebookName = first_name + " " + last_name;
-            Log.v("test", facebookName);
->>>>>>> PinItmaster/master
+                first_name = object.getString("first_name");
+                last_name = object.getString("last_name");
+                facebookName = first_name + " " + last_name;
+                ((User) this.getApplication()).setUserName(facebookName);
 
-        }
-        catch (JSONException e)
-        {
+                ((User) this.getApplication()).setUserImageURL(profile_picture);
+
+
+
+                String newID = PostStreamReader.sendCreateString("createUser.php",
+                        "name=" + facebookName
+                                + "&imageURL=" + profile_picture + "&facebookID=" + id);
+                ((User) this.getApplication()).setUserID(newID);
+
+                //used for getting numerical values out of string for id
+                Pattern numbersID = Pattern.compile("\\d+");
+                Matcher findID = numbersID.matcher(newID);
+                findID.find();
+                newID = findID.group();
+                ((User) this.getApplication()).setUserID(newID);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -190,74 +186,63 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
-<<<<<<< HEAD
-    /** sign in click button listener
-     */
-    public void onLoginSignClick(View view){
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
-=======
 
-    /** sign in click button listener
+    /**
+     * sign in click button listener
      */
-    public void onLoginSignClick(View view){
+    public void onLoginSignClick(View view) {
         String username = mUserName.getText().toString();
         String password = mPassword.getText().toString();
-        String response;
+        String result = "0";
+        String id;
 
         String userID;
-        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password))
-        {
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             try {
-                 response = PostStreamReader.sendCreateString("validateUser.php",
-                         "name=" + username
-                        + "&password=" + password);
+                result = PostStreamReader.sendCreateString("validateUser.php",
+                        "name=" + username
+                                + "&password=" + password);
+                result = result.substring(result.length() - 1);
 
-                ((User)this.getApplication()).setUserName(username);
-                ((User)this.getApplication()).setUserImageURL("test");
+                ((User) this.getApplication()).setUserName(username);
 
-                //response = PostStreamReader.sendCreateString("getUserID.php",
-                //       "?name=" + username);
-                ((User)this.getApplication()).setUserID(response);
+                id = PostStreamReader.sendCreateString("getUserID.php",
+                        "name=" + username);
+                ((User) this.getApplication()).setUserID(id);
 
-                Log.v("testoutput", ((User)this.getApplication()).getUserID());
-                Intent mapScreen = new Intent(this, MapsActivity.class);
-                startActivity(mapScreen);
+                ((User) this.getApplication()).setUserImageURL(null);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            if(result.equals("1"))
+            {
+                Intent mapScreen = new Intent(this, MapsActivity.class);
+                startActivity(mapScreen);
+            }
 
         }
->>>>>>> PinItmaster/master
     }
 
-    /** register click button listener
+    /**
+     * register click button listener
      */
-<<<<<<< HEAD
-    public void onLoginRegisterClick(View view){
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
-=======
-    public void onRegisterClick(View view){
+    public void onLoginRegisterClick(View view) {
         Intent register = new Intent(this, RegisterActivity.class);
         startActivity(register);
->>>>>>> PinItmaster/master
     }
 
 
-    /** without login click button listener
+    /**
+     * without login click button listener
      */
-    public void onWithoutLoginClick(View view){
-<<<<<<< HEAD
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
-    }
-}
-=======
-        isGuest = true;
+    public void onWithoutLoginClick(View view) {
+        ((User) this.getApplication()).setUserID("GUEST");
+        ((User) this.getApplication()).setUserName("GUEST");
 
-        Intent mapScreen = new Intent(this, MapsActivity.class);
-        startActivity(mapScreen);
+
+        Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
+        startActivity(loadingScreen);
     }
+
 }
->>>>>>> PinItmaster/master

@@ -198,7 +198,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void UpdateHeatMap (OverlayState pollutionType) {
+<<<<<<< HEAD
+=======
         if(true){return ;}
+>>>>>>> PinItmaster/master
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
 

@@ -18,8 +18,8 @@ public class ImageHandler {
 
     public static Drawable LoadImageFromURL(Resources resource) {
         try {
-            String url = ((User) LoginActivity.getLoginActivity().getApplication()).getUserEmail();
-            InputStream is = (InputStream) new URL(url).getContent();
+            URL url = ((User) LoginActivity.getLoginActivity().getApplication()).getUserImageURL();
+            InputStream is = (InputStream) url.getContent();
             Drawable pic = Drawable.createFromStream(is, "url");
             Bitmap bit = ((BitmapDrawable)pic).getBitmap();
             Bitmap newBit = Bitmap.createScaledBitmap(bit, PIC_WIDTH, PIC_HEIGHT, false);

@@ -392,6 +392,10 @@
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.32.0.aar\\832e76338255c337564f997bfe8875e6\\res\\drawable-xhdpi-v4\\com_facebook_tooltip_black_background.9.png"
     },
     {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.png"
+    },
+    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\fd48f4255ab08fdb4dd491ed21f9ccfc\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
@@ -414,6 +418,10 @@
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_register.xml.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\layout\\activity_register.xml"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
@@ -454,6 +462,10 @@
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
@@ -796,6 +808,10 @@
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\de87f65d28c8cf1a43b348a286d7a834\\res\\color\\common_google_signin_btn_text_dark.xml"
     },
     {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_contact_form.xml.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\layout\\activity_contact_form.xml"
+    },
+    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
@@ -908,6 +924,10 @@
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_foreground.png"
+    },
+    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_design_tint_password_toggle.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\fd48f4255ab08fdb4dd491ed21f9ccfc\\res\\color-v23\\design_tint_password_toggle.xml"
     },
@@ -1018,6 +1038,10 @@
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_com_facebook_tooltip_black_xout.png.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.32.0.aar\\832e76338255c337564f997bfe8875e6\\res\\drawable-hdpi-v4\\com_facebook_tooltip_black_xout.png"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -1320,10 +1344,6 @@
         "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\drawable\\login_button_background.9.png"
     },
     {
-        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_help_screen.xml.flat",
-        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\layout\\activity_help_screen.xml"
-    },
-    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_navigation_item_separator.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\fd48f4255ab08fdb4dd491ed21f9ccfc\\res\\layout\\design_navigation_item_separator.xml"
     },
@@ -1476,10 +1496,6 @@
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.4.4.aar\\36657b9f7a2512604cf88f460937b325\\res\\raw\\amu_nested_folders.kml"
     },
     {
-        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registration.xml.flat",
-        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\layout\\activity_registration.xml"
-    },
-    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_icon_background.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable\\notification_icon_background.xml"
     },
@@ -1600,12 +1616,12 @@
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_design_ic_visibility.png.flat",
-        "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\fd48f4255ab08fdb4dd491ed21f9ccfc\\res\\drawable-xxxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_ratingbar_small_material.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable\\abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_design_ic_visibility.png.flat",
+        "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\fd48f4255ab08fdb4dd491ed21f9ccfc\\res\\drawable-xxxhdpi-v4\\design_ic_visibility.png"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
@@ -1794,6 +1810,10 @@
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_list_menu_item_checkbox.xml.flat",
@@ -2274,6 +2294,10 @@
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_select_dialog_item_material.xml.flat",
         "source": "C:\\Users\\Steve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\52a8d3678fbb8e89a8d46d0359fa79ae\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\layout_loading_bar_layout.xml.flat",
+        "source": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\src\\main\\res\\layout\\loading_bar_layout.xml"
     },
     {
         "merged": "D:\\Stephen Northrop\\AndroidStudioWorkspace\\PinIt\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_fab_out.xml.flat",

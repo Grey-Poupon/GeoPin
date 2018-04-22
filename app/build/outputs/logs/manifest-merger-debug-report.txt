@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\36657b9f7a2512604cf88f460937b325\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:design:25.3.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\design-25.3.0.aar\fd48f4255ab08fdb4dd491ed21f9ccfc\AndroidManifest.xml:17:1-31:12
 MERGED from [com.facebook.android:facebook-login:4.32.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\facebook-login-4.32.0.aar\832e76338255c337564f997bfe8875e6\AndroidManifest.xml:21:1-31:12
@@ -32,20 +32,20 @@ MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\ff892d9eb082044fea8a484b8632f3c6\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\afe323cc250105dc59e2895e474044c6\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\a0a14de31d622a58c7279e6c8a720ffe\AndroidManifest.xml:2:1-6:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
+INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
 	package
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:3:5-32
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-96:12
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:1-94:12
 		INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:2:11-69
@@ -72,7 +72,7 @@ ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\Android
 	android:name
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:16:22-69
 application
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:18:5-94:19
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:18:5-92:19
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\36657b9f7a2512604cf88f460937b325\AndroidManifest.xml:7:5-11:19
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\36657b9f7a2512604cf88f460937b325\AndroidManifest.xml:7:5-11:19
 MERGED from [com.android.support:design:25.3.0] C:\Users\Steve\.gradle\caches\transforms-1\files-1.1\design-25.3.0.aar\fd48f4255ab08fdb4dd491ed21f9ccfc\AndroidManifest.xml:29:5-20
@@ -214,7 +214,7 @@ ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\Android
 	android:name
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:63:13-41
 activity#team3.teamproject.PostListActivity
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:66:9-75:20
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:66:9-70:20
 	android:parentActivityName
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:69:13-55
 	android:label
@@ -222,29 +222,45 @@ ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\Android
 	android:name
 		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:67:13-45
 activity#team3.teamproject.ForumPostActivity
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:76:9-85:20
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:71:9-75:20
 	android:parentActivityName
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:79:13-59
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:74:13-59
 	android:label
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:78:13-62
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:73:13-62
 	android:name
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:77:13-46
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:72:13-46
 activity#team3.teamproject.SubmitPageActivity
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:86:9-89:47
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:76:9-79:47
 	android:label
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:88:13-63
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:78:13-63
 	android:theme
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:89:13-44
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:79:13-44
 	android:name
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:87:13-47
-activity#team3.teamproject.RegistrationActivity
-ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:90:9-93:56
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:77:13-47
+activity#team3.teamproject.RegisterActivity
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:80:9-83:47
 	android:label
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:92:13-60
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:82:13-60
 	android:theme
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:93:13-44
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:83:13-44
 	android:name
-		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:91:13-49
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:81:13-45
+activity#team3.teamproject.ContactFormActivity
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:84:9-87:47
+	android:label
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:86:13-53
+	android:theme
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:87:13-44
+	android:name
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:85:13-48
+activity#team3.teamproject.LoadingBarActivity
+ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:88:9-91:47
+	android:label
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:90:13-57
+	android:theme
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:91:13-44
+	android:name
+		ADDED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml:89:13-47
 uses-sdk
 INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Stephen Northrop\AndroidStudioWorkspace\PinIt\app\src\main\AndroidManifest.xml

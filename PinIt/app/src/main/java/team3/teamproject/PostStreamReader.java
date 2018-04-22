@@ -1,10 +1,5 @@
 package team3.teamproject;
 
-<<<<<<< HEAD
-=======
-import android.util.Log;
-
->>>>>>> PinItmaster/master
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -21,10 +16,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class PostStreamReader {
 
-<<<<<<< HEAD
-=======
-    private String message; // used for getting messages from server
->>>>>>> PinItmaster/master
 
     public static List<JsonPostMessage> getPosts(String pinID) throws Exception {
         String URLend = "getPost.php?";
@@ -85,17 +76,10 @@ public class PostStreamReader {
             //print result
             System.out.println(response.toString());
 
-<<<<<<< HEAD
-=======
-
->>>>>>> PinItmaster/master
         }
         in.close();
     }
-
-<<<<<<< HEAD
-=======
-    // used for getting response from server
+    // used for getting response from server Mantas S
     public static String sendCreateString(String url, String urlParameters) throws Exception {
 
         String answer = null;
@@ -138,9 +122,6 @@ public class PostStreamReader {
         return answer;
     }
 
-
-
->>>>>>> PinItmaster/master
     // Steve N
     private static List<JsonPostMessage> getPosts(String url, String urlParameters) throws Exception {
 

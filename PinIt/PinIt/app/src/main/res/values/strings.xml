@@ -12,7 +12,11 @@
     <string name="facebook_app_id">2040301499520945</string>
     <string name="fb_login_protocol_scheme">fb2040301499520945</string>
 
+<<<<<<< HEAD
+    <string name="prompt_email">Email</string>
+=======
     <string name="prompt_email">Username</string>
+>>>>>>> PinItmaster/master
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="title">Title</string>
@@ -40,5 +44,8 @@
         <item>NO</item>
         <item>CO</item>
     </array>
+<<<<<<< HEAD
+=======
     <string name="title_activity_register">RegisterActivity</string>
+>>>>>>> PinItmaster/master
 </resources>

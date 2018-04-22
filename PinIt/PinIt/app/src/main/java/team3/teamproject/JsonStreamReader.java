@@ -79,7 +79,11 @@ public class JsonStreamReader {
             try {
                 name = reader.nextName();
             }
+<<<<<<< HEAD
+            catch (IllegalStateException e) {
+=======
             catch (IOException e) {
+>>>>>>> PinItmaster/master
                 name = reader.nextString();
             }
             if(name.equals("sensorID")){
@@ -276,11 +280,15 @@ public class JsonStreamReader {
             catch (IllegalStateException e) {
                 name = reader.nextString();
             }
+<<<<<<< HEAD
+            if(name.equals("ID")){
+=======
 
             if(name.equals("ID")){
                 ID = reader.nextString();
             }
             else if(name.equals("sensorName")){
+>>>>>>> PinItmaster/master
                 sensorName = reader.nextString();
             }
             else if(name.equals("longitude")){
