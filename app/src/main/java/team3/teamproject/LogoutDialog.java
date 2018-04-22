@@ -7,15 +7,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import com.facebook.login.LoginManager;
+
 
 /**
  * Created by Petr Makarov on 21.04.2018.
  */
 
+
+
 public class LogoutDialog extends DialogFragment {
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.alert_message)
@@ -23,7 +27,8 @@ public class LogoutDialog extends DialogFragment {
                 .setPositiveButton(R.string.alert_positive, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         LoginManager.getInstance().logOut();
-
+                        Intent logOutScreen = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(logOutScreen);
 
                     }
                 })
@@ -35,5 +40,6 @@ public class LogoutDialog extends DialogFragment {
 
         return builder.create();
     }
+
 
 }

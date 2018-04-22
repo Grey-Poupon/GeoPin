@@ -697,8 +697,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return true;
                     case R.id.logOutButton:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
-                        //need to change it so that OK logs out
-                        onLogOutButtonClick(view);
+
 
                         return true;
                     default:
@@ -708,13 +707,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         popup.show();
     }
-    // log out button click listener
-    public void onLogOutButtonClick(View view) {
-        LoginManager.getInstance().logOut();
 
-        Intent logOutScreen = new Intent(this, LoginActivity.class);
-        startActivity(logOutScreen);
-    }
     public void onRefreshClick(View view){
         return;
     }
