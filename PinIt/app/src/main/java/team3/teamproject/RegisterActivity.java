@@ -52,17 +52,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             try {
-<<<<<<< HEAD
-                response = PostStreamReader.sendCreateString("createUser.php",name=" + username+ "&password=" + password + "&email=" + "" + "&image=" + imageurl);
-                Intent login = new Intent(this, LoginActivity.class);
-                startActivity(login);
-=======
                 response = PostStreamReader.sendCreateString("createUser.php",
                         "name=" + username
                                 + "&password=" + password);
                 test = Integer.parseInt(response);
-
->>>>>>> f588bbea7ab489bc4492ef5ff15cc1f985dea955
             } catch (Exception e) {
                 e.printStackTrace();
             }

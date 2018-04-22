@@ -7,22 +7,22 @@
     format="10"
     ir-eligibility="COMPATIBLE"
     plugin-version="3.1.1"
-    timestamp="1524425123422"
+    timestamp="1524426941936"
     token="3335656945819956399"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="453" />
+        duration="363" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="17" />
+        duration="22" />
     <task
         name="verifier"
-        duration="10" />
+        duration="7" />
 
     <artifact
         location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
@@ -33,13 +33,28 @@
 
     <build
         build-mode="FULL"
-        timestamp="1524423876978"
+        timestamp="1524426785142"
         verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            type="SPLIT" />
         <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
+            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
@@ -51,22 +66,7 @@
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
-        <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
         <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -74,8 +74,8 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="FIELD_ADDED"
-        timestamp="1524425015998"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1524426872764"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -84,7 +84,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1524425123422"
+        timestamp="1524426941936"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="D:\Users\rheyn\AndroidStudioProjects\PinIt\app\build\intermediates\split-apk\debug\slices\slice_4.apk"

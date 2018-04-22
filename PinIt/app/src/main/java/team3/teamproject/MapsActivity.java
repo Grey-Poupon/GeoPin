@@ -246,6 +246,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void setGraphValues(ArrayList<Entry> values, String property) {
         LineDataSet set = new LineDataSet(values, "");
+        if (colours != null) {
+            set.setColors(colours[0]);
+        }
         set.setFillAlpha(110);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
@@ -396,6 +399,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             currentIndex = -1;
             UpdateHeatMap(currentOverlayState);
         }
+        else {
+
+        }
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {
@@ -517,13 +523,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Will be replaced with graph functionality later
+        int newestIndex = getNewestIndex();
 
-        int heatmapIndex = getNewestIndex();
-        if (heatmapIndex == -1) {
+        if (currentIndex != -1) {
+            newestIndex = currentIndex;
+        }
+
+        if (newestIndex == -1) {
             return null;
         }
 
-        List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, heatmapIndex);
+        List<JsonSensorData> listOfSensorData = getSensorDataFromDatabase(urlPath, newestIndex);
 
         if ((listOfSensorData == null) || (listOfSensorData.size() == 0)) {
             Log.e("PROGRESS","listOfSensorData null");
