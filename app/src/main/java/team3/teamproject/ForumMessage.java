@@ -127,4 +127,8 @@ public class ForumMessage implements Comparable, Parcelable {
     public Date getLastBump(){
         return  lastBump;
     }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 }

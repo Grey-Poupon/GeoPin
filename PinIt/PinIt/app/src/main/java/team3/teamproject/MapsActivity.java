@@ -513,7 +513,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         HttpsURLConnection urlConnection = null;
         try {
-            urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection = (HttpsURLConnection) url.open Connection();
         } catch (IOException e) {
             e.printStackTrace();
             return listOfSensors;
