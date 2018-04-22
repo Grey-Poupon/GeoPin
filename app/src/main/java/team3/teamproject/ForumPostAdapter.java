@@ -40,6 +40,7 @@ public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
             profilePic.setImageDrawable(ImageHandler.LoadImageFromURL(convertView.getResources(),post.getUrl()));
         }
 
+
         return convertView;
     }
 }

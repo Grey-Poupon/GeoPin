@@ -84,6 +84,7 @@ private ForumMessage source;
         }
         // set vars
         name.setText(msg.getUsername());
+
         date.setText(msg.getDateString());
         id.setText(msg.getID());
         text.setMovementMethod(LinkMovementMethod.getInstance());

@@ -63,6 +63,7 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
+
         InputStream in = con.getInputStream();
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -77,6 +78,7 @@ public class PostStreamReader {
     }
     // used for getting response from server Mantas S
     public static String sendCreateString(String url, String urlParameters) throws Exception {
+
 
         URL obj = new URL("https://duffin.co/uo/"+url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -95,6 +97,7 @@ public class PostStreamReader {
 
         int responseCode = con.getResponseCode();
 
+
         InputStream in = con.getInputStream();
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -104,10 +107,10 @@ public class PostStreamReader {
         while ((inputLine = bin.readLine()) != null) {
             response.append(inputLine);
         }
-        //returns result
 
         in.close();
         return response.toString();
+
     }
 
     // Steve N
@@ -156,6 +159,7 @@ public class PostStreamReader {
         wr.close();
 
         int responseCode = con.getResponseCode();
+
 
         InputStream in = con.getInputStream();
         String inputLine;
@@ -222,4 +226,5 @@ public class PostStreamReader {
         }
         return null;
     }
+
 }

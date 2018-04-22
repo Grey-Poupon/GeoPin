@@ -18,6 +18,7 @@ public class ImageHandler {
 
     public static Drawable LoadImageFromURL(Resources resource,URL url) {
         try {
+
             InputStream is = (InputStream) url.getContent();
             Drawable pic = Drawable.createFromStream(is, "url");
             Bitmap bit = ((BitmapDrawable)pic).getBitmap();

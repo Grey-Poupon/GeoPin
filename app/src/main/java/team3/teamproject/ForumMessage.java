@@ -35,7 +35,9 @@ public class ForumMessage implements Comparable, Parcelable {
         this.ID = ID;
         this.date = date;
         this.url = PostStreamReader.getUserImage(username);
+
     }
+
 
 
 
@@ -56,6 +58,7 @@ public class ForumMessage implements Comparable, Parcelable {
     }
 
 
+
     public String getDateString() {
         return format.format(date);
     }
@@ -69,9 +72,6 @@ public class ForumMessage implements Comparable, Parcelable {
     }
 
 
-
-
-
     public String getUsername() {
         return username;
     }
@@ -79,6 +79,7 @@ public class ForumMessage implements Comparable, Parcelable {
     public URL getUrl() {
         return url;
     }
+
 
 
     protected ForumMessage(Parcel in) {
@@ -90,6 +91,7 @@ public class ForumMessage implements Comparable, Parcelable {
         date = tmpDate != -1 ? new Date(tmpDate) : null;
         username = in.readString();
         url = (URL) in.readValue(URL.class.getClassLoader());
+
     }
 
     @Override
@@ -106,6 +108,7 @@ public class ForumMessage implements Comparable, Parcelable {
         dest.writeLong(date != null ? date.getTime() : -1L);
         dest.writeString(username);
         dest.writeValue(url);
+
     }
 
     @SuppressWarnings("unused")

@@ -38,6 +38,7 @@ public class SubmitPageActivity extends AppCompatActivity {
         String username = ((User) this.getApplication()).getUserName();
 
         ForumPost post = new ForumPost(title,username,text,uID,ID,getNewID(),new Date());
+
         return post;
 
     }

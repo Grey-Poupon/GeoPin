@@ -42,6 +42,7 @@ public class JsonCommentMessage {
 
     public static ForumMessage toForumMessage( JsonCommentMessage msg,String postID){
         return new ForumMessage(msg.getComment(),msg.getUsername(),msg.getUserID(),postID,msg.getID(),msg.getDate());
+
     }
     public static List<ForumMessage> toListForumMessages(List<JsonCommentMessage> msgs, String postID){
         if(msgs == null){return new ArrayList<ForumMessage>();}

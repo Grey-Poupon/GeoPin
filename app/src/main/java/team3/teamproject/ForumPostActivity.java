@@ -123,6 +123,7 @@ public class ForumPostActivity extends AppCompatActivity {
         String username = ((User) this.getApplication()).getUserName();
         ForumMessage message = new ForumMessage(txt,username,uID,post.getID(),"-1",new Date());
 
+
         newID = addMsgToServer(message);
         if(newID!="-1") {
             message.setID(newID);
