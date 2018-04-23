@@ -20,6 +20,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity{
         };
         // checks if user is logged in
         updateWithToken(AccessToken.getCurrentAccessToken());
-
+        LoginManager.getInstance().logOut();
         //below is for facebook log in
         facebookLoginButton = (LoginButton) findViewById(R.id.bt_facebookLogin);
         facebookLoginButton.setReadPermissions("email", "public_profile");
@@ -193,12 +194,8 @@ public class LoginActivity extends AppCompatActivity{
         if (currentAccessToken != null) {
             ((User) this.getApplication()).setIsGuest(false);
             ((User) this.getApplication()).setIsFacebook(true);
-
-            Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
-            startActivity(loadingScreen);
-        } else {
-
         }
+
     }
 
 
