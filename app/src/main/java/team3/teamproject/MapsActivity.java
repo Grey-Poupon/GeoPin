@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -232,11 +233,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if (marker.getTitle() != null) {
+                if (marker.getTitle() != null && !User.getIsGuest()) {
                     Intent forum = new Intent(MapsActivity.this, PostListActivity.class);
                     forum.putExtra("PinID", (String) marker.getTag());
                     forum.putExtra("title", marker.getTitle());
                     startActivity(forum);
+                }
+                else{
+                    Toast denied = Toast.makeText(getApplicationContext(),"Guest users cannot access the forums",Toast.LENGTH_SHORT);
+                    denied.show();
                 }
                 return true;
             }
@@ -845,7 +850,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //On pin click listener
     public void onPMenuClick(final View view){
-        if(!((User) this.getApplication()).getUserID().equals("GUEST")){
+        if(!User.getIsGuest()){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

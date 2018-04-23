@@ -25,6 +25,7 @@ public class ForumPost extends ForumMessage  {
     protected ForumPost(Parcel in) {
         super(in);
         this.title = in.readString();
+
     }
 
     public static final Creator<ForumPost> CREATOR = new Creator<ForumPost>() {

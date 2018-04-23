@@ -11,10 +11,11 @@ import java.net.URL;
 
 //Holds the data regarding the user
 public class User extends Application {
+
     private String userID;
     private String userName;
     private URL userImageURL;
-    private boolean isGuest;
+    private static boolean isGuest;
     private boolean isFacebook;
 
     public String getUserID() {
@@ -24,7 +25,7 @@ public class User extends Application {
         return userName;
     }
     public URL getUserImageURL() {return userImageURL;}
-    public boolean getIsGuest() {return isGuest;}
+    public static boolean getIsGuest() {return isGuest;}
     public boolean getIsFacebook() {return isFacebook;}
 
 

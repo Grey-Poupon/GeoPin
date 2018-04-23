@@ -50,7 +50,13 @@ public class ForumMessage implements Comparable, Parcelable {
         this.parentID = parentID;
         this.ID = ID;
         this.date = date;
-        this.url = PostStreamReader.getUserImage(username);
+        if (ID != "-1") {
+            try {
+                this.url = PostStreamReader.getUserImage(ID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -108,6 +114,13 @@ public class ForumMessage implements Comparable, Parcelable {
         date = tmpDate != -1 ? new Date(tmpDate) : null;
         username = in.readString();
         url = (URL) in.readValue(URL.class.getClassLoader());
+        if(url == null || ID == "-1"){
+            try {
+                this.url = PostStreamReader.getUserImage(ID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -145,5 +158,10 @@ public class ForumMessage implements Comparable, Parcelable {
 
     public void setID(String ID) {
         this.ID = ID;
+        try {
+            this.url = PostStreamReader.getUserImage(ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
