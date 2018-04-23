@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity{
 
 
                 String newID = PostStreamReader.sendCreateString("createUser.php",
-                        "name=" + facebookName
+                        "name=" + facebookName + "&password=" + ""
                                 + "&imageURL=" + profile_picture + "&facebookID=" + id);
                 ((User) this.getApplication()).setUserID(newID);
 
@@ -241,6 +241,8 @@ public class LoginActivity extends AppCompatActivity{
         ((User) this.getApplication()).setIsFacebook(false);
         ((User) this.getApplication()).setUserName("GUEST");
         ((User) this.getApplication()).setUserID("GUEST");
+
+        ((User) this.getApplication()).setUserImageURL(null);
 
 
         Intent loadingScreen = new Intent(this, LoadingBarActivity.class);

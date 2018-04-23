@@ -75,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TileOverlay mOverlay;
     private HeatmapTileProvider mProvider;
     //Holds which pollution is to be displayed
-    private OverlayState overlayState;
+    private OverlayState overlayState = OverlayState.CO;
     //Holds the sensor information
     private HashMap<String,JsonSensorMessage> sensors;
     private static final String TAG = MapsActivity.class.getSimpleName();
@@ -420,6 +420,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else {
             Log.e("UNKNOWN POLLUTION TYPE", "" + selectedPollution.toString());
+            return;
         }
 
         if (currentOverlayState != null) {
@@ -491,7 +492,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Takes in heatmap data and places it on the heatmap component
     public void placeDataOnMap(List<WeightedLatLng> heatmapData) {
 
-        if (heatmapData.size() < 1) {
+        if (heatmapData == null || heatmapData.size() < 1) {
             return;
         }
 
