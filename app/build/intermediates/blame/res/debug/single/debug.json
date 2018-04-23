@@ -600,6 +600,10 @@
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\983d41a1f97af539cc65d2cbd3835dec\\res\\drawable-hdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_account.xml.flat",
+        "source": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\src\\main\\res\\layout\\activity_account.xml"
+    },
+    {
         "merged": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.0.aar\\c6fbd7dc623833999f28cf1eb45263b9\\res\\drawable-hdpi-v4\\design_ic_visibility.png"
     },

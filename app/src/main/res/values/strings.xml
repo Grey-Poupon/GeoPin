@@ -51,7 +51,6 @@
     <string name="contact_posted">Your message has been successfully delivered.</string>
 
 
-
     <array name="polutionTypes">
         <item>Sound</item>
         <item>Temperature</item>
@@ -85,6 +84,10 @@
     <string name="my_account">My account</string>
     <string name="sign_out">Sign out</string>
     <string name="profile_picture">profile picture</string>
+    <string name="title_activity_account">My Account</string>
+    <string name="delete_me">Delete Me</string>
+    <string name="reset">Reset</string>
+    <string name="title_activity_main">MainActivity</string>
 
 
 </resources>

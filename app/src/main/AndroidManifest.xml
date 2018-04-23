@@ -29,7 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <!--              Used for the Facebook log in -->
+        <!-- Used for the Facebook log in -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -66,13 +66,11 @@
         <activity
             android:name=".PostListActivity"
             android:label="@string/title_activity_forum"
-            android:parentActivityName=".MapsActivity">
-        </activity>
+            android:parentActivityName=".MapsActivity" />
         <activity
             android:name=".ForumPostActivity"
             android:label="@string/title_activity_forum_page"
-            android:parentActivityName=".PostListActivity">
-        </activity>
+            android:parentActivityName=".PostListActivity" />
         <activity
             android:name=".SubmitPageActivity"
             android:label="@string/title_activity_submit_page"
@@ -88,6 +86,10 @@
         <activity
             android:name=".LoadingBarActivity"
             android:label="@string/loading_bar_activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account"
             android:theme="@style/AppTheme" />
     </application>
 

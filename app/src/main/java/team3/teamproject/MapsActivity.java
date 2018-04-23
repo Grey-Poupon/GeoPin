@@ -798,7 +798,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         startActivity(contactUsScreen);
                         return true;
                     case R.id.acc:
-
+                        Intent accountScreen = new Intent(MapsActivity.this, AccountActivity.class);
+                        startActivity(accountScreen);
                         return true;
                     case R.id.logout:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
