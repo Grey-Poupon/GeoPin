@@ -107,6 +107,8 @@ public class LoginActivity extends AppCompatActivity{
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
 
+                ((User) getLoginActivity().getApplication()).setIsGuest(false);
+                ((User) getLoginActivity().getApplication()).setIsFacebook(true);
 
                 Intent loadingScreen = new Intent(LoginActivity.this, LoadingBarActivity.class);
                 startActivity(loadingScreen);
@@ -189,8 +191,11 @@ public class LoginActivity extends AppCompatActivity{
     private void updateWithToken(AccessToken currentAccessToken) {
 
         if (currentAccessToken != null) {
-            Intent mapScreen = new Intent(this, MapsActivity.class);
-            startActivity(mapScreen);
+            ((User) this.getApplication()).setIsGuest(false);
+            ((User) this.getApplication()).setIsFacebook(true);
+
+            Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
+            startActivity(loadingScreen);
         } else {
 
         }
@@ -209,7 +214,7 @@ public class LoginActivity extends AppCompatActivity{
         String id;
 
 
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(username)&& !TextUtils.isEmpty(password)) {
             try {
                 result = PostStreamReader.sendCreateString("validateUser.php",
                         "name=" + username
@@ -228,6 +233,7 @@ public class LoginActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
             if (result.equals("1")) {
+                ((User) this.getApplication()).setIsGuest(false);
                 Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
                 startActivity(loadingScreen);
             } else {
@@ -251,8 +257,10 @@ public class LoginActivity extends AppCompatActivity{
      * without login click button listener
      */
     public void onWithoutLoginClick(View view) {
-        ((User) this.getApplication()).setUserID("GUEST");
+        ((User) this.getApplication()).setIsGuest(true);
+        ((User) this.getApplication()).setIsFacebook(false);
         ((User) this.getApplication()).setUserName("GUEST");
+        ((User) this.getApplication()).setUserID("GUEST");
 
 
         Intent loadingScreen = new Intent(this, LoadingBarActivity.class);
