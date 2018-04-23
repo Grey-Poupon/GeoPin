@@ -3,6 +3,7 @@ package team3.teamproject;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         //used to test if response returns an id or an error
         int test = -1;
         String response = null;
+        Handler logOutTimer = new Handler();
 
 
         String error = "Username is already in use!";
@@ -70,6 +72,17 @@ public class RegisterActivity extends AppCompatActivity {
             {
                 mNotifyUserRegister.setTextColor(Color.GREEN);
                 mNotifyUserRegister.setText(success);
+
+                logOutTimer.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Intent logOut =
+                                new Intent(getApplication(), LoginActivity.class);
+                        startActivity(logOut);
+                    }
+
+                }, 3000L);
             }
 
 

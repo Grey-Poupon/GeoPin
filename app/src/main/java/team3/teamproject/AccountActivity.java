@@ -35,6 +35,10 @@ public class AccountActivity extends AppCompatActivity {
         String oldPassword = mCurrentPassAcc.getText().toString();
         String newPassword = mNewPassAcc.getText().toString();
 
+        String success = "Password change successful! You will be logged out!";
+        String incorrect = "Password is incorrect!";
+        String empty = "Password fields cannot be empty!";
+
         //used for logging user out after a while
         Handler logOutTimer = new Handler();
 
@@ -48,7 +52,7 @@ public class AccountActivity extends AppCompatActivity {
                 if(response.equals("1"))
                 {
                     mStatusBar.setTextColor(Color.GREEN);
-                    mStatusBar.setText("Password change successful! You will be logged out!");
+                    mStatusBar.setText(success);
 
                     logOutTimer.postDelayed(new Runnable() {
 
@@ -64,7 +68,7 @@ public class AccountActivity extends AppCompatActivity {
                 else
                 {
                     mStatusBar.setTextColor(Color.RED);
-                    mStatusBar.setText("Password is incorrect!");
+                    mStatusBar.setText(incorrect);
                 }
 
             } catch (Exception e) {
@@ -75,7 +79,7 @@ public class AccountActivity extends AppCompatActivity {
         else
         {
             mStatusBar.setTextColor(Color.RED);
-            mStatusBar.setText("Password fields cannot be empty!");
+            mStatusBar.setText(empty);
         }
 
     }
