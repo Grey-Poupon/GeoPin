@@ -41,8 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
         mNotifyUserRegister = (TextView) findViewById(R.id.notifyUserRegister);
 
     }
-
+    // used for creating an account
     public void onCreateAccountClick(View view) {
+        // username and password messages
         String username = mUserName.getText().toString();
         String password = mPassword.getText().toString();
         //used to test if response returns an id or an error
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         String response = null;
         Handler logOutTimer = new Handler();
 
-
+    // notification messages
         String error = "Username is already in use!";
         String success = "Registration was a success!";
 
@@ -97,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-
+    // used for getting back to the sign in screen
     public void onGoBackClick(View view) {
         Intent goBack = new Intent(this, LoginActivity.class);
         startActivity(goBack);

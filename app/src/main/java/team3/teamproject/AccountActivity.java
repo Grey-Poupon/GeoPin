@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Used for changing password and deleting account
+ */
 //Controlls account details and activity
 public class AccountActivity extends AppCompatActivity {
 
@@ -34,11 +37,16 @@ public class AccountActivity extends AppCompatActivity {
         mStatusBar = (TextView)findViewById(R.id.statusBar);
     }
 
+    //button used for submitting a request to change the password
     public void onResetPassClick(View view){
+        // id is used to confirm which account's password to change
+
+        //current password used for confirmation and new one to replace old one
         String userID = ((User) this.getApplication()).getUserID();
         String oldPassword = mCurrentPassAcc.getText().toString();
         String newPassword = mNewPassAcc.getText().toString();
 
+        // used to notify user what happened
         String success = "Password change successful! You will be logged out!";
         String incorrect = "Password is incorrect!";
         String empty = "Password fields cannot be empty!";
@@ -47,6 +55,7 @@ public class AccountActivity extends AppCompatActivity {
         Handler logOutTimer = new Handler();
 
 
+        //checks if new password field is empty
         if(!mNewPassAcc.getText().toString().equals("")
                 && !mCurrentPassAcc.getText().toString().equals("") ) {
             try {
@@ -58,6 +67,7 @@ public class AccountActivity extends AppCompatActivity {
                     mStatusBar.setTextColor(Color.GREEN);
                     mStatusBar.setText(success);
 
+                    //logs out automatically when password change is successful
                     logOutTimer.postDelayed(new Runnable() {
 
                         @Override
@@ -87,8 +97,10 @@ public class AccountActivity extends AppCompatActivity {
         }
 
     }
-
+    //used for sending an account deletion
     public void onDeleteMeClick(View view){
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(AccountActivity.this);
         builder.setTitle("Delete account?")
                 .setMessage("Are you sure you want to delete your account?")
@@ -113,6 +125,21 @@ public class AccountActivity extends AppCompatActivity {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+
+                                        Handler logOutTimer = new Handler();
+
+                                        //logs out automatically when password change is successful
+                                        logOutTimer.postDelayed(new Runnable() {
+
+                                            @Override
+                                            public void run() {
+                                                Intent logOut =
+                                                        new Intent(getApplication(), LoginActivity.class);
+                                                startActivity(logOut);
+                                            }
+
+                                        }, 3000L);
+
                                 }
                                 if(!isFacebook && !TextUtils.isEmpty(password))
                                 {
@@ -122,23 +149,30 @@ public class AccountActivity extends AppCompatActivity {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+                                    //used to norify if account deletion has failed or succeeded
 
-                                }
+                                        Handler logOutTimer = new Handler();
+
+                                        //logs out automatically when password change is successful
+                                        logOutTimer.postDelayed(new Runnable() {
+
+                                            @Override
+                                            public void run() {
+                                                Intent logOut =
+                                                        new Intent(getApplication(), LoginActivity.class);
+                                                startActivity(logOut);
+                                            }
+
+                                        }, 3000L);
+
+                                    }
+
                                 else if(!isFacebook && TextUtils.isEmpty(password))
                                 {
                                     mStatusBar.setTextColor(Color.RED);
                                     mStatusBar.setText("Password cannot be empty if you're not using Facebook!");
                                 }
-                                if(response == "-1")
-                                {
-                                    mStatusBar.setTextColor(Color.RED);
-                                    mStatusBar.setText("Account deletion has failed!");
-                                }
-                                else if(response == "1")
-                                {
-                                    mStatusBar.setTextColor(Color.GREEN);
-                                    mStatusBar.setText("Account deletion has succeeded!");
-                                }
+
                             }
                         });
         AlertDialog alert = builder.create();

@@ -18,8 +18,7 @@ import java.util.regex.Pattern;
  */
 
 
-//Controlls regestering a new user
-//When an instance is created
+//Contactform which will send email
 
 public class ContactFormActivity extends AppCompatActivity {
     private Activity activity;

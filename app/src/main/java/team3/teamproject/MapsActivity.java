@@ -190,6 +190,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         updateGraph(currentOverlayState);
         mChart.getLegend().setEnabled(false);
         mChart.getAxisRight().setDrawLabels(false);
+
     }
 
     /**
@@ -270,6 +271,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Place data on the graph component
     private void setGraphValues(ArrayList<Entry> values, String property) {
         LineDataSet set = new LineDataSet(values, "");
+        set.setHighlightLineWidth(3);
         if (colours != null) {
             set.setColors(colours[0]);
         }
