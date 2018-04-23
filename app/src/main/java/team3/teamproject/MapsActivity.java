@@ -160,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // get sensors from server
         sensors = createSensorMap();
 
-        logoutDialog = new LogoutDialog();
+        logoutDialog = new DialogLogout();
         appToolbar = (Toolbar) findViewById(R.id.toolbar_maps);
         // Pollution selection
         heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
@@ -653,8 +653,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * back button listener, returns to home screen
-     * <p>
+     * Back button listener.
+     * Returns to home screen
+     *
      * Created by Petr Makarov
      */
     @Override

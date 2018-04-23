@@ -13,11 +13,12 @@
     tools:context="team3.teamproject.LoginActivity">
 
     <!-- Login progress -->
-
     <ScrollView
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/username_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -105,7 +106,6 @@
                 android:paddingBottom="@dimen/activity_login_facebook_padding"
                 android:onClick="onWithoutLoginClick"
                 android:text="@string/action_without_login" />
-
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+        </LinearLayout>

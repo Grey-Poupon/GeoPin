@@ -12,12 +12,13 @@ import com.facebook.login.LoginManager;
 
 
 /**
+ * Dialog for sign out.
  * Created by Petr Makarov on 21.04.2018.
  */
 
 //Controlls loggin out the user
 
-public class LogoutDialog extends DialogFragment {
+public class DialogLogout extends DialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
@@ -34,7 +35,7 @@ public class LogoutDialog extends DialogFragment {
                 })
                 .setNegativeButton(R.string.alert_lo_negative, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        LogoutDialog.super.onCancel(dialog);
+                        DialogLogout.super.onCancel(dialog);
                     }
                 });
 

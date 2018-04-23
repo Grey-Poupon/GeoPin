@@ -39,16 +39,16 @@ public final class R {
         public static final int zOrderOnTop = 0x7f040199;
     }
     public static final class color {
-        public static final int common_google_signin_btn_text_dark = 0x7f060041;
-        public static final int common_google_signin_btn_text_dark_default = 0x7f060042;
-        public static final int common_google_signin_btn_text_dark_disabled = 0x7f060043;
-        public static final int common_google_signin_btn_text_dark_focused = 0x7f060044;
-        public static final int common_google_signin_btn_text_dark_pressed = 0x7f060045;
-        public static final int common_google_signin_btn_text_light = 0x7f060046;
-        public static final int common_google_signin_btn_text_light_default = 0x7f060047;
-        public static final int common_google_signin_btn_text_light_disabled = 0x7f060048;
-        public static final int common_google_signin_btn_text_light_focused = 0x7f060049;
-        public static final int common_google_signin_btn_text_light_pressed = 0x7f06004a;
+        public static final int common_google_signin_btn_text_dark = 0x7f060042;
+        public static final int common_google_signin_btn_text_dark_default = 0x7f060043;
+        public static final int common_google_signin_btn_text_dark_disabled = 0x7f060044;
+        public static final int common_google_signin_btn_text_dark_focused = 0x7f060045;
+        public static final int common_google_signin_btn_text_dark_pressed = 0x7f060046;
+        public static final int common_google_signin_btn_text_light = 0x7f060047;
+        public static final int common_google_signin_btn_text_light_default = 0x7f060048;
+        public static final int common_google_signin_btn_text_light_disabled = 0x7f060049;
+        public static final int common_google_signin_btn_text_light_focused = 0x7f06004a;
+        public static final int common_google_signin_btn_text_light_pressed = 0x7f06004b;
     }
     public static final class drawable {
         public static final int amu_bubble_mask = 0x7f08005a;
@@ -72,26 +72,26 @@ public final class R {
         public static final int adjust_width = 0x7f090017;
         public static final int amu_text = 0x7f09001b;
         public static final int auto = 0x7f09001d;
-        public static final int dark = 0x7f090054;
-        public static final int hybrid = 0x7f090073;
-        public static final int icon_only = 0x7f090076;
-        public static final int light = 0x7f090081;
-        public static final int none = 0x7f09009a;
-        public static final int normal = 0x7f09009b;
-        public static final int satellite = 0x7f0900b9;
-        public static final int standard = 0x7f0900db;
-        public static final int terrain = 0x7f0900e4;
-        public static final int webview = 0x7f090106;
-        public static final int wide = 0x7f090107;
-        public static final int window = 0x7f090108;
+        public static final int dark = 0x7f090055;
+        public static final int hybrid = 0x7f090074;
+        public static final int icon_only = 0x7f090077;
+        public static final int light = 0x7f090082;
+        public static final int none = 0x7f09009c;
+        public static final int normal = 0x7f09009d;
+        public static final int satellite = 0x7f0900bb;
+        public static final int standard = 0x7f0900dd;
+        public static final int terrain = 0x7f0900e8;
+        public static final int webview = 0x7f09010b;
+        public static final int wide = 0x7f09010c;
+        public static final int window = 0x7f09010d;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f0a0006;
     }
     public static final class layout {
-        public static final int amu_info_window = 0x7f0b0023;
-        public static final int amu_text_bubble = 0x7f0b0024;
-        public static final int amu_webview = 0x7f0b0025;
+        public static final int amu_info_window = 0x7f0b0024;
+        public static final int amu_text_bubble = 0x7f0b0025;
+        public static final int amu_webview = 0x7f0b0026;
     }
     public static final class raw {
         public static final int amu_ballon_gx_prefix = 0x7f0e0000;

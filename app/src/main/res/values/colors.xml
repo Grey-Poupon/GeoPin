@@ -5,4 +5,5 @@
     <color name="colorAccent">#ff2b32</color>
     <color name="colorFacebookText">#ffffff</color>
     <color name="colorToolbarText">#ffffff</color>
+    <color name="colorPost">#00ccff</color>
 </resources>

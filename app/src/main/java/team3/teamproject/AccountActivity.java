@@ -1,14 +1,17 @@
 package team3.teamproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 //Controlls account details and activity
 public class AccountActivity extends AppCompatActivity {
@@ -16,7 +19,7 @@ public class AccountActivity extends AppCompatActivity {
     EditText mCurrentPassAcc;
     EditText mNewPassAcc;
     EditText mCurrentPassDelAcc;
-    EditText mStatusBar;
+    TextView mStatusBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class AccountActivity extends AppCompatActivity {
         mCurrentPassAcc = (EditText)findViewById(R.id.currentPassAcc);
         mNewPassAcc = (EditText)findViewById(R.id.newPassAcc);
         mCurrentPassDelAcc = (EditText)findViewById(R.id.currentPassDelAcc);
-        mStatusBar = (EditText)findViewById(R.id.statusBar);
+        mStatusBar = (TextView)findViewById(R.id.statusBar);
     }
 
     public void onResetPassClick(View view){
@@ -86,45 +89,60 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void onDeleteMeClick(View view){
-        String password = mCurrentPassDelAcc.getText().toString();
-        String userName = ((User) this.getApplication()).getUserName();
-        String response = "";
-        boolean isFacebook = ((User) this.getApplication()).getIsFacebook();
+        AlertDialog.Builder builder = new AlertDialog.Builder(AccountActivity.this);
+        builder.setTitle("Delete account?")
+                .setMessage("Are you sure you want to delete your account?")
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                String password = mCurrentPassDelAcc.getText().toString();
+                                String userName = ((User) getApplication()).getUserName();
+                                String response = "";
+                                boolean isFacebook = ((User) getApplication()).getIsFacebook();
 
-        if(isFacebook) {
-            try {
-                response = PostStreamReader.sendCreateString("userDelete.php",
-                        "name=" + userName + "&password=" + "");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if(!isFacebook && !TextUtils.isEmpty(password))
-        {
-            try {
-                response = PostStreamReader.sendCreateString("userDelete.php",
-                        "name=" + userName + "&password=" + password);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                                if(isFacebook) {
+                                    try {
+                                        response = PostStreamReader.sendCreateString("userDelete.php",
+                                                "name=" + userName + "&password=" + "");
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if(!isFacebook && !TextUtils.isEmpty(password))
+                                {
+                                    try {
+                                        response = PostStreamReader.sendCreateString("userDelete.php",
+                                                "name=" + userName + "&password=" + password);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
 
-        }
-        else if(!isFacebook && TextUtils.isEmpty(password))
-        {
-            mStatusBar.setTextColor(Color.RED);
-            mStatusBar.setText("Password cannot be empty if you're not using Facebook!");
-        }
-        if(response == "-1")
-        {
-            mStatusBar.setTextColor(Color.RED);
-            mStatusBar.setText("Account deletion has failed!");
-        }
-        else if(response == "1")
-        {
-            mStatusBar.setTextColor(Color.GREEN);
-            mStatusBar.setText("Account deletion has succeeded!");
-        }
-
+                                }
+                                else if(!isFacebook && TextUtils.isEmpty(password))
+                                {
+                                    mStatusBar.setTextColor(Color.RED);
+                                    mStatusBar.setText("Password cannot be empty if you're not using Facebook!");
+                                }
+                                if(response == "-1")
+                                {
+                                    mStatusBar.setTextColor(Color.RED);
+                                    mStatusBar.setText("Account deletion has failed!");
+                                }
+                                else if(response == "1")
+                                {
+                                    mStatusBar.setTextColor(Color.GREEN);
+                                    mStatusBar.setText("Account deletion has succeeded!");
+                                }
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
         }
 
 }

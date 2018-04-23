@@ -12,12 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profilePic"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"/>
 
     <TextView
         android:id="@+id/postCreator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPost"
         android:layout_toEndOf="@id/profilePic"
         android:layout_below="@id/postTitle"/>
 
@@ -30,4 +33,9 @@
         android:layout_alignParentTop="true"
         android:contentDescription="@string/profile_picture"
         app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_margin_small"
+        android:layout_below="@+id/profilePic"/>
 </RelativeLayout>

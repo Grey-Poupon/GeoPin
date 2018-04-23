@@ -123,14 +123,10 @@
                 android:onClick="onDeleteMeClick"
                 android:text="@string/delete_me" />
 
-            <EditText
+            <TextView
                 android:id="@+id/statusBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
