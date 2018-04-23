@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/myAcc"
-        android:title="My account"/>
+        android:id="@+id/acc"
+        android:title="@string/my_account"/>
     <item
         android:id="@+id/contact"
-        android:title="Contact Us"/>
+        android:title="@string/contact_us"/>
     <item
-        android:id="@+id/logOutButton"
-        android:title="Log out"/>
+        android:id="@+id/logout"
+        android:title="@string/sign_out"/>
 </menu>

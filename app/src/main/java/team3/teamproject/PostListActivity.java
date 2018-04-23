@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,6 +36,8 @@ public class PostListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_postList);
+        setSupportActionBar(toolbar);
         ID = getIntent().getStringExtra("PinID");
         title = getIntent().getStringExtra("title");
 
@@ -75,7 +78,7 @@ public class PostListActivity extends AppCompatActivity {
     private void addNewPost(ForumPost newPost) {
         String newID = "-1";
         try {
-            newID = PostStreamReader.createPost(newPost.getUserID(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
+            newID = PostStreamReader.createPost(newPost.getUsername(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
         } catch (Exception e) {
             e.printStackTrace();
         }

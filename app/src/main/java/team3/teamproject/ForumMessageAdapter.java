@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Date;
 
@@ -46,6 +48,10 @@ private ForumMessage source;
         TextView date = convertView.findViewById(R.id.date);
         TextView text = convertView.findViewById(R.id.usrMsg);
         TextView id   = convertView.findViewById(R.id.msgID);
+        ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
+        if(msg.getUrl()!=null) {
+            profilePic.setImageDrawable(ImageHandler.LoadImageFromURL(convertView.getResources(),msg.getUrl()));
+        }
 
         // make reply tags clickable
         String comment = msg.getText();

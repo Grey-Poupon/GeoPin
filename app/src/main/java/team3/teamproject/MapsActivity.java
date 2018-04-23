@@ -7,14 +7,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +23,6 @@ import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -145,7 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sensors = createSensorMap();
 
         logoutDialog = new LogoutDialog();
-        appToolbar = (Toolbar) findViewById(R.id.toolbar3);
+        appToolbar = (Toolbar) findViewById(R.id.toolbar_maps);
         // Pollution selection
         heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
 
@@ -786,24 +783,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onPMenuClick(final View view){
+        if(!((User) this.getApplication()).getUserID().equals("GUEST")){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-
                     case R.id.contact:
                         Intent contactUsScreen = new Intent(MapsActivity.this, ContactFormActivity.class);
                         startActivity(contactUsScreen);
                         return true;
-                    case R.id.myAcc:
-
+                    case R.id.acc:
+                        Intent accountScreen = new Intent(MapsActivity.this, AccountActivity.class);
+                        startActivity(accountScreen);
                         return true;
-                    case R.id.logOutButton:
+                    case R.id.logout:
                         logoutDialog.show(getFragmentManager(), "logoutDialog");
-
-
                         return true;
                     default:
                         return false;
@@ -811,6 +807,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         popup.show();
+    }else{
+        PopupMenu popupLo = new PopupMenu(MapsActivity.this, view);
+        popupLo.getMenuInflater().inflate(R.menu.popup_menu_lo, popupLo.getMenu());
+        popupLo.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.login:
+                        Intent loginScreen = new Intent(MapsActivity.this, LoginActivity.class);
+                        startActivity(loginScreen);
+                        return true;
+                    case R.id.contact:
+                        Intent contactUsScreen = new Intent(MapsActivity.this, ContactFormActivity.class);
+                        startActivity(contactUsScreen);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupLo.show();
+    }
     }
 
     public void onRefreshClick(View view){

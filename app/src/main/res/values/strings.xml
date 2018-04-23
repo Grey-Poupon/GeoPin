@@ -1,44 +1,67 @@
 <resources>
+    <!-- Titles for app and activities strings -->
     <string name="app_name">Enviroscope</string>
     <string name="app_logo">Enviroscope logo</string>
-    <string name="button_environmental">Environment button</string>
-    <string name="button_air_quality">Air Quality Button</string>
-    <string name="button_traffic">Traffic button</string>
-    <string name="button_weather">Weather button</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_forum">Forum</string>
-    <string name="button_menu">Menu button</string>
-    <string name="button_refresh">Refresh button</string>
+    <string name="title_activity_forum">Enviroscope Forum</string>
+    <string name="title_activity_forum_page">Enviroscope Forum</string>
+    <string name="title_activity_submit_page">Submit Page</string>
+    <string name="title_activity_register">Registration</string>
+    <string name="title_activity_account">My Account</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_contact">Contact Us</string>
+    <string name="title_activity_loading_bar">Loading Bar</string>
 
-    <!-- Strings related to login -->
+
+    <!-- Strings related to MapsActivity-->
+    <string name="bt_menu">Menu button</string>
+    <string name="bt_refresh">Refresh button</string>
+    <string name="contact_us">Contact Us</string>
+
+
+    <!-- Strings related to login and registration -->
     <string name="facebook_app_id">2040301499520945</string>
     <string name="fb_login_protocol_scheme">fb2040301499520945</string>
-
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
     <string name="title">Title</string>
     <string name="text">Text</string>
-    <string name="submit">Submit</string>
-    <string name="submitInfoTxt">You are submitting a page to this forum. Please write a clear title about the issue you are concerned about </string>
     <string name="action_register">Register</string>
     <string name="action_facebook">Log in with Facebook</string>
     <string name="action_without_login">Continue without logging in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="prompt_old_password">Please re-enter your password</string>
+    <string name="prompt_new_password">Please enter a new password</string>
+    <string name="reg_username">Username</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_create_account">Create Account</string>
+    <string name="reg_go_back">Go back</string>
+    <string name="reg_registration">Registration</string>
+    <string name="sign_in">Sign in</string>
+    <string name="my_account">My account</string>
+    <string name="sign_out">Sign out</string>
+    <string name="profile_picture">profile picture</string>
+    <string name="delete_me">Delete Me</string>
+    <string name="reset">Reset</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="delete_account">Delete Account</string>
+
+    <!-- Strings related to forum -->
+    <string name="submit">Submit</string>
+    <string name="submitInfoTxt">You are submitting a page to this forum. Please write a clear title about the issue you are concerned about </string>
     <string name="comments">Comments</string>
     <string name="commentTxt">Enter comment here</string>
     <string name="commentBtn">Post</string>
     <string name="Bump">Bump</string>
-    <string name="title_activity_forum_page">Post</string>
-    <string name="title_activity_submit_page">SubmitPageActivity</string>
+
 
     <!-- Strings related to alert dialog -->
-    <string name="alert_title">Logout?</string>
-    <string name="alert_message">Are you sure you want to logout?</string>
-    <string name="alert_positive">Yes</string>
-    <string name="alert_negative">Cancel</string>
+    <string name="alert_lo_title">Sign out?</string>
+    <string name="alert_lo_message">Are you sure you want to sign out?</string>
+    <string name="alert_lo_positive">Yes</string>
+    <string name="alert_lo_negative">Cancel</string>
 
     <!-- Strings related to help page -->
     <string name="contact_form">Contact Us</string>
@@ -49,7 +72,6 @@
     <string name="contact_form_button">Send Message</string>
     <string name="contact_form_post_message">Please wait</string>
     <string name="contact_posted">Your message has been successfully delivered.</string>
-
 
 
     <array name="polutionTypes">
@@ -70,16 +92,7 @@
         <item>Visiblity</item>
     </array>
 
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="contact_activity">ContactUsActivity</string>
-    <string name="loading_bar_activity">LoadingBarActivity</string>
-
-    <string name="reg_registration">Registration</string>
-    <string name="reg_username">Username</string>
-    <string name="reg_password">Password</string>
-    <string name="reg_create_account">Create Account</string>
-    <string name="reg_go_back">Go back</string>
-    <string name="profile_picture">profile picture</string>
+    <string name="title_activity_main">MainActivity</string>
 
 
 </resources>

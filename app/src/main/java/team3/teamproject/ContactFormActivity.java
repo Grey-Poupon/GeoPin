@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +24,16 @@ public class ContactFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_form);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_contact);
+        setSupportActionBar(toolbar);
 
-        final EditText your_name        = (EditText) findViewById(R.id.your_name);
-        final EditText your_email       = (EditText) findViewById(R.id.your_email);
-        final EditText your_subject     = (EditText) findViewById(R.id.your_subject);
-        final EditText your_message     = (EditText) findViewById(R.id.your_message);
+        final EditText your_name        = (EditText) findViewById(R.id.nameEditContact);
+        final EditText your_email       = (EditText) findViewById(R.id.emailEditContact);
+        final EditText your_subject     = (EditText) findViewById(R.id.subjectEditContact);
+        final EditText your_message     = (EditText) findViewById(R.id.messageContact);
 
 
-        Button email = (Button) findViewById(R.id.post_message);
+        Button email = (Button) findViewById(R.id.bt_postContact);
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

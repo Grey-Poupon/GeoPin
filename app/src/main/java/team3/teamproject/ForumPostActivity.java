@@ -3,6 +3,7 @@ package team3.teamproject;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +37,8 @@ public class ForumPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_post);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_postMsg);
+        setSupportActionBar(toolbar);
         //get the data from intent
         post = getIntent().getParcelableExtra("ForumPost");
 
@@ -54,10 +55,9 @@ public class ForumPostActivity extends AppCompatActivity {
         listView.setClickable(true);
 
         ((TextView) findViewById(R.id.postTitle)).setText(post.getTitle());
-       ((TextView) findViewById(R.id.date)).setText(post.getDateString());
-        ((TextView) findViewById(R.id.usrName)).setText(post.getUserID());
+        ((TextView) findViewById(R.id.date)).setText(post.getDateString());
+        ((TextView) findViewById(R.id.usrName)).setText(post.getUsername());
         ((TextView) findViewById(R.id.postTxt)).setText(post.getText());
-
 
         // list view onclick
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,7 +68,7 @@ public class ForumPostActivity extends AppCompatActivity {
         });
 
         // post message onClick
-        Button commentBtn = (Button) findViewById(R.id.commentBtn);
+        Button commentBtn = (Button) findViewById(R.id.bt_comment);
         commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +137,7 @@ public class ForumPostActivity extends AppCompatActivity {
 
     private String addMsgToServer(ForumMessage message) {
         try {
-           return PostStreamReader.createComment(message.getUserID(),message.getText(),message.getParentID());
+           return PostStreamReader.createComment(message.getUsername(),message.getText(),message.getParentID());
         } catch (Exception e) {
             e.printStackTrace();
         }

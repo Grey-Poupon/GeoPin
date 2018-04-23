@@ -17,14 +17,14 @@
         android:id="@+id/usrName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/imageView"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_toEndOf="@id/imageView"
-        android:layout_alignParentTop="true"
 
-        />
+        android:textColor="@color/cardview_dark_background" />
 
 
     <TextView
@@ -46,7 +46,7 @@
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:layout_toEndOf="@id/msgID"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/usrName"/>
 
 

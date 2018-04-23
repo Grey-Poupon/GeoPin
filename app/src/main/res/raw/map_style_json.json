@@ -57,5 +57,14 @@
         "visibility": "off"
       }
     ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   }
 ]

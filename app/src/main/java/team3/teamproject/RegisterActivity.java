@@ -1,14 +1,12 @@
 package team3.teamproject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,12 +27,14 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_register);
+        setSupportActionBar(toolbar);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
 
-        mUserName = (EditText) findViewById(R.id.reg_username_edit);
-        mPassword = (EditText) findViewById(R.id.reg_password_edit);
+        mUserName = (EditText) findViewById(R.id.usernameReg);
+        mPassword = (EditText) findViewById(R.id.passwordReg);
         mNotifyUserRegister = (TextView) findViewById(R.id.notifyUserRegister);
 
     }
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         int test = -1;
         String response = null;
 
-        //In case the there is no response from the servers
+
         String error = "Username is already in use!";
         String success = "Registration was a success!";
 
