@@ -75,9 +75,11 @@
 
 
     <array name="polutionTypes">
+        <item>Enviroment:</item>
         <item>Sound</item>
         <item>Sewage_Level</item>
         <item>Visiblity</item>
+        <item>Weather:</item>
         <item>Wind_speed</item>
         <item>Pressure</item>
         <item>Rain_Fall</item>
@@ -85,6 +87,7 @@
         <item>Humidity</item>
         <item>Solar_Diffuseradiation</item>
         <item>Rain_Accumulation</item>
+        <item>Air:</item>
         <item>NO2</item>
         <item>NO</item>
         <item>CO</item>

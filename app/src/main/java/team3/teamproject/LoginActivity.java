@@ -74,15 +74,6 @@ public class LoginActivity extends AppCompatActivity{
         StrictMode.setThreadPolicy(policy);
 
 
-        // looks if the user is already logged in to the app
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken newAccessToken) {
-                updateWithToken(newAccessToken);
-            }
-        };
-        // checks if user is logged in
-        updateWithToken(AccessToken.getCurrentAccessToken());
         LoginManager.getInstance().logOut();
         //below is for facebook log in
         facebookLoginButton = (LoginButton) findViewById(R.id.bt_facebookLogin);
@@ -188,15 +179,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    // looks if user is already logged in to facebook on the app
-    private void updateWithToken(AccessToken currentAccessToken) {
 
-        if (currentAccessToken != null) {
-            ((User) this.getApplication()).setIsGuest(false);
-            ((User) this.getApplication()).setIsFacebook(true);
-        }
-
-    }
 
 
     /**

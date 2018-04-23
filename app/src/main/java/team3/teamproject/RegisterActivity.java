@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivity(logOut);
                     }
 
-                }, 3000L);
+                }, 1000L);
             }
 
 

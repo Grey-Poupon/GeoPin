@@ -420,7 +420,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else {
             Log.e("UNKNOWN POLLUTION TYPE", "" + selectedPollution.toString());
-            currentOverlayState = null;
         }
 
         if (currentOverlayState != null) {
