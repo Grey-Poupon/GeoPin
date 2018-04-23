@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         String error = "Username is already in use!";
         String success = "Registration was a success!";
 
+
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             try {
                 response = PostStreamReader.sendCreateString("createUser.php",
