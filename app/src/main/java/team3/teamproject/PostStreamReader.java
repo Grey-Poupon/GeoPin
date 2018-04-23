@@ -170,63 +170,38 @@ public class PostStreamReader {
         return JsonStreamReader.readCommentJsonStream(in);
     }
 
-    public static URL getUserImage(String username){
-        URL obj = null;
-        try {
-            obj = new URL("https://duffin.co/uo/getUserImage.php?name=");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        HttpsURLConnection con = null;
-        try {
-            con = (HttpsURLConnection) obj.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static URL getUserImage(String userID) throws Exception{
+        userID = "name="+userID;
+
+        URL obj = new URL("https://duffin.co/uo/getUserImage.php?"+userID);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
         //add reuqest header
-        try {
-            con.setRequestMethod("POST");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        }
+        con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", System.getProperty("http.agent"));
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
+        // Send post request
         con.setDoOutput(true);
-        DataOutputStream wr = null;
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(userID);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+
+
+        InputStream in = con.getInputStream();
         String inputLine;
         StringBuffer response = new StringBuffer();
 
-        try {
-            // Send post request
-            wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(username);
-            wr.flush();
-            wr.close();
 
-            int responseCode = con.getResponseCode();
-
-            InputStream in = con.getInputStream();
-            BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-
-            while ((inputLine = bin.readLine()) != null) {
-                response.append(inputLine);
-            }
-
-            in.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+        while ((inputLine = bin.readLine()) != null) {
+            response.append(inputLine);
         }
 
-
-        try {
-            return new URL(response.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        in.close();
+        return new URL(response.toString());
     }
 
 }
