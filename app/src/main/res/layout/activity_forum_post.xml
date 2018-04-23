@@ -104,6 +104,7 @@
         </ListView>
     </LinearLayout>
 
+
     <EditText
         android:id="@+id/commentBox"
         android:layout_width="match_parent"
