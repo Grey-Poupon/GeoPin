@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         int test = -1;
         String response = null;
 
-        //In case the there is no response from the servers
+
         String error = "Username is already in use!";
         String success = "Registration was a success!";
 

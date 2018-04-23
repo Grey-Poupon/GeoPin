@@ -16,6 +16,8 @@
 
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_old_password">Please re-enter your password</string>
+    <string name="prompt_new_password">Please enter a new password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="title">Title</string>
     <string name="text">Text</string>
@@ -86,7 +88,7 @@
     <string name="profile_picture">profile picture</string>
     <string name="title_activity_account">My Account</string>
     <string name="delete_me">Delete Me</string>
-    <string name="reset">Reset</string>
+    <string name="reset">Reset Account</string>
     <string name="title_activity_main">MainActivity</string>
 
 
