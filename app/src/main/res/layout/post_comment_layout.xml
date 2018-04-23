@@ -23,7 +23,6 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:textAppearance="@style/TextAppearance.AppCompat"
-
         android:textColor="@color/cardview_dark_background" />
 
 

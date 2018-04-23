@@ -17,8 +17,13 @@ import java.util.regex.Pattern;
  * Created by Petr Makarov on 21.04.2018.
  */
 
+
+//Controlls regestering a new user
+//When an instance is created
+
 public class ContactFormActivity extends AppCompatActivity {
     private Activity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,8 @@ public class ContactFormActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_contact);
         setSupportActionBar(toolbar);
 
+
+        //Stores information regarding the user (modifiable)
         final EditText your_name        = (EditText) findViewById(R.id.nameEditContact);
         final EditText your_email       = (EditText) findViewById(R.id.emailEditContact);
         final EditText your_subject     = (EditText) findViewById(R.id.subjectEditContact);
@@ -38,10 +45,13 @@ public class ContactFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Applies data inputted as a new user
                 String name      = your_name.getText().toString();
                 String email     = your_email.getText().toString();
                 String subject   = your_subject.getText().toString();
                 String message   = your_message.getText().toString();
+
+                //Error checking
                 if (TextUtils.isEmpty(name)){
                     your_name.setError("Enter Your Name");
                     your_name.requestFocus();

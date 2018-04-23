@@ -20,9 +20,12 @@ import java.util.Scanner;
  * Functions for reading the JSON Stream from the Server  Stephen N
  */
 
+
+
+//Reads data from the databased
 public class JsonStreamReader {
 
-
+    //Returns the data required for the graph
     public static List<JsonGraphMessage> readJsonGraphStream(InputStream in, String property) {
         JsonReader reader =  new JsonReader(new InputStreamReader(in));
         try {
@@ -43,6 +46,8 @@ public class JsonStreamReader {
         return null;
     }
 
+
+    //Returns an array of obtained graph data
     private static List<JsonGraphMessage> readJsonGraphArray(JsonReader reader, String property) throws IOException {
         List<JsonGraphMessage> messages = new ArrayList<JsonGraphMessage>();
 
@@ -55,6 +60,8 @@ public class JsonStreamReader {
         return messages;
     }
 
+
+    //Returns an element to be used in the graph
     private static JsonGraphMessage readJsonGraphMessage(JsonReader reader, String property) throws IOException {
         double value = 0;
         String date = "";
@@ -85,6 +92,8 @@ public class JsonStreamReader {
         return new JsonGraphMessage(date, value, indexValue);
     }
 
+
+    //Returns the highest index
     public static int readHighestIndex(InputStream in) {
         Scanner scan = new Scanner(in);
         String s = scan.nextLine();
@@ -113,6 +122,8 @@ public class JsonStreamReader {
         return new ArrayList<JsonSensorData>();
     }
 
+
+    //Returns a list of sensor data obtained from the database
     private static List<JsonSensorData> readJsonSensorDataArray(JsonReader reader, int index) throws IOException {
         List<JsonSensorData> messages = new ArrayList<JsonSensorData>();
 
@@ -129,6 +140,7 @@ public class JsonStreamReader {
         return messages;
     }
 
+    //Returns an item of sensor data
     private static JsonSensorData readJsonSensorDataMessage(JsonReader reader) throws IOException {
         int sensorId = -1;
         double value = 0;
@@ -189,6 +201,8 @@ public class JsonStreamReader {
         return null;
     }
 
+
+    //Returns a array of pin data
     private static List<Pin> readJsonPinArray(JsonReader reader) throws IOException {
         List<Pin> messages = new ArrayList<Pin>();
 
@@ -200,6 +214,8 @@ public class JsonStreamReader {
         return messages;
     }
 
+
+    //Creates and returns a single pin item from the database
     private static Pin readJsonPinMessage(JsonReader reader) throws IOException{
 
         String ID = "";

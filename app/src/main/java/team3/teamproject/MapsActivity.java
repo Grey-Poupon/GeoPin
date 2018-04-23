@@ -69,41 +69,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LineChart mChart;
     private DialogFragment logoutDialog;
 
+
+    //Google map feature variables
     private GoogleMap mMap;
     private TileOverlay mOverlay;
     private HeatmapTileProvider mProvider;
+    //Holds which pollution is to be displayed
     private OverlayState overlayState;
+    //Holds the sensor information
     private HashMap<String,JsonSensorMessage> sensors;
     private static final String TAG = MapsActivity.class.getSimpleName();
 
-
+    // Holds the index value which the heatmap will be base from (data value)
     private int currentIndex = -1;
     private OverlayState currentOverlayState = OverlayState.Sound;
     private Map<String, Integer> dateToIndex = new HashMap<String, Integer>();
     private Map indexToDate = new HashMap();
     private DateValueFormatter dateValueFormatter = new DateValueFormatter();
 
+
+    // Define start point of the map (local 0,0)
     private LatLng startlocation = new LatLng(54.973701, -1.624397);
+    // Other map properties
     private final int maxZoom = 15;
     private final int minZoom = 13;
+    // Heatmap properties
     private final int radiusBlur = 35;
+    // Define the bounds of the map
     private final LatLngBounds mapBounds = new LatLngBounds(
             new LatLng(54.85, -1.7), new LatLng(55.07, -1.52));
 
+    // Colours that will affect how the heatmap looks
     private int[] colours;
 
+    //Heatmap colours for weather typed pollution
     private int[] weatherColours = {
             Color.rgb(152, 236, 220),
             Color.rgb(75, 205, 179),
             Color.rgb(30, 148, 126),
             Color.rgb(0, 91, 73)};
 
+
+    //Heatmap colours for air typed pollution
     private int[] airColours = {
             Color.rgb(234, 98, 96),
             Color.rgb(204, 49, 46),
             Color.rgb(195, 14, 23),
             Color.rgb(174, 0, 7)};
 
+
+    //Heatmap colours for enviroment typed pollution
     private int[] enviromantColours = {
             Color.rgb(108, 255, 35),
             Color.rgb(116, 226, 72),
@@ -117,12 +132,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private List<Marker> forumMarkers = new ArrayList<Marker>();
 
+
+    //UI elements
     private Toolbar appToolbar;
     private Spinner heatmapTypeSpinner;
 
     public MapsActivity() {
     }
 
+
+    //Run when the page loads
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +199,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+
+    //Load when the map is created with all its properties are defined
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -226,8 +248,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
+    //Called when either the polluttion type or index value changes
     private void updateGraph(OverlayState pollutionType) {
         String property = pollutionType.toString().toLowerCase();
 
@@ -245,6 +266,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setGraphValues(values, property);
     }
 
+
+    //Place data on the graph component
     private void setGraphValues(ArrayList<Entry> values, String property) {
         LineDataSet set = new LineDataSet(values, "");
         if (colours != null) {
@@ -262,6 +285,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mChart.setData(data);
     }
 
+
+    //Returns the graph data obtained by the database
     private List<JsonGraphMessage> getGraphValues(String urlPath, String property) {
         if (property == null || property == "") {
             return null;
@@ -297,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
+    //Place landmark forum markers on the map
     private void setupForumMarkers(GoogleMap map) {
         for (Pin pin : Pin.allPins) {
             Marker text = map.addMarker(
@@ -320,6 +345,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * move the camera when screen launched
      * Created by Petr Makarov modified by Rheyn Scholtz
      */
+
+    // Move camera to starting position on loadup
     private void startLocation(LatLng lat, int zoom) {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(lat, zoom);
         mMap.moveCamera(update);
@@ -327,9 +354,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // Rheyn Scholtz
 
+    //Called when the pollution spinner changes value
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedPollution = heatmapTypeSpinner.getSelectedItem().toString();
-
 
         if (selectedPollution.equals(OverlayState.CO.toString())) {
             colours = airColours;
@@ -406,10 +433,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+    //If the user selects nothing / aborts the selection
     public void onNothingSelected(AdapterView<?> adapterView) {
         return;
     }
 
+
+    //Updates the heatmap with new data
     private void UpdateHeatMap(OverlayState pollutionType) {
         // Get all sensor data to place on the heatmap
         List<JsonSensorData> allRelivantSensorData = getSensorsFromType(pollutionType);
@@ -457,6 +488,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // Rheyn Scholtz
+
+    // Takes in heatmap data and places it on the heatmap component
     public void placeDataOnMap(List<WeightedLatLng> heatmapData) {
 
         if (heatmapData.size() < 1) {
@@ -473,6 +506,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    //Get the sensor information from the database
     public List<JsonSensorData> getSensorsFromType(OverlayState type){
         String urlPath = "https://duffin.co/uo/getData.php?property=";
         if (type == OverlayState.Sound) {
@@ -545,6 +579,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return listOfSensorData;
     }
 
+
+    //Returns the sensor loction data from the database
     public List<JsonSensorData> getSensorDataFromDatabase(String urlPath, int sensorIndex) {
         List<JsonSensorData> listOfSensorData = new ArrayList<JsonSensorData>();
 
@@ -581,6 +617,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return listOfSensorData;
     }
 
+
+    //Returns the most recent index value (newest data source)
     private int getNewestIndex() {
         String urlPath = "https://duffin.co/uo/getIndex.php";
 
@@ -620,6 +658,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * Created by Petr Makarov
      */
     @Override
+
+    //Back button listener
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -631,6 +671,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * gets all sensor data from server
      * Stephen N
      */
+
+    //Returns all data regarding a sensor
     public List<JsonSensorMessage> getAllSensorData() {
         List<JsonSensorMessage> empty = new ArrayList<JsonSensorMessage>();
         URL url = null;
@@ -661,6 +703,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
+
+    //Creates a sensor map
     public HashMap<String,JsonSensorMessage> createSensorMap(){
         HashMap<String,JsonSensorMessage> map = new HashMap<>();
         List<JsonSensorMessage> sensors = getAllSensorData();
@@ -671,6 +715,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    //Returns all the landmark pins stored on the database
     public List<Pin> getAllPins(){
         List<Pin> empty = new ArrayList<Pin>();
         String message = "";
@@ -702,6 +747,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return empty;
     }
 
+
+    //Creates a text item
     public BitmapDescriptor createText(String text) {
 
         Paint textPaint = new Paint();
@@ -724,11 +771,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return textBitmap;
     }
 
+
+    //Chart gesture listener
     @Override
     public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
+        return;
     }
 
+    //Chart value selected listener
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
@@ -742,46 +792,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         UpdateHeatMap(currentOverlayState);
     }
 
+
+    //Chart hold listener
     @Override
     public void onChartLongPressed(MotionEvent me) {
-
+        return;
     }
 
+    //Chart zoom listener
     @Override
     public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-
+        return;
     }
 
+    //Chart tap listener
     @Override
     public void onChartSingleTapped(MotionEvent me) {
-
+        return;
     }
 
+    //Chart nothing selected listener
     @Override
     public void onNothingSelected() {
-
+        return;
     }
 
+    //Chart gesture listener
     @Override
     public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-
+        return;
     }
 
+
+    //Chart gesture listener
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
+        return;
     }
 
+    //Chart double tap listener
     @Override
     public void onChartDoubleTapped(MotionEvent me) {
-
+        return;
     }
 
+    //Chart listener
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
-
+        return;
     }
 
+    //On pin click listener
     public void onPMenuClick(final View view){
         if(!((User) this.getApplication()).getUserID().equals("GUEST")){
         PopupMenu popup = new PopupMenu(MapsActivity.this, view);
@@ -831,8 +892,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     }
 
-    public void onRefreshClick(View view){
-        return;
+
+    //Refresh button listener
+    public void onRefreshClick(View view) {
+        currentIndex = -1;
+        UpdateHeatMap(overlayState);
     }
 
 

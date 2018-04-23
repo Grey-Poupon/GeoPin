@@ -8,6 +8,8 @@ import java.net.URL;
  * Created by Steve on 22/03/2018.
  */
 
+
+//Holds the data regarding the user
 public class User extends Application {
     private String userID;
     private String userName;

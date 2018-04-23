@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -22,11 +23,16 @@ import java.util.List;
  * Created by Steve on 03/03/2018.
  */
 
+
+//Controlls forum message
+
 public class ForumMessage implements Comparable, Parcelable {
 
     /** This is the format for a Date it should used globally*/
     public final static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+
+    //User data required for the post
     private String text;
     private String userID;
     private String ID;
@@ -35,6 +41,8 @@ public class ForumMessage implements Comparable, Parcelable {
     private String username;
     private URL url;
 
+
+    //Constructor
     public ForumMessage(String text,String username, String uID, String parentID,String ID,Date date){
         this.text = text;
         this.userID = uID;
@@ -47,8 +55,7 @@ public class ForumMessage implements Comparable, Parcelable {
     }
 
 
-
-
+    //Getters and setters
     public String getText() {
         return text;
     }
@@ -66,7 +73,6 @@ public class ForumMessage implements Comparable, Parcelable {
     }
 
 
-
     public String getDateString() {
         return format.format(date);
     }
@@ -74,6 +80,8 @@ public class ForumMessage implements Comparable, Parcelable {
         return date;
     }
 
+
+    //Overidden comparitor
     @Override
     public int compareTo(@NonNull Object o) {
         return date.compareTo(((ForumMessage)o).getDate());
@@ -90,6 +98,7 @@ public class ForumMessage implements Comparable, Parcelable {
 
 
 
+    //Forum message reader
     protected ForumMessage(Parcel in) {
         text = in.readString();
         userID = in.readString();
@@ -107,6 +116,8 @@ public class ForumMessage implements Comparable, Parcelable {
         return 0;
     }
 
+
+    //Write post to database
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(text);

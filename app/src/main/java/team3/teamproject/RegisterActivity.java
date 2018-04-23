@@ -15,6 +15,8 @@ import android.widget.TextView;
  * Used for creating a new account
  * Created by Mantas Sutas
  */
+
+//Controlls the registering activity for new users
 public class RegisterActivity extends AppCompatActivity {
 
     EditText mUserName;

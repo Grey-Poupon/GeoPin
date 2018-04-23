@@ -4,6 +4,9 @@ import android.os.Parcel;
 
 import java.util.Date;
 
+
+//Holds data regarding a fourm post
+
 public class ForumPost extends ForumMessage  {
 
     public String getTitle() {

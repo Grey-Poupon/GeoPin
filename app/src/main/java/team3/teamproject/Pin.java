@@ -9,6 +9,8 @@ import java.util.List;
  * Created by Steve on 19/04/2018.
  */
 
+
+//Defins a pin object
 public class Pin {
 
     public static List<Pin> allPins = new ArrayList<Pin>();
@@ -23,6 +25,8 @@ public class Pin {
         this.name = name;
     }
 
+
+    //Getters and setters
     public String getID() {
         return ID;
     }

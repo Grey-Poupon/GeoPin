@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+
+//Controlls the posing
 public class PostListActivity extends AppCompatActivity {
 
     private List<ForumPost> posts = new ArrayList<>();
@@ -79,6 +81,7 @@ public class PostListActivity extends AppCompatActivity {
         String newID = "-1";
         try {
             newID = PostStreamReader.createPost(newPost.getUsername(),newPost.getTitle(),newPost.getText(),newPost.getBoardID());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,6 +8,9 @@ import java.util.Date;
  * Created by Steve on 02/03/2018. Modified by Rheyn Scholtz
  */
 
+
+//Holds data regarding a sensor
+
 public class JsonSensorMessage {
     String ID;
     String sensorName;
@@ -15,6 +18,8 @@ public class JsonSensorMessage {
     double baseHeight;
     Date date;
 
+
+    //Constructor
     public JsonSensorMessage(String ID, String sensorName, double lat, double lon, double baseHeight, Date date){
         this.ID = ID;
 
@@ -24,6 +29,8 @@ public class JsonSensorMessage {
         this.date = date;
     }
 
+
+    //Getters and setters
     public String getID() {
         return ID;
     }

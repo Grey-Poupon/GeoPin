@@ -13,6 +13,14 @@
     tools:context="team3.teamproject.LoginActivity">
 
     <!-- Login progress -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="match_parent"
@@ -99,3 +107,5 @@
                 android:text="@string/action_without_login" />
 
         </LinearLayout>
+    </ScrollView>
+</LinearLayout>

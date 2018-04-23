@@ -40,16 +40,13 @@ public class SubmitPageActivity extends AppCompatActivity {
         String uID = ((User) this.getApplication()).getUserID();
         String username = ((User) this.getApplication()).getUserName();
 
-        ForumPost post = new ForumPost(title,username,text,uID,ID,getNewID(),new Date());
+        ForumPost post = new ForumPost(title,username,text,uID,ID,"-1",new Date());
 
         return post;
 
     }
 
-    private String getNewID() {
-        // ToDo get new ID from Server to stop ID duplication
-        return String.valueOf(new Random().nextInt(10000));
-    }
+
 
 
 }

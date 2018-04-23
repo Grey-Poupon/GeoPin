@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,9 @@ import java.util.List;
  * Created by Steve on 08/03/2018.
  */
 
+
+//Controls forum acvitivity
+
 public class ForumPostActivity extends AppCompatActivity {
 
     private ForumPost post;
@@ -33,6 +37,7 @@ public class ForumPostActivity extends AppCompatActivity {
     private String boardID;
 
 
+    //Instantiate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,8 @@ public class ForumPostActivity extends AppCompatActivity {
         });
    }
 
+
+   //Cleans the comment box
     private void cleanCommentBox() {
         // wipe text
         ((EditText) findViewById(R.id.commentBox)).setText("");
@@ -86,6 +93,8 @@ public class ForumPostActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+
+    //Reply function
     private void quickReply(ForumMessage forumMessage) {
         // focus on the comment Box
         EditText commentText = (EditText) findViewById(R.id.commentBox);
@@ -99,12 +108,16 @@ public class ForumPostActivity extends AppCompatActivity {
         imm.showSoftInput(commentText, InputMethodManager.SHOW_IMPLICIT);
     }
 
+
+    //Add to map
     private void populateMap(List<ForumMessage> messages) {
         for(int i= 0;i<messages.size();i++){
             msgMap.put(messages.get(i).getID(),messages.get(i));
         }
     }
 
+
+    //Returns all comments
     public List<ForumMessage> getComments(ForumPost post) {
         if(post.getID() != "-1"){
             try {
@@ -117,6 +130,8 @@ public class ForumPostActivity extends AppCompatActivity {
         return new ArrayList<ForumMessage>();
 
     }
+
+    //Creates a forum message
     private void createForumMessage(String txt){
         String newID = "-1";
         String uID = ((User) this.getApplication()).getUserID();
@@ -135,14 +150,19 @@ public class ForumPostActivity extends AppCompatActivity {
         }
     }
 
+    //Send a message to be saved on the server
     private String addMsgToServer(ForumMessage message) {
         try {
            return PostStreamReader.createComment(message.getUsername(),message.getText(),message.getParentID());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "-1";
     }
+
+
+    //Adds a message to the list of messages
     private void addMessageToList(ForumMessage message) {
         adapter.add(message);
         msgMap.put(message.getID(),message);

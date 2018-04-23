@@ -39,6 +39,9 @@ import java.util.regex.Pattern;
  * Class used for loginning in to application
  * Modified by Mantas Sutas
  */
+
+
+//Controls the login on features
 public class LoginActivity extends AppCompatActivity{
     private static LoginActivity loginActivity;
 
@@ -58,6 +61,8 @@ public class LoginActivity extends AppCompatActivity{
     private String facebookName;
 
 
+
+    //Constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +130,8 @@ public class LoginActivity extends AppCompatActivity{
         mNotifyUserLogin = (TextView) findViewById(R.id.notifyUserLogIn);
     }
 
+
+    //Displays the user info
     // used for setting facebook user details
     public void displayUserInfo(JSONObject object) {
         String id, first_name, last_name = null;

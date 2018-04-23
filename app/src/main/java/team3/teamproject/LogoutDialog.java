@@ -15,7 +15,7 @@ import com.facebook.login.LoginManager;
  * Created by Petr Makarov on 21.04.2018.
  */
 
-
+//Controlls loggin out the user
 
 public class LogoutDialog extends DialogFragment {
     @Override

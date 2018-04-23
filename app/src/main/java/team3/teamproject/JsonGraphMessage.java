@@ -9,6 +9,8 @@ import java.util.List;
  * Created by Tyler Duffin on 18/04/2018.
  */
 
+
+//Controls a data type for a graph point
 public class JsonGraphMessage {
     String date;
     double value;

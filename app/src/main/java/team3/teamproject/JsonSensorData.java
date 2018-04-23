@@ -9,6 +9,9 @@ import java.util.List;
  * Created by Rheyn Scholtz on 17/04/2018.
  */
 
+
+//Holds the data regarding a sensor
+
 public class JsonSensorData {
     int sensorID;
     Date date;
@@ -16,6 +19,8 @@ public class JsonSensorData {
     LatLng latLng;
     int indexValue;
 
+
+    //Constructor
     public JsonSensorData(int sensorID, Date date, double value, int indexValue){
         this.sensorID = sensorID;
         this.date = date;
@@ -23,6 +28,8 @@ public class JsonSensorData {
         this.indexValue = indexValue;
     }
 
+
+    //Getters and setters
     public Date getDate() {
         return date;
     }
@@ -43,6 +50,8 @@ public class JsonSensorData {
         latLng = location;
     }
 
+
+    //Overidden toString method
     public String toString () {
         if (latLng == null) {
             return "null";

@@ -48,6 +48,7 @@ public class MapsActivityTest {
     }
 
     @Test
+
     public void getSensorFromType_validTypeSound_returnsList(){
         MapsActivity maps = new MapsActivity();
         OverlayState sound = OverlayState.Sound;
@@ -71,6 +72,7 @@ public class MapsActivityTest {
         MapsActivity maps = new MapsActivity();
         OverlayState NO = OverlayState.NO;
         assertNotEquals(maps.getSensorsFromType(NO),0);
+
     }
 
     @Test
@@ -134,7 +136,6 @@ public class MapsActivityTest {
         OverlayState Visiblity = OverlayState.Visiblity;
         assertNotEquals(maps.getSensorsFromType(Visiblity),0);
     }
-
 
 
     @Test

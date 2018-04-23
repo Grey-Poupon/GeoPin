@@ -5,6 +5,8 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
 
+
+//Controlls the date controller
 public class DateValueFormatter implements IAxisValueFormatter{
     private ArrayList<String> dates;
     private ArrayList<Integer> indices;

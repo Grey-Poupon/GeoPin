@@ -1,15 +1,11 @@
 package team3.teamproject;
 
 /**
-<<<<<<< HEAD
- * Created by Steve on 22/02/2018.
-=======
  * Created by Steve on 22/02/2018. Modified by Rheyn Scholtz
->>>>>>> Rheyn1/master
  */
 
-// Modified by Rheyn Scholtz
 
+// Defines the different types of pollution
 public enum OverlayState {
     Temperature,
     Sound,

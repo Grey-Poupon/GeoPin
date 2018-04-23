@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.List;
 import java.util.Date;
 
@@ -23,17 +26,22 @@ import java.util.Date;
  * Created by Steve on 08/03/2018.
  */
 
-public class ForumMessageAdapter extends ArrayAdapter<ForumMessage>{
-ForumPostActivity page;
-private String msgID;
-private Date msgDate;
-private ForumMessage source;
 
+//Controls the flow of forum messages on each pin
+
+public class ForumMessageAdapter extends ArrayAdapter<ForumMessage>{
+    ForumPostActivity page;
+    private String msgID;
+    private Date msgDate;
+    private ForumMessage source;
+
+    //Constructor
     public ForumMessageAdapter(@NonNull Context context, List<ForumMessage> resources,ForumPostActivity page) {
         super(context,0, resources);
         this.page = page;
     }
 
+    //Load in all previous messages
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

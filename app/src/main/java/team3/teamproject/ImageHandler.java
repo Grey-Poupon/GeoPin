@@ -12,6 +12,8 @@ import java.net.URL;
 /**
  * Created by Steve on 22/04/2018.
  */
+
+//Controls the images used
 public class ImageHandler {
     private static final int PIC_WIDTH = 50;
     private static final int PIC_HEIGHT = 50;

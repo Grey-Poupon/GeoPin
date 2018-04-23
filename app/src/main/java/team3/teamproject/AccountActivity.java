@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+//Controlls account details and activity
 public class AccountActivity extends AppCompatActivity {
 
     EditText mCurrentPassAcc;

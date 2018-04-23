@@ -25,7 +25,6 @@
         android:layout_above="@id/bt_comment"
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/postTitle"
             android:layout_width="match_parent"
@@ -42,6 +41,7 @@
             android:textColor="@android:color/black"
             tools:text="txt" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,12 +56,14 @@
                 android:textColor="@color/cardview_dark_background"
                 tools:text="usrname" />
 
+
             <TextView
                 android:id="@+id/date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".30"
                 tools:text="date" />
+
 
 
         </LinearLayout>

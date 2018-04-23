@@ -15,6 +15,8 @@ import java.util.List;
  * Created by Steve on 06/03/2018.
  */
 
+
+//Controls the flow of forum posts
 public class ForumPostAdapter extends ArrayAdapter<ForumPost> {
 
     public ForumPostAdapter(@NonNull Context context, List<ForumPost> resources) {

@@ -17,6 +17,8 @@ import javax.net.ssl.HttpsURLConnection;
  * Functions for sendsing Post Requests to the server
  */
 
+
+//Controlls the flow of posts between the app and the database
 public class PostStreamReader {
 
 
