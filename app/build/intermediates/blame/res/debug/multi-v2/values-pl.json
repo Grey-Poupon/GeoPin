@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pl\\values-pl.xml",
+            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pl\\values-pl.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\983d41a1f97af539cc65d2cbd3835dec\\res\\values-pl\\values-pl.xml",
+                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.0.aar\\e3d2fc0ee04c27248ce5944c7e21910b\\res\\values-pl\\values-pl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\d5cfe760736cb59c5ed1de235a1b807c\\res\\values-pl\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "283",
-                        "endColumns": "198",
-                        "endOffsets": "481"
-                    },
-                    "to": {
-                        "startLines": "52",
-                        "startColumns": "4",
-                        "startOffsets": "5787",
-                        "endColumns": "198",
-                        "endOffsets": "5981"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\41e9189b45daa1f34fdbe1fed158fc04\\res\\values-pl\\values.xml",
+                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\795101744cb1f7ca0e5f310dc2ed8c4e\\res\\values-pl\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.32.0.aar\\fda88d311cd1fba2e6d8bec6a41aabca\\res\\values-pl\\values-pl.xml",
+                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.32.0.aar\\249486ee4f889e82e4001e7794ece8a9\\res\\values-pl\\values-pl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +52,23 @@
                         "startOffsets": "2077,2233,2366,2504,2615,2701,2791,2868,2957,3053,3181,3296,3391,3486,3589,3715,3797,3884,4062,4157,4258,4373,4482",
                         "endColumns": "155,132,137,110,85,89,76,88,95,127,114,94,94,102,125,81,86,177,94,100,114,108,156",
                         "endOffsets": "2228,2361,2499,2610,2696,2786,2863,2952,3048,3176,3291,3386,3481,3584,3710,3792,3879,4057,4152,4253,4368,4477,4634"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\af188564d535c6178761b875cd969f53\\res\\values-pl\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "283",
+                        "endColumns": "198",
+                        "endOffsets": "481"
+                    },
+                    "to": {
+                        "startLines": "52",
+                        "startColumns": "4",
+                        "startOffsets": "5787",
+                        "endColumns": "198",
+                        "endOffsets": "5981"
                     }
                 }
             ]
