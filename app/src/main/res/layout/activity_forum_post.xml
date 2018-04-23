@@ -2,31 +2,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar4"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:visibility="visible">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/forum_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/forum_title"
-            android:textColor="@color/colorToolbarText"
-            android:textSize="@dimen/activity_registration_text"
-            android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_postMsg"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="87dp"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_above="@id/bt_comment"
         android:orientation="vertical">
 
         <LinearLayout
@@ -83,10 +78,10 @@
         android:layout_alignParentStart="true"
         android:ems="10"
         android:inputType="textLongMessage"
-        android:text="@string/commentTxt" />
+        android:hint="@string/commentTxt" />
 
     <Button
-        android:id="@+id/commentBtn"
+        android:id="@+id/bt_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/commentBox"

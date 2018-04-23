@@ -7,14 +7,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +23,6 @@ import android.widget.Spinner;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -145,7 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sensors = createSensorMap();
 
         logoutDialog = new LogoutDialog();
-        appToolbar = (Toolbar) findViewById(R.id.toolbar3);
+        appToolbar = (Toolbar) findViewById(R.id.toolbar_maps);
         // Pollution selection
         heatmapTypeSpinner = (Spinner) findViewById(R.id.heatmapType);
 

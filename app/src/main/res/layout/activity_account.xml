@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_account"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -22,19 +23,27 @@
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
-        android:id="@+id/myAccForm"
-        android:layout_width="match_parent"
-        android:layout_height="505dp"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_anchorGravity="left|bottom"
-        tools:layout_editor_absoluteY="62dp">
+    android:id="@+id/myAccForm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_vertical_margin"
+    app:layout_anchor="@+id/appBarLayout"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_anchorGravity="left|bottom">
 
         <LinearLayout
             android:id="@+id/myAccFormLinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/resetPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/reset_password"
+                android:textSize="@dimen/acc_text"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -75,6 +84,20 @@
                 android:layout_marginTop="@dimen/activity_login_small_margin"
                 android:onClick="onResetPassClick"
                 android:text="@string/reset" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/space_margin"
+                android:layout_marginBottom="@dimen/space_margin" />
+
+            <TextView
+                android:id="@+id/deleteAcc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/delete_account"
+                android:textSize="@dimen/acc_text"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

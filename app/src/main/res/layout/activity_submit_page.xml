@@ -4,24 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar4"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:visibility="visible">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/forum_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/forum_title"
-            android:textColor="@color/colorToolbarText"
-            android:textSize="@dimen/activity_registration_text"
-            android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_submit"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
+
+    </android.support.design.widget.AppBarLayout>
     <TextView
         android:id="@+id/submitInfoTxt"
         android:layout_width="match_parent"
@@ -59,7 +54,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/submitPageBtn"
+        android:id="@+id/bt_submitPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit" />

@@ -1,22 +1,35 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@android:color/white"
     tools:context=".ContactFormActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_contact"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+
     <ScrollView
+        android:id="@+id/contactForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/contactLinearForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -24,79 +37,79 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="3dp"
+                android:layout_marginStart="@dimen/contact_text_margin"
                 android:text="@string/contact_form_name"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="@dimen/contact_text" />
 
             <EditText
-                android:id="@+id/your_name"
+                android:id="@+id/nameEditContact"
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textSize="14sp" />
+                android:textSize="@dimen/contact_edit" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="3dp"
+                android:layout_marginStart="@dimen/contact_text_margin"
                 android:text="@string/contact_form_email"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="@dimen/contact_text" />
 
             <EditText
-                android:id="@+id/your_email"
+                android:id="@+id/emailEditContact"
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
-                android:textSize="14sp" />
+                android:textSize="@dimen/contact_edit" />
 
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
+                android:layout_marginStart="@dimen/contact_text_margin"
                 android:text="@string/contact_form_subject"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="@dimen/contact_text" />
 
             <EditText
-                android:id="@+id/your_subject"
+                android:id="@+id/subjectEditContact"
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textSize="14sp" />
+                android:textSize="@dimen/contact_edit" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="32dp"
-                android:paddingLeft="3dp"
+                android:layout_marginStart="@dimen/contact_text_margin"
                 android:text="@string/contact_form_message"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="@dimen/contact_text" />
 
             <EditText
-                android:id="@+id/your_message"
+                android:id="@+id/messageContact"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:height="180dp"
+                android:height="140dp"
                 android:gravity="top"
                 android:inputType="textMultiLine"
-                android:textSize="14sp" />
+                android:textSize="@dimen/contact_edit" />
 
             <Button
-                android:id="@+id/post_message"
+                android:id="@+id/bt_postContact"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="center"

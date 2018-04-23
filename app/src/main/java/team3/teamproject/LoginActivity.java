@@ -1,6 +1,5 @@
 package team3.teamproject;
 
-import android.app.Application;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.text.TextUtils;
 
-import android.util.Log;
 import android.view.View;
 
 import com.facebook.AccessToken;
@@ -26,17 +24,14 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +79,7 @@ public class LoginActivity extends AppCompatActivity{
         updateWithToken(AccessToken.getCurrentAccessToken());
 
         //below is for facebook log in
-        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
+        facebookLoginButton = (LoginButton) findViewById(R.id.bt_facebookLogin);
         facebookLoginButton.setReadPermissions("email", "public_profile");
 
         callbackManager = CallbackManager.Factory.create();
@@ -125,8 +120,8 @@ public class LoginActivity extends AppCompatActivity{
         });
         loginActivity = this;
 
-        mUserName = (EditText) findViewById(R.id.username_login);
-        mPassword = (EditText) findViewById(R.id.password_login);
+        mUserName = (EditText) findViewById(R.id.usernameLogin);
+        mPassword = (EditText) findViewById(R.id.passwordLogin);
         mNotifyUserLogin = (TextView) findViewById(R.id.notifyUserLogIn);
     }
 

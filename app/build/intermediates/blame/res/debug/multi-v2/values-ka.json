@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\R3Z3R0\\PinIt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ka\\values-ka.xml",
+            "outputFile": "C:\\Users\\petym\\AndroidStudioProjects\\final2\\GeoPin\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ka\\values-ka.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\795101744cb1f7ca0e5f310dc2ed8c4e\\res\\values-ka\\values.xml",
+                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\41e9189b45daa1f34fdbe1fed158fc04\\res\\values-ka\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\R3Z3R0\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\af188564d535c6178761b875cd969f53\\res\\values-ka\\values.xml",
+                    "source": "C:\\Users\\petym\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\d5cfe760736cb59c5ed1de235a1b807c\\res\\values-ka\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

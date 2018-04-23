@@ -19,7 +19,7 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_account);
         setSupportActionBar(toolbar);
 
         mCurrentPassAcc = (EditText)findViewById(R.id.currentPassAcc);
