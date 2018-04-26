@@ -257,6 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Called when either the polluttion type or index value changes
     private void updateGraph(OverlayState pollutionType) {
         String property = pollutionType.toString().toLowerCase();
+        property.replaceAll("_","");
 
         List<JsonGraphMessage> x = getGraphValues("https://duffin.co/uo/getAverages.php?property=", property);
         if(x==null || x.size()<1){return;}
@@ -387,7 +388,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else if (selectedPollution.equals(OverlayState.Temperature.toString())) {
             colours = weatherColours;
-            UpdateHeatMap(OverlayState.Temperature);
+            currentOverlayState = OverlayState.Temperature;
         }
         else if (selectedPollution.equals(OverlayState.Wind_speed.toString())) {
             colours = weatherColours;

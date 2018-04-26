@@ -27,6 +27,7 @@ import com.facebook.login.widget.LoginButton;
 
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Class used for loginning in to application
+ * Class used for logging in to application
  * Modified by Mantas Sutas
  */
 
