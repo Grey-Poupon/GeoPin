@@ -906,6 +906,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRefreshClick(View view) {
         currentIndex = -1;
         UpdateHeatMap(overlayState);
+        updateGraph(overlayState);
     }
 
 
