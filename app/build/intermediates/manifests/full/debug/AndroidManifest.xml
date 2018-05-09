@@ -38,6 +38,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
 
         <!-- The API key for Google Maps-based APIs is defined as a string resource. -->
@@ -69,7 +70,8 @@
         </activity>
         <activity
             android:name="team3.teamproject.LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,34 +81,42 @@
         <activity
             android:name="team3.teamproject.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName="team3.teamproject.LoginActivity" />
+            android:parentActivityName="team3.teamproject.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="team3.teamproject.PostListActivity"
             android:label="@string/title_activity_forum"
-            android:parentActivityName="team3.teamproject.MapsActivity" />
+            android:parentActivityName="team3.teamproject.MapsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="team3.teamproject.ForumPostActivity"
             android:label="@string/title_activity_forum_page"
-            android:parentActivityName="team3.teamproject.PostListActivity" />
+            android:parentActivityName="team3.teamproject.PostListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="team3.teamproject.SubmitPageActivity"
             android:label="@string/title_activity_submit_page"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name="team3.teamproject.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name="team3.teamproject.ContactFormActivity"
             android:label="@string/title_activity_contact"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name="team3.teamproject.LoadingBarActivity"
             android:label="@string/title_activity_loading_bar"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name="team3.teamproject.AccountActivity"
             android:label="@string/title_activity_account"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <meta-data

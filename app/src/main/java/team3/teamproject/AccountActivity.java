@@ -41,62 +41,73 @@ public class AccountActivity extends AppCompatActivity {
     public void onResetPassClick(View view){
         // id is used to confirm which account's password to change
 
-        //current password used for confirmation and new one to replace old one
-        String userID = ((User) this.getApplication()).getUserID();
-        String oldPassword = mCurrentPassAcc.getText().toString();
-        String newPassword = mNewPassAcc.getText().toString();
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(AccountActivity.this);
+        builder1.setTitle("Reset password?")
+                .setMessage("Are you sure you want to reset your account?")
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //current password used for confirmation and new one to replace old one
+                                String userID = ((User) getApplication()).getUserID();
+                                String oldPassword = mCurrentPassAcc.getText().toString();
+                                String newPassword = mNewPassAcc.getText().toString();
 
-        // used to notify user what happened
-        String success = "Password change successful! You will be logged out!";
-        String incorrect = "Password is incorrect!";
-        String empty = "Password fields cannot be empty!";
+                                // used to notify user what happened
+                                String success = "Password change successful! You will be logged out!";
+                                String incorrect = "Password is incorrect!";
+                                String empty = "Password fields cannot be empty!";
 
-        //used for logging user out after a while
-        Handler logOutTimer = new Handler();
+                                //used for logging user out after a while
+                                Handler logOutTimer = new Handler();
 
 
-        //checks if new password field is empty
-        if(!mNewPassAcc.getText().toString().equals("")
-                && !mCurrentPassAcc.getText().toString().equals("") ) {
-            try {
-                String response = PostStreamReader.sendCreateString("changePassword.php",
-                        "userID=" + userID + "&password=" + oldPassword + "&newPassword="
-                                + newPassword);
-                if(response.equals("1"))
-                {
-                    mStatusBar.setTextColor(Color.GREEN);
-                    mStatusBar.setText(success);
+                                //checks if new password field is empty
+                                if (!mNewPassAcc.getText().toString().equals("")
+                                        && !mCurrentPassAcc.getText().toString().equals("")) {
+                                    try {
+                                        String response = PostStreamReader.sendCreateString("changePassword.php",
+                                                "userID=" + userID + "&password=" + oldPassword + "&newPassword="
+                                                        + newPassword);
+                                        if (response.equals("1")) {
+                                            mStatusBar.setTextColor(Color.GREEN);
+                                            mStatusBar.setText(success);
 
-                    //logs out automatically when password change is successful
-                    logOutTimer.postDelayed(new Runnable() {
+                                            //logs out automatically when password change is successful
+                                            logOutTimer.postDelayed(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            Intent logOut =
-                                    new Intent(getApplication(), LoginActivity.class);
-                            startActivity(logOut);
-                        }
+                                                @Override
+                                                public void run() {
+                                                    Intent logOut =
+                                                            new Intent(getApplication(), LoginActivity.class);
+                                                    startActivity(logOut);
+                                                }
 
-                    }, 3000L);
+                                            }, 3000L);
+                                        } else {
+                                            mStatusBar.setTextColor(Color.RED);
+                                            mStatusBar.setText(incorrect);
+                                        }
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+                                    mStatusBar.setTextColor(Color.RED);
+                                    mStatusBar.setText(empty);
+                                }
+
+                            }});
+    AlertDialog alert = builder1.create();
+        alert.show();
                 }
-                else
-                {
-                    mStatusBar.setTextColor(Color.RED);
-                    mStatusBar.setText(incorrect);
-                }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-            mStatusBar.setTextColor(Color.RED);
-            mStatusBar.setText(empty);
-        }
-
-    }
     //used for sending an account deletion
     public void onDeleteMeClick(View view){
 
@@ -177,6 +188,6 @@ public class AccountActivity extends AppCompatActivity {
                         });
         AlertDialog alert = builder.create();
         alert.show();
-        }
+}
 
 }
