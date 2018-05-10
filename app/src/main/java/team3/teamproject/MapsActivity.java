@@ -257,7 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Called when either the polluttion type or index value changes
     private void updateGraph(OverlayState pollutionType) {
         String property = pollutionType.toString().toLowerCase();
-        property.replaceAll("_","");
+        property = property.replaceAll("_","");
 
         List<JsonGraphMessage> x = getGraphValues("https://duffin.co/uo/getAverages.php?property=", property);
         if(x==null || x.size()<1){return;}
@@ -390,7 +390,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             colours = weatherColours;
             currentOverlayState = OverlayState.Temperature;
         }
-        else if (selectedPollution.equals(OverlayState.Wind_speed.toString())) {
+        else if (selectedPollution.equals("Wind Speed")) {
             colours = weatherColours;
             currentOverlayState = OverlayState.Wind_speed;
         }
@@ -406,25 +406,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             colours = weatherColours;
             currentOverlayState = OverlayState.Pressure;
         }
-        else if (selectedPollution.equals(OverlayState.Rain_Accumulation.toString())) {
+        else if (selectedPollution.equals("Rain Accumulation")) {
             colours = weatherColours;
             currentOverlayState = OverlayState.Rain_Accumulation;
         }
-        else if (selectedPollution.equals(OverlayState.Rain_Fall.toString())) {
+        else if (selectedPollution.equals("Rain Fall")) {
             colours = weatherColours;
             currentOverlayState = OverlayState.Rain_Fall;
         }
-        else if (selectedPollution.equals(OverlayState.Sewage_Level.toString())) {
+        else if (selectedPollution.equals("Sewage Level")) {
             colours = enviromantColours;
             currentOverlayState = OverlayState.Sewage_Level;
         }
-        else if (selectedPollution.equals(OverlayState.Solar_Diffuseradiation.toString())) {
+        else if (selectedPollution.equals("Solar Diffuse Radiation")) {
             colours = weatherColours;
             currentOverlayState = OverlayState.Solar_Diffuseradiation;
         }
-        else if (selectedPollution.equals(OverlayState.Visiblity.toString())) {
+        else if (selectedPollution.equals(OverlayState.Visibility.toString())) {
             colours = enviromantColours;
-            currentOverlayState = OverlayState.Visiblity;
+            currentOverlayState = OverlayState.Visibility;
         }
         else {
             Log.e("UNKNOWN POLLUTION TYPE", "" + selectedPollution.toString());
@@ -559,8 +559,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else if (type == OverlayState.Solar_Diffuseradiation) {
             urlPath += "SolarDiffuseradiation";
         }
-        else if (type == OverlayState.Visiblity) {
-            urlPath += "Visiblity";
+        else if (type == OverlayState.Visibility) {
+            urlPath += "Visibility";
         }
         else {
             Log.e("Overlay state error", "" + overlayState.toString() + " Not recognised");
@@ -905,8 +905,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Refresh button listener
     public void onRefreshClick(View view) {
         currentIndex = -1;
-        UpdateHeatMap(overlayState);
-        updateGraph(overlayState);
+        UpdateHeatMap(currentOverlayState);
+        updateGraph(currentOverlayState);
     }
 
 

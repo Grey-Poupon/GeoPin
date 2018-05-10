@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\7c2fece689b0119a2aac16e2c2d33258\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:design:25.3.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\design-25.3.0.aar\c6fbd7dc623833999f28cf1eb45263b9\AndroidManifest.xml:17:1-31:12
 MERGED from [com.facebook.android:facebook-login:4.32.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\facebook-login-4.32.0.aar\fda88d311cd1fba2e6d8bec6a41aabca\AndroidManifest.xml:21:1-31:12
@@ -32,20 +32,20 @@ MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\60ace7f6fde32bd6449623c8d288dd81\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\083eb66d78811ace159da8e7af354a57\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\924ab25991aa4108b84bc752243f9684\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
+INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
 	package
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:3:5-32
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-95:12
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:1-104:12
 		INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:2:11-69
@@ -72,7 +72,7 @@ ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\Andro
 	android:name
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:16:22-69
 application
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:18:5-93:19
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:18:5-102:19
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\7c2fece689b0119a2aac16e2c2d33258\AndroidManifest.xml:7:5-11:19
 MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\7c2fece689b0119a2aac16e2c2d33258\AndroidManifest.xml:7:5-11:19
 MERGED from [com.android.support:design:25.3.0] C:\Users\petym\.gradle\caches\transforms-1\files-1.1\design-25.3.0.aar\c6fbd7dc623833999f28cf1eb45263b9\AndroidManifest.xml:29:5-20
@@ -190,85 +190,103 @@ ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\Andro
 	android:scheme
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:50:23-72
 activity#team3.teamproject.LoginActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:53:9-60:20
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:53:9-61:20
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:56:13-49
 	android:label
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:55:13-45
 	android:name
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:54:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:56:13-59:29
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:57:13-60:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:57:17-69
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:58:17-69
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:57:25-66
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:58:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:58:17-77
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:59:17-77
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:58:27-74
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:59:27-74
 activity#team3.teamproject.MapsActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:61:9-64:59
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:62:9-66:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:66:13-49
 	android:parentActivityName
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:65:13-56
+	android:label
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:64:13-56
-	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:63:13-56
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:62:13-41
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:63:13-41
 activity#team3.teamproject.PostListActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:65:9-68:58
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:67:9-71:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:71:13-49
 	android:parentActivityName
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:68:13-55
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:70:13-55
 	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:67:13-57
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:69:13-57
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:66:13-45
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:68:13-45
 activity#team3.teamproject.ForumPostActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:69:9-72:62
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:72:9-76:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:76:13-49
 	android:parentActivityName
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:72:13-59
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:75:13-59
 	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:71:13-62
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:74:13-62
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:70:13-46
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:73:13-46
 activity#team3.teamproject.SubmitPageActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:73:9-76:47
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:77:9-81:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:81:13-49
 	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:75:13-63
-	android:theme
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:76:13-44
-	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:74:13-47
-activity#team3.teamproject.RegisterActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:77:9-80:47
-	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:79:13-60
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:79:13-63
 	android:theme
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:80:13-44
 	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:78:13-45
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:78:13-47
+activity#team3.teamproject.RegisterActivity
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:82:9-86:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:86:13-49
+	android:label
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:84:13-60
+	android:theme
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:85:13-44
+	android:name
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:83:13-45
 activity#team3.teamproject.ContactFormActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:81:9-84:47
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:87:9-91:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:91:13-49
 	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:83:13-59
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:89:13-59
 	android:theme
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:84:13-44
-	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:82:13-48
-activity#team3.teamproject.LoadingBarActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:85:9-88:47
-	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:87:13-63
-	android:theme
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:88:13-44
-	android:name
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:86:13-47
-activity#team3.teamproject.AccountActivity
-ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:89:9-92:47
-	android:label
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:91:13-59
-	android:theme
-		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:92:13-44
-	android:name
 		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:90:13-44
+	android:name
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:88:13-48
+activity#team3.teamproject.LoadingBarActivity
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:92:9-96:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:96:13-49
+	android:label
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:94:13-63
+	android:theme
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:95:13-44
+	android:name
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:93:13-47
+activity#team3.teamproject.AccountActivity
+ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:97:9-101:51
+	android:screenOrientation
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:101:13-49
+	android:label
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:99:13-59
+	android:theme
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:100:13-44
+	android:name
+		ADDED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml:98:13-44
 uses-sdk
 INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\petym\AndroidStudioProjects\final2\GeoPin\app\src\main\AndroidManifest.xml

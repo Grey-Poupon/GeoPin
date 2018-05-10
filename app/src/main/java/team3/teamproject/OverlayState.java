@@ -21,5 +21,5 @@ public enum OverlayState {
     Rain_Fall,
     Sewage_Level,
     Solar_Diffuseradiation,
-    Visiblity
+    Visibility
 }
